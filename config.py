@@ -1,6 +1,0 @@
-customhost = "assignment.cgzss1uvc4e8.us-east-1.rds.amazonaws.com"
-customuser = "admin"
-custompass = "admin123"
-customdb = "assignment"
-custombucket = "kungweixin-employee"
-customregion = "us-east-1"
