@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
+    <center>
+        <h1>Admin Login</h1>
+    </center>
+    <form action="/admin-login" method="POST">
+        <center>
+
+            <label for="admin_id">Admin ID:</label><br>
+            <input type="text" id="admin_id" name="admin_id" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <!-- Back button styled as a button and linked to login.html -->
+            <a href="login.html">
+                <button type="button" style="background: grey; height: 45px; width: 100px; color: white; font: oblique;">
+                    Back
+                </button>
+            </a>
+            
+            <!-- Login button styled as a button and linked to adminMenu.html -->
+            <a href="adminMenu.html">
+                <button type="submit" style="background: green; height: 45px; width: 100px; color: white; font: oblique;">
+                    Login
+                </button>
+            </a>
+        </center>
+    </form>
+</body>
+</html>
+
+
+
