@@ -13,7 +13,7 @@ db_conn = connections.Connection(
 
 )
 
-admin_app = Blueprint('student_app', __name__)
+admin_app = Blueprint('admin_app', __name__)
 
 @admin_app.route("/admin-login", methods=['POST'])
 def admin_login():
