@@ -1,8 +1,17 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Flask
 from pymysql import connections
 import os
 import boto3
 from config import *
+from flask_session import Session
+
+app = Flask(__name__)
+
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+Session(app)
+
 
 db_conn = connections.Connection(
     host=customhost,
@@ -49,6 +58,8 @@ def signUp():
         db_conn.commit()
         stud_name = "" + first_name + " " + last_name
 
+        session['student_id'] = student_id
+
     except Exception as e:
         db_conn.rollback()
         return str(e)
@@ -80,6 +91,7 @@ def student_login():
         if student:
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
+            session['student_id'] = student_id
             return render_template('studentMenu.html')
 
         else:
@@ -95,88 +107,105 @@ def student_login():
 
 @student_app.route("/view-and-edit/<student_id>", methods=['GET'])
 def view_and_edit(student_id):
-    cursor = db_conn.cursor()
+    # Check if the student is logged in (has an active session)
+    if 'student_id' in session and session['student_id'] == student_id:
+        cursor = db_conn.cursor()
 
-    try:
-        # Query the database to retrieve the student's information based on student_id
-        query = "SELECT * FROM students WHERE student_id = %s"
-        cursor.execute(query, (student_id,))
-        student = cursor.fetchone()
+        try:
+            # Query the database to retrieve the student's information based on student_id
+            query = "SELECT * FROM students WHERE student_id = %s"
+            cursor.execute(query, (student_id,))
+            student = cursor.fetchone()
 
-        if student:
-            # Pass the student's information to the template
-            return render_template('studentViewEdit.html', student=student)
+            if student:
+                # Pass the student's information to the template
+                return render_template('studentViewEdit.html', student=student)
 
-        else:
-            # Handle the case where the student is not found
-            return render_template('studentNotFound.html')
+            else:
+                # Handle the case where the student is not found
+                return render_template('studentNotFound.html')
 
-    except Exception as e:
-        # Handle exceptions here, e.g., database connection issues
-        return str(e)
+        except Exception as e:
+            # Handle exceptions here, e.g., database connection issues
+            return str(e)
 
-    finally:
-        cursor.close()
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
+
+from flask import session, request, redirect, url_for
+
+# ...
 
 @student_app.route("/update-student", methods=['POST'])
 def update_student():
-    updated_info = {
-        "student_id": request.form['student_id'],
-        "first_name": request.form['first_name'],
-        "last_name": request.form['last_name'],
-        "phone_number": request.form['phone_number'],
-        "email": request.form['email'],
-        "password": request.form['password'],
-        "current_address": request.form['current_address'],
-        "course_of_study": request.form['course_of_study'],
-        "year_intake": request.form['year_intake'],
-        "skills_learned": request.form['skills_learned'],
-        "cgpa": request.form['cgpa']
-    }
+    # Check if the student is logged in (has an active session)
+    if 'student_id' in session:
+        updated_info = {
+            "student_id": request.form['student_id'],
+            "first_name": request.form['first_name'],
+            "last_name": request.form['last_name'],
+            "phone_number": request.form['phone_number'],
+            "email": request.form['email'],
+            "password": request.form['password'],
+            "current_address": request.form['current_address'],
+            "course_of_study": request.form['course_of_study'],
+            "year_intake": request.form['year_intake'],
+            "skills_learned": request.form['skills_learned'],
+            "cgpa": request.form['cgpa']
+        }
 
-    cursor = db_conn.cursor()
+        # Verify that the student_id in the session matches the one in the form
+        if session['student_id'] == updated_info['student_id']:
+            cursor = db_conn.cursor()
 
-    try:
-        # Retrieve the current student information from the database
-        select_query = "SELECT * FROM students WHERE student_id = %s"
-        cursor.execute(select_query, (updated_info["student_id"],))
-        current_student_info = cursor.fetchone()
+            try:
+                # Retrieve the current student information from the database
+                select_query = "SELECT * FROM students WHERE student_id = %s"
+                cursor.execute(select_query, (updated_info["student_id"],))
+                current_student_info = cursor.fetchone()
 
-        if current_student_info:
-            # Use the current_student_info dictionary to update the fields that were not changed
-            for key in updated_info.keys():
-                if not updated_info[key]:
-                    updated_info[key] = current_student_info[key]
+                if current_student_info:
+                    # Use the current_student_info dictionary to update the fields that were not changed
+                    for key in updated_info.keys():
+                        if not updated_info[key]:
+                            updated_info[key] = current_student_info[key]
 
-            # SQL UPDATE query
-            update_query = """
-                UPDATE students 
-                SET first_name = %s, last_name = %s, phone_number = %s, 
-                    email = %s, password = %s, current_address = %s, 
-                    course_of_study = %s, year_intake = %s, 
-                    skills_learned = %s, cgpa = %s
-                WHERE student_id = %s
-            """
-            cursor.execute(update_query, (
-                updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
-                updated_info["email"], updated_info["password"], updated_info["current_address"],
-                updated_info["course_of_study"], updated_info["year_intake"],
-                updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
-            ))
-            db_conn.commit()
+                    # SQL UPDATE query
+                    update_query = """
+                        UPDATE students 
+                        SET first_name = %s, last_name = %s, phone_number = %s, 
+                            email = %s, password = %s, current_address = %s, 
+                            course_of_study = %s, year_intake = %s, 
+                            skills_learned = %s, cgpa = %s
+                        WHERE student_id = %s
+                    """
+                    cursor.execute(update_query, (
+                        updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
+                        updated_info["email"], updated_info["password"], updated_info["current_address"],
+                        updated_info["course_of_study"], updated_info["year_intake"],
+                        updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
+                    ))
+                    db_conn.commit()
 
-            # Redirect the student to the view and edit page or another appropriate page
-            return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
+                    # Redirect the student to the view and edit page or another appropriate page
+                    return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
+                else:
+                    return render_template('student_not_found.html')
+
+            except Exception as e:
+                db_conn.rollback()
+                return str(e)
+            finally:
+                cursor.close()
         else:
-            return render_template('student_not_found.html')
-
-    except Exception as e:
-        db_conn.rollback()
-        return str(e)
-    finally:
-        cursor.close()
-
-
+            # If the student_id in the session doesn't match the one in the form, handle accordingly
+            return redirect(url_for('student_login_page'))
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
