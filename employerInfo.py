@@ -20,6 +20,11 @@ def employer_login_page():
     return render_template('employerLogin.html')
 
 
+@employer_app.route("/employerSignUpPage", methods=['GET'])
+def employer_sign_up_page():
+    return render_template('employerSignUp.html')
+
+
 @employer_app.route("/employer_signup", methods=['POST'])
 def employerSignUp():
     employer_id = request.form['employer_id']
