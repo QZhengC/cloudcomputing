@@ -56,7 +56,6 @@ def signUp():
     finally:
         cursor.close()
 
-    # Redirect to the additional information page
     return render_template('studentSignUpOutput.html', student_id=student_id, name=stud_name)
 
 
@@ -93,6 +92,90 @@ def student_login():
 
     finally:
         cursor.close()
+
+@student_app.route("/view-and-edit/<student_id>", methods=['GET'])
+def view_and_edit(student_id):
+    cursor = db_conn.cursor()
+
+    try:
+        # Query the database to retrieve the student's information based on student_id
+        query = "SELECT * FROM students WHERE student_id = %s"
+        cursor.execute(query, (student_id,))
+        student = cursor.fetchone()
+
+        if student:
+            # Pass the student's information to the template
+            return render_template('studentViewEdit.html', student=student)
+
+        else:
+            # Handle the case where the student is not found
+            return render_template('student_not_found.html')
+
+    except Exception as e:
+        # Handle exceptions here, e.g., database connection issues
+        return str(e)
+
+    finally:
+        cursor.close()
+
+@student_app.route("/update-student", methods=['POST'])
+def update_student():
+    updated_info = {
+        "student_id": request.form['student_id'],
+        "first_name": request.form['first_name'],
+        "last_name": request.form['last_name'],
+        "phone_number": request.form['phone_number'],
+        "email": request.form['email'],
+        "password": request.form['password'],
+        "current_address": request.form['current_address'],
+        "course_of_study": request.form['course_of_study'],
+        "year_intake": request.form['year_intake'],
+        "skills_learned": request.form['skills_learned'],
+        "cgpa": request.form['cgpa']
+    }
+
+    cursor = db_conn.cursor()
+
+    try:
+        # Retrieve the current student information from the database
+        select_query = "SELECT * FROM students WHERE student_id = %s"
+        cursor.execute(select_query, (updated_info["student_id"],))
+        current_student_info = cursor.fetchone()
+
+        if current_student_info:
+            # Use the current_student_info dictionary to update the fields that were not changed
+            for key in updated_info.keys():
+                if not updated_info[key]:
+                    updated_info[key] = current_student_info[key]
+
+            # SQL UPDATE query
+            update_query = """
+                UPDATE students 
+                SET first_name = %s, last_name = %s, phone_number = %s, 
+                    email = %s, password = %s, current_address = %s, 
+                    course_of_study = %s, year_intake = %s, 
+                    skills_learned = %s, cgpa = %s
+                WHERE student_id = %s
+            """
+            cursor.execute(update_query, (
+                updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
+                updated_info["email"], updated_info["password"], updated_info["current_address"],
+                updated_info["course_of_study"], updated_info["year_intake"],
+                updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
+            ))
+            db_conn.commit()
+
+            # Redirect the student to the view and edit page or another appropriate page
+            return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
+        else:
+            return render_template('student_not_found.html')
+
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+    finally:
+        cursor.close()
+
 
 
 if __name__ == '__main__':
