@@ -6,11 +6,11 @@ import boto3
 from config import *
 from flask_session import Session
 
-app = Flask(__name__)
-
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
-Session(app)
+student_app = Flask(__name__)
+student_app.secret_key = 'gay'
+student_app.config['SESSION_TYPE'] = 'filesystem'
+student_app.config['SESSION_PERMANENT'] = False
+Session(student_app)
 
 
 db_conn = connections.Connection(
