@@ -32,7 +32,7 @@ def signUp():
     cursor = db_conn.cursor()
     try:
         # SQL INSERT query
-        insert_query = "INSERT INTO students (employer_id, company_name, company_number, company_email, employer_password, employer_address) VALUES (%s, %s, %s, %s, %s, %s)"
+        insert_query = "INSERT INTO employer (employer_id, company_name, company_number, company_email, employer_password, employer_address) VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_query, (employer_id, company_name, company_number,
                        company_email, employer_password, employer_address))
         db_conn.commit()
