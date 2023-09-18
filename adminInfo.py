@@ -15,6 +15,10 @@ db_conn = connections.Connection(
 
 admin_app = Blueprint('admin_app', __name__)
 
+@admin_app.route("/adminLoginPage", methods=['GET'])
+def admin_login_page():
+    return render_template('adminLogin.html')
+
 @admin_app.route("/admin-login", methods=['POST'])
 def admin_login():
     admin_id = request.form['admin_id']
@@ -31,7 +35,7 @@ def admin_login():
         if admin:
             # Admin is authenticated, you can set up a session or JWT token here
             # Redirect to the admin dashboard or homepage
-            return redirect(url_for('adminMenu.html'))
+            return render_template('adminMenu.html')
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message

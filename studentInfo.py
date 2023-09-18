@@ -19,6 +19,12 @@ student_app = Blueprint('student_app', __name__)
 def student_login_page():
     return render_template('studentLogin.html')
 
+<<<<<<< HEAD
+=======
+@student_app.route("/studentSignUpPage", methods=['GET'])
+def student_signUp_page():
+    return render_template('studentSignUp.html')
+>>>>>>> d9d75c2103463909bcb4907e2626c0d767903520
 
 @student_app.route("/signup", methods=['POST'])
 def signUp():
@@ -57,10 +63,7 @@ def signUp():
 
 @student_app.route("/signup-output", methods=['GET'])
 def signUpOutput():
-    # Retrieve the name from the URL parameter
-    name = request.args.get('name')
-
-    return redirect(url_for('studentMenu.html'))
+     return render_template('studentMenu.html')
 
 
 @student_app.route("/student-login", methods=['POST'])
@@ -79,7 +82,7 @@ def student_login():
         if student:
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
-            return redirect(url_for('menu.html'))
+            return render_template('studentMenu.html')
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message
