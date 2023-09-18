@@ -19,6 +19,10 @@ student_app = Blueprint('student_app', __name__)
 def student_login_page():
     return render_template('studentLogin.html')
 
+@student_app.route("/studentSignUpPage", methods=['GET'])
+def student_login_page():
+    return render_template('studentSignUp.html')
+
 @student_app.route("/signup", methods=['POST'])
 def signUp():
     student_id = request.form['student_id']
