@@ -17,7 +17,7 @@ student_app = Blueprint('student_app', __name__)
 
 @student_app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('studentSignUp.html')
+    return render_template('login.html')
 
 @student_app.route("/signup", methods=['POST'])
 def signUp():
