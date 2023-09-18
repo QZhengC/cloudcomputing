@@ -59,10 +59,7 @@ def signUp():
 
 @student_app.route("/signup-output", methods=['GET'])
 def signUpOutput():
-    # Retrieve the name from the URL parameter
-    name = request.args.get('name')
-
-    return redirect(url_for('studentMenu.html'))
+     return render_template('studentMenu.html')
 
 @student_app.route("/student-login", methods=['POST'])
 def student_login():
