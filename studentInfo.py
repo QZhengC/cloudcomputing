@@ -6,12 +6,12 @@ import boto3
 from config import *
 from flask_session import Session
 
-app = Flask(__name__)
+student_app = Flask(__name__)
+student_app.secret_key = os.urandom(24)  # Set the secret key before creating the Flask app instance
 
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
-Session(app)
-
+student_app.config['SESSION_TYPE'] = 'filesystem'
+student_app.config['SESSION_PERMANENT'] = False
+Session(student_app)
 
 db_conn = connections.Connection(
     host=customhost,
