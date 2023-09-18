@@ -109,7 +109,7 @@ def view_and_edit(student_id):
 
         else:
             # Handle the case where the student is not found
-            return render_template('student_not_found.html')
+            return render_template('studentNotFound.html')
 
     except Exception as e:
         # Handle exceptions here, e.g., database connection issues
