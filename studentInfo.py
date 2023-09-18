@@ -83,7 +83,7 @@ def student_login():
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
             session['student_id'] = student_id
-            return render_template('studentMenu.html')
+            return redirect(url_for('student_app.signUpOutput'))
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message
