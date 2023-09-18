@@ -10,14 +10,15 @@ db_conn = connections.Connection(
     user=customuser,
     password=custompass,
     db=customdb
-
 )
 
 student_app = Blueprint('student_app', __name__)
 
+
 @student_app.route("/studentLoginPage", methods=['GET'])
 def student_login_page():
     return render_template('studentLogin.html')
+
 
 @student_app.route("/signup", methods=['POST'])
 def signUp():
@@ -38,7 +39,8 @@ def signUp():
     try:
         # SQL INSERT query
         insert_query = "INSERT INTO students (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa))
+        cursor.execute(insert_query, (student_id, first_name, last_name, phone_number, email,
+                       password, current_address, course_of_study, year_intake, skills_learned, cgpa))
         db_conn.commit()
         stud_name = "" + first_name + " " + last_name
 
@@ -59,6 +61,7 @@ def signUpOutput():
     name = request.args.get('name')
 
     return redirect(url_for('studentMenu.html'))
+
 
 @student_app.route("/student-login", methods=['POST'])
 def student_login():
