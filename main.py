@@ -18,3 +18,7 @@ main_app = Blueprint('main_app', __name__)
 @main_app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('login.html')
+
+@main_app.route("/backToMenu", methods=['GET', 'POST'])
+def home():
+    return render_template('login.html')
