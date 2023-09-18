@@ -13,10 +13,10 @@ db_conn = connections.Connection(
     db=customdb
 )
 
-app = Flask(__name__)
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SECRET_KEY'] = 'your_secret_key'
-Session(app)
+employer_session = Flask(__name__)
+employer_session.config['SESSION_TYPE'] = 'filesystem'
+employer_session.config['SECRET_KEY'] = 'your_secret_key'
+Session(employer_session)
 employer_app = Blueprint('employer_app', __name__)
 
 
