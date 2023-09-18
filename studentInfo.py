@@ -7,12 +7,6 @@ from config import *
 
 student_app = Blueprint('student_app', __name__)
 
-# Use the 'app' instance created in app.py for session configuration
-student_app.secret_key = os.urandom(24)  # Set the secret key
-student_app.config['SESSION_TYPE'] = 'filesystem'
-student_app.config['SESSION_PERMANENT'] = False
-Session(student_app)
-
 db_conn = connections.Connection(
     host=customhost,
     port=3306,
