@@ -4,14 +4,14 @@ from pymysql import connections
 import os
 from flask_session import Session
 from config import *
-from app import app
 
-# Create the Flask app instance
+student_app = Blueprint('student_app', __name__)
 
-app.secret_key = os.urandom(24)  # Set the secret key
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
-Session(app)
+# Use the 'app' instance created in app.py for session configuration
+student_app.secret_key = os.urandom(24)  # Set the secret key
+student_app.config['SESSION_TYPE'] = 'filesystem'
+student_app.config['SESSION_PERMANENT'] = False
+Session(student_app)
 
 db_conn = connections.Connection(
     host=customhost,
@@ -20,9 +20,6 @@ db_conn = connections.Connection(
     password=custompass,
     db=customdb
 )
-
-student_app = Blueprint('student_app', __name__)
-
 
 @student_app.route("/studentLoginPage", methods=['GET'])
 def student_login_page():
