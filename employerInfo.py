@@ -70,6 +70,11 @@ def employerAddJobPost():
     return redirect(url_for('addJobPost.html'))
 
 
+@employer_app.route("/employer-menu-page", methods=['GET'])
+def employerMenu():
+    return redirect(url_for('employerMenu.html'))
+
+
 @employer_app.route("/employer-login", methods=['GET', 'POST'])
 def employer_login():
     if request.method == 'POST':
@@ -85,9 +90,8 @@ def employer_login():
             if employer:
                 # Authentication successful, set session variables
                 session['employer_id'] = employer_id
-                session['is_authenticated'] = True
                 # Redirect to the dashboard route
-                return redirect(url_for('employer_app.dashboard'))
+                return redirect(url_for('employer_app.employerMenu'))
             else:
                 return "Login Failed"
 
@@ -100,45 +104,13 @@ def employer_login():
 
     return render_template('employerLogin.html')
 
-    # employer_id = request.form['employer_id']
-    # employer_password = request.form['employer_password']
-
-    # cursor = db_conn.cursor()
-
-    # try:
-    #     # Query the database to check if the student exists and the password is correct
-    #     query = "SELECT * FROM employer WHERE employer_id = %s AND employer_password = %s"
-    #     cursor.execute(query, (employer_id, employer_password))
-    #     employer = cursor.fetchone()
-
-    #     if employer:
-    #         # Student is authenticated, you can set up a session or JWT token here
-    #         # Redirect to the student dashboard or homepage
-    #         # SUBJECT TO BE CHANGES
-    #         session['employer_id'] = employer.id
-    #         # session['company_name'] = employer.company_name
-    #         session['is_autheticated'] = True
-    #         employer = authenticate()
-    #         return redirect(url_for('employerMenu.html'))
-
-    #     else:
-    #         # Authentication failed, you can redirect to an error page or show an error message
-    #         return render_template('employerLogin.html')
-
-    # except Exception as e:
-    #     # Handle exceptions here, e.g., database connection issues
-    #     return str(e)
-
-    # finally:
-    #     cursor.close()
-
 
 @employer_app.route("/add-job-post", methods=['POST'])
 def add_job_post():
     if 'is_authenticated' in session and session['is_authenticated']:
         # Access user information from the session
         employer_id = session['employer_id']
-        # company_name = session['company_name']
+        company_name = session['company_name']
     else:
         return "unauthorized"
 
