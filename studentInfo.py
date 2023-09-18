@@ -15,6 +15,10 @@ db_conn = connections.Connection(
 
 student_app = Blueprint('student_app', __name__)
 
+@student_app.route("/studentLoginPage", methods=['GET'])
+def student_login_page():
+    return render_template('studentLogin.html')
+
 @student_app.route("/signup", methods=['POST'])
 def signUp():
     student_id = request.form['student_id']
