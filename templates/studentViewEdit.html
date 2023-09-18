@@ -1,0 +1,21 @@
+<!-- studentView.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student View & Edit</title>
+</head>
+
+<body>
+    <center>
+        <h1>Student View & Edit</h1>
+        <form action="/update-student" method="POST">
+            <label for="student_id">Student ID:</label><br>
+            <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required><br><br>
+            <!-- Add other fields for displaying and editing student information here -->
+            <button type="submit">Save Changes</button>
+        </form>
+    </center>
+</body>
+
+</html>

@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <center>
-        <font color="DodgerBlue" size="5" style="font-family: avenir">
-            <body bgcolor="lightgrey">
-                <h1>Hehe</h1>
-            </body>
-        </font>
-    </center>
+    <title>Student Dashboard</title>
+    <style>
+        /* Styling for the top menu bar */
+        .top-menu {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+        
+        /* Styling for the sidebar menu */
+        .sidebar {
+            width: 200px;
+            background: #555;
+            color: white;
+            position: fixed;
+            height: 100%;
+            padding: 20px;
+        }
+        
+        /* Styling for the sidebar menu items */
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+        
+        /* Styling for the content area */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+    </style>
 </head>
+<body>
+    <!-- Top menu bar with student's name -->
+    <div class="top-menu">
+        <div style="float: left;">Welcome, [Student Name]</div>
+        <div style="float: right;"><a href="#">Logout</a></div>
+    </div>
+
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="{{ url_for('student_app.view_and_edit', student_id=student_id) }}">View & Edit</a>
+        <a href="#">Look for Intern</a>
+    </div>
+
+    <!-- Content area -->
+    <div class="content">
+        <!-- Your content goes here -->
+    </div>
+</body>
 </html>
+
 
 
 
