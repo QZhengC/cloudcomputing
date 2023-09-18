@@ -20,7 +20,7 @@ def student_login_page():
     return render_template('studentLogin.html')
 
 @student_app.route("/studentSignUpPage", methods=['GET'])
-def student_login_page():
+def student_signUp_page():
     return render_template('studentSignUp.html')
 
 @student_app.route("/signup", methods=['POST'])
