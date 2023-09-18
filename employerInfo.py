@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, request
 from pymysql import connections
 import os
 import boto3
@@ -65,38 +65,52 @@ def employerAddJobPost():
     return redirect(url_for('addJobPost.html'))
 
 
-@employer_app.route("/employer-login", methods=['POST'])
+@employer_app.route("/employer-login", methods=['GET', 'POST'])
 def employer_login():
-    employer_id = request.form['employer_id']
-    employer_password = request.form['employer_password']
+    if request.method == 'POST':
+        employer_id = request.form['employer_id']
+        employer_pass = request.form['employer_password']
+        employer = Employer.query.filter_by(employer_id=employer_id).first()
 
-    cursor = db_conn.cursor()
-
-    try:
-        # Query the database to check if the student exists and the password is correct
-        query = "SELECT * FROM employer WHERE employer_id = %s AND employer_password = %s"
-        cursor.execute(query, (employer_id, employer_password))
-        employer = cursor.fetchone()
-
-        if employer:
-            # Student is authenticated, you can set up a session or JWT token here
-            # Redirect to the student dashboard or homepage
-            # SUBJECT TO BE CHANGES
+        if employer and employer.employer_password == employer_password:
             session['employer_id'] = employer.id
-            # session['company_name'] = employer.company_name
-            session['is_autheticated'] = True
-            return redirect(url_for('employerMenu.html'))
-
+            session['employer_password'] = employer.employer_password
+            session['is_authenticated'] = True
         else:
-            # Authentication failed, you can redirect to an error page or show an error message
-            return render_template('employerLogin.html')
+            return "Login Failed"
+    return render_template('employerLogin.html')
 
-    except Exception as e:
-        # Handle exceptions here, e.g., database connection issues
-        return str(e)
+    # employer_id = request.form['employer_id']
+    # employer_password = request.form['employer_password']
 
-    finally:
-        cursor.close()
+    # cursor = db_conn.cursor()
+
+    # try:
+    #     # Query the database to check if the student exists and the password is correct
+    #     query = "SELECT * FROM employer WHERE employer_id = %s AND employer_password = %s"
+    #     cursor.execute(query, (employer_id, employer_password))
+    #     employer = cursor.fetchone()
+
+    #     if employer:
+    #         # Student is authenticated, you can set up a session or JWT token here
+    #         # Redirect to the student dashboard or homepage
+    #         # SUBJECT TO BE CHANGES
+    #         session['employer_id'] = employer.id
+    #         # session['company_name'] = employer.company_name
+    #         session['is_autheticated'] = True
+    #         employer = authenticate()
+    #         return redirect(url_for('employerMenu.html'))
+
+    #     else:
+    #         # Authentication failed, you can redirect to an error page or show an error message
+    #         return render_template('employerLogin.html')
+
+    # except Exception as e:
+    #     # Handle exceptions here, e.g., database connection issues
+    #     return str(e)
+
+    # finally:
+    #     cursor.close()
 
 
 @employer_app.route("/add-job-post", methods=['POST'])
