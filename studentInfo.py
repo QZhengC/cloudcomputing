@@ -7,7 +7,8 @@ from config import *
 from flask_session import Session
 
 student_app = Flask(__name__)
-student_app.secret_key = os.urandom(24)  # Set the secret key first
+student_app.secret_key = os.urandom(24)  # Set the secret key before creating the Flask app instance
+
 student_app.config['SESSION_TYPE'] = 'filesystem'
 student_app.config['SESSION_PERMANENT'] = False
 Session(student_app)
