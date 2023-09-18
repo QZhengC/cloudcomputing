@@ -19,12 +19,11 @@ student_app = Blueprint('student_app', __name__)
 def student_login_page():
     return render_template('studentLogin.html')
 
-<<<<<<< HEAD
-=======
+
 @student_app.route("/studentSignUpPage", methods=['GET'])
 def student_signUp_page():
     return render_template('studentSignUp.html')
->>>>>>> d9d75c2103463909bcb4907e2626c0d767903520
+
 
 @student_app.route("/signup", methods=['POST'])
 def signUp():
@@ -63,7 +62,7 @@ def signUp():
 
 @student_app.route("/signup-output", methods=['GET'])
 def signUpOutput():
-     return render_template('studentMenu.html')
+    return render_template('studentMenu.html')
 
 
 @student_app.route("/student-login", methods=['POST'])
