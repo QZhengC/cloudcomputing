@@ -2,16 +2,15 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from flask import Flask
 from pymysql import connections
 import os
-import boto3
-from config import *
 from flask_session import Session
+from config import *
 
-student_app = Flask(__name__)
-student_app.secret_key = os.urandom(24)  # Set the secret key before creating the Flask app instance
-
-student_app.config['SESSION_TYPE'] = 'filesystem'
-student_app.config['SESSION_PERMANENT'] = False
-Session(student_app)
+# Create the Flask app instance
+app = Flask(__name__)
+app.secret_key = os.urandom(24)  # Set the secret key
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+Session(app)
 
 db_conn = connections.Connection(
     host=customhost,
