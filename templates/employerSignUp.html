@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Employer Sign-Up</title>
+</head>
+
+<body>
+    <center>
+        <h1>Employer Sign Up</h1>
+    </center>
+    <form action="/employer_signup" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <center>
+            <label for="employer_id">Employer ID:</label><br>
+            <input type="text" id="employer_id" name="employer_id" required><br><br>
+
+            <label for="company_picture">Company Picture:</label><br>
+            <input type="file" id="company_picture" name="company_picture"><br><br>
+
+            <label for="company_name">Company Name:</label><br>
+            <input type="text" id="company_name" name="company_name"><br><br>
+
+            <label for="company_number">Company Number:</label><br>
+            <input type="text" id="company_number" name="company_number required"><br><br>
+
+            <label for="company_email">Company Email:</label><br>
+            <input type="email" id="company_email" name="company_email" required><br><br>
+
+            <label for="employer_password">Employer password:</label><br>
+            <input type="password" id="employer_password" name="employer_password" required><br><br>
+
+            <label for="confirm_employer_password">Confirm Password:</label><br>
+            <input type="password" id="confirm_employer_password" name="confirm_employer_password" required><br><br>
+
+            <label for="employer_address">Employer Address:</label><br>
+            <textarea id="employer_address" name="employer_address" rows="4" cols="50" required></textarea><br><br>
+
+            <form action="/employer_signup" autocomplete="on" method="GET">
+                <button type="submit"
+                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
+            </form>
+
+            <form action="" autocomplete="on" method="GET">
+                <button onclick="history.back()"
+                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+                    BACK</button><br><br>
+            </form>
+
+        </center>
+    </form>
+
+    <script>
+        function validateForm() {
+            var employer_id = document.getElementById("employer_id").value;
+            var company_name = document.getElementById("company_name").value;
+            var company_number = document.getElementById("company_number").value;
+            var company_email = document.getElementById("company_email").value;
+            var employer_password = document.getElementById("employer_password").value;
+            var employer_address = document.getElementById("employer_address").value;
+            var confirm_employer_password = document.getElementById("confirm_employer_password").value;
+
+            if (employer_id === "" || company_name === "" || company_number === "" || company_email === "" || employer_password === "" || employer_address === "" || confirm_employer_password === "") {
+                alert("All fields are required. Please fill them in.");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+</body>
+
+</html>
