@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, request
+from flask import Blueprint, render_template, request, redirect, url_for, session, request, Flask
 from pymysql import connections
 import os
 import boto3
 from config import *
+from flask_session import Session
 
 db_conn = connections.Connection(
     host=customhost,
@@ -12,7 +13,12 @@ db_conn = connections.Connection(
     db=customdb
 )
 
+
 employer_app = Blueprint('employer_app', __name__)
+# Choose your preferred session type
+employer_app.config['SESSION_TYPE'] = 'filesystem'
+employer_app.config['SECRET_KEY'] = 'your_secret_key'
+Session(employer_app)
 
 
 @employer_app.route("/employerLoginPage", methods=['GET'])
@@ -69,15 +75,30 @@ def employerAddJobPost():
 def employer_login():
     if request.method == 'POST':
         employer_id = request.form['employer_id']
-        employer_pass = request.form['employer_password']
-        employer = Employer.query.filter_by(employer_id=employer_id).first()
+        employer_password = request.form['employer_password']
+        cursor = db_conn.cursor()
 
-        if employer and employer.employer_password == employer_password:
-            session['employer_id'] = employer.id
-            session['employer_password'] = employer.employer_password
-            session['is_authenticated'] = True
-        else:
-            return "Login Failed"
+        try:
+            query = "SELECT * FROM employer WHERE employer_id = %s AND employer_password = %s"
+            cursor.execute(query, (employer_id, employer_password))
+            employer = cursor.fetchone()
+
+            if employer:
+                # Authentication successful, set session variables
+                session['employer_id'] = employer_id
+                session['is_authenticated'] = True
+                # Redirect to the dashboard route
+                return redirect(url_for('employer_app.dashboard'))
+            else:
+                return "Login Failed"
+
+        except Exception as e:
+            # Handle exceptions here, e.g., database connection issues
+            return str(e)
+
+        finally:
+            cursor.close()
+
     return render_template('employerLogin.html')
 
     # employer_id = request.form['employer_id']
