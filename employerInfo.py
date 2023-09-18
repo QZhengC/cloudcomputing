@@ -82,8 +82,8 @@ def employer_login():
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
             # SUBJECT TO BE CHANGES
-            session['employer_id'] = employer.employer_id
-            session['company_name'] = employer.company_name
+            session['employer_id'] = employer.id
+            # session['company_name'] = employer.company_name
             session['is_autheticated'] = True
             return redirect(url_for('employerMenu.html'))
 
@@ -104,7 +104,7 @@ def add_job_post():
     if 'is_authenticated' in session and session['is_authenticated']:
         # Access user information from the session
         employer_id = session['employer_id']
-        company_name = session['company_name']
+        # company_name = session['company_name']
     else:
         return "unauthorized"
 
