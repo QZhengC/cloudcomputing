@@ -80,7 +80,7 @@ def student_login():
         if student:
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
-            return redirect(url_for('menu.html'))
+            return redirect(url_for('studentMenu.html'))
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message

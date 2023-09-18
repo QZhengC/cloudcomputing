@@ -13,7 +13,9 @@
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password" required><br><br>
     
-            <button type="submit">Login</button>
+            <button type="submit" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">LOGIN</button><br><br>
+
+            <button onclick="history.back()" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
         </form>
         
         <p>Haven't signed up yet? <a href="{{ url_for('student_app.student_signUp_page') }}">Click Here</a> to sign up.</p>
