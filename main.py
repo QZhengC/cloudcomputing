@@ -20,5 +20,5 @@ def home():
     return render_template('login.html')
 
 @main_app.route("/backToMenu", methods=['GET', 'POST'])
-def home():
+def backhome():
     return render_template('login.html')
