@@ -16,12 +16,12 @@ employer_app = Blueprint('employer_app', __name__)
 
 
 @employer_app.route("/employerLoginPage", methods=['GET'])
-def student_login_page():
+def employer_login_page():
     return render_template('employerLogin.html')
 
 
 @employer_app.route("/employer_signup", methods=['POST'])
-def signUp():
+def employerSignUp():
     employer_id = request.form['employer_id']
     company_name = request.form['company_name']
     company_number = request.form['company_number']
@@ -49,14 +49,14 @@ def signUp():
 
 
 @employer_app.route("/employer-signup-output", methods=['GET'])
-def signUpOutput():
+def employerSignUpOutput():
     # Retrieve the name from the URL parameter
     company_name = request.args.get('company_name')
     return redirect(url_for('employerPage.html'))
 
 
 @employer_app.route("/employer-login", methods=['POST'])
-def student_login():
+def employer_login():
     employer_id = request.form['employer_id']
     employer_password = request.form['employer_password']
 
