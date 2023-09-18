@@ -4,9 +4,10 @@ from pymysql import connections
 import os
 from flask_session import Session
 from config import *
+from app import app
 
 # Create the Flask app instance
-app = Flask(__name__)
+
 app.secret_key = os.urandom(24)  # Set the secret key
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_PERMANENT'] = False
