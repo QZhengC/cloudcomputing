@@ -9,8 +9,9 @@
     <center>
         <h1>Admin Login</h1>
     </center>
-    <form action="/admin-login" method="POST">
-        <center>
+
+    <center>
+        <form action="/admin-login" method="POST">
 
             <label for="admin_id">Admin ID:</label><br>
             <input type="text" id="admin_id" name="admin_id" required><br><br>
@@ -20,14 +21,12 @@
 
             <button type="submit"
                 style="background: green; height: 45px; width: 100px; color: white; font: oblique;">LOGIN</button>
+        </form>
 
-
-    </form>
-
-    <form action="/backToMenu" autocomplete="on" method="POST">
-        <button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-            BACK</button><br><br>
-    </form>
+        <form action="/backToMenu" autocomplete="on" method="POST">
+            <button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+                BACK</button><br><br>
+        </form>
     </center>
 </body>
 
