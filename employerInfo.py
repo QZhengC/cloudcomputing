@@ -67,12 +67,12 @@ def employerSignUpOutput():
 
 @employer_app.route("/employer-add-job-page", methods=['GET'])
 def employerAddJobPost():
-    return redirect(url_for('addJobPost.html'))
+    return render_template('addJobPost.html')
 
 
 @employer_app.route("/employer-menu-page", methods=['GET'])
-def employerMenu():
-    return redirect(url_for('employerMenu.html'))
+def employer_Menu():
+    return render_template('employerMenu.html')
 
 
 @employer_app.route("/employer-login", methods=['GET', 'POST'])
@@ -91,7 +91,7 @@ def employer_login():
                 # Authentication successful, set session variables
                 session['employer_id'] = employer_id
                 # Redirect to the dashboard route
-                return redirect(url_for('employer_app.employerMenu'))
+                return redirect(url_for('employer_app.employer_Menu'))
             else:
                 return "Login Failed"
 
