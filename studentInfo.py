@@ -7,9 +7,8 @@ from config import *
 from flask_session import Session
 
 student_app = Flask(__name__)
-student_app.secret_key = 'u are a piece of shit324532423'
+student_app['SECRET_KEY'] = 'u are a piece of shit324532423'
 student_app.config['SESSION_TYPE'] = 'filesystem'
-student_app.config['SESSION_PERMANENT'] = False
 Session(student_app)
 
 db_conn = connections.Connection(
