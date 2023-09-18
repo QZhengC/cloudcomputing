@@ -1,12 +1,11 @@
 from flask import Flask
-from studentInfo import student_app, student_app2
+from studentInfo import student_app
 from adminInfo import admin_app
 
 app = Flask(__name__)
 
 # Register student and admin blueprints
 app.register_blueprint(student_app)
-app.register_blueprint(student_app2)
 app.register_blueprint(admin_app)
 
 if __name__ == '__main__':
