@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from pymysql import connections
 import os
 import boto3
@@ -60,6 +60,11 @@ def employerSignUpOutput():
     return redirect(url_for('employerPage.html'))
 
 
+@employer_app.route("/employer-add-job-page", methods=['GET'])
+def employerAddJobPost():
+    return redirect(url_for('addJobPost.html'))
+
+
 @employer_app.route("/employer-login", methods=['POST'])
 def employer_login():
     employer_id = request.form['employer_id']
@@ -76,7 +81,11 @@ def employer_login():
         if employer:
             # Student is authenticated, you can set up a session or JWT token here
             # Redirect to the student dashboard or homepage
-            return redirect(url_for('menu.html'))  # SUBJECT TO BE CHANGES
+            # SUBJECT TO BE CHANGES
+            session['employer_id'] = employer.employer_id
+            session['company_name'] = employer.company_name
+            session['is_autheticated'] = True
+            return redirect(url_for('employerMenu.html'))
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message
@@ -88,6 +97,38 @@ def employer_login():
 
     finally:
         cursor.close()
+
+
+@employer_app.route("/add-job-post", methods=['POST'])
+def add_job_post():
+    if 'is_authenticated' in session and session['is_authenticated']:
+        # Access user information from the session
+        employer_id = session['employer_id']
+        company_name = session['company_name']
+    else:
+        return "unauthorized"
+
+    job_name = request.form('job_name')
+    job_description = request.form('job_description')
+    salary = request.form('salary')
+
+    cursor = db_conn.cursor()
+    try:
+        # SQL INSERT query
+        insert_query = "INSERT INTO job_post (employer_id, company_name, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
+        cursor.execute(insert_query, (employer_id, company_name, job_name,
+                       job_description, salary))
+        db_conn.commit()
+
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    # Redirect to the output page
+    return render_template('employer.html', employer_id=employer_id, company_name=company_name)
 
 
 if __name__ == '__main__':
