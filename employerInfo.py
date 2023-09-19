@@ -105,7 +105,7 @@ def employer_login():
     return render_template('employerLogin.html')
 
 
-@employer_app.route("/add-job-post/<employer_id>", methods=['POST'])
+@employer_app.route("/add-job-post/<employer_id>", methods=['GET'])
 def add_job_post(employer_id):
     if 'employer_id' in session and session['employer_id'] == employer_id:
         # Access user information from the session
