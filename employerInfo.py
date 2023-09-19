@@ -39,7 +39,13 @@ def employer_add_job_page():
 def employerSignUpOutput():
     # Retrieve the name from the URL parameter
     company_name = request.args.get('company_name')
-    return redirect(url_for('employerPage.html'))
+    return render_template('employerMenu.html')
+
+
+@employer_app.route("/employer-add-job-output", methods=['GET'])
+def employerAddJobOutput():
+    job_name = request.args.get('job_name')
+    return render_template('addJobPostOutput.html')
 
 
 @employer_app.route("/employer-menu-page", methods=['GET'])
@@ -112,53 +118,36 @@ def add_job_post(employer_id):
         employer_id = session['employer_id']
         return render_template("addJobPost.html", employer_id=employer_id)
     else:
-        return "unauthorized"
-
-    # job_name = request.form('job_name')
-    # job_description = request.form('job_description')
-    # salary = request.form('salary')
-
-    # cursor = db_conn.cursor()
-    # try:
-    #     # SQL INSERT query
-    #     insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-    #     cursor.execute(insert_query, (employer_id, job_name,
-    #                    job_description, salary))
-    #     db_conn.commit()
-
-    # except Exception as e:
-    #     db_conn.rollback()
-    #     return str(e)
-
-    # finally:
-    #     cursor.close()
-
-    # # Redirect to the output page
-    # return render_template('addJobPostOutput.html', employer_id=employer_id)
+        return render_template('employerLogin.html')
 
 
-@employer_app.route("/employer-add-job/<employer_id>", methods=["POST"])
-def emloyer_add_job(employer_id):
-    if 'employer_id' in session and session['employer_id'] == employer_id:
+@employer_app.route("/employer-add-job", methods=["POST"])
+def emloyer_add_job():
+    if 'employer_id' in session:
         employer_id = session['employer_id']
-        job_id = request.form('job_id')
-        job_name = request.form('job_name')
-        job_description = request.form('job_description')
-        salary = request.form('salary')
+
+        job_id = request.form['job_id']
+        job_name = request.form['job_name']
+        job_description = request.form['job_description']
+        salary = request.form['salary']
 
         cursor = db_conn.cursor()
         try:
             # SQL INSERT query
-            insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-            cursor.execute(insert_query, (employer_id, job_name,
-                           job_description, salary))
+            select_query = "SELECT company_name FROM employer WHERE employer_id = %s"
+            cursor.execute(select_query, (employer_id,))
+            company_name = cursor.fetchone()[0]
+
+            insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %s)"
+            cursor.execute(insert_query, (employer_id, company_name, job_id,
+                           job_name, job_description, salary))
             db_conn.commit()
+            return redirect(url_for('employer_app.employerAddJobOutput', job_name=job_name))
         except Exception as e:
             db_conn.rollback()
             return str(e)
         finally:
             cursor.close()
-        return render_template('addJobPostOutput.html', employer_id, job_name)
 
 
 if __name__ == '__main__':
