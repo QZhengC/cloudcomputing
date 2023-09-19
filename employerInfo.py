@@ -137,5 +137,29 @@ def add_job_post(employer_id):
     # return render_template('addJobPostOutput.html', employer_id=employer_id)
 
 
+@employer_app.route("/employer-add-job/<employer_id>", methods=["POST"])
+def emloyer_add_job(employer_id):
+    if 'employer_id' in session and session['employer_id'] == employer_id:
+        employer_id = session['employer_id']
+        job_id = request.form('job_id')
+        job_name = request.form('job_name')
+        job_description = request.form('job_description')
+        salary = request.form('salary')
+
+        cursor = db_conn.cursor()
+        try:
+            # SQL INSERT query
+            insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
+            cursor.execute(insert_query, (employer_id, job_name,
+                           job_description, salary))
+            db_conn.commit()
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+        return render_template('addJobPostOutput.html', employer_id, job_name)
+
+
 if __name__ == '__main__':
     employer_app.run(host='0.0.0.0', port=80, debug=True)
