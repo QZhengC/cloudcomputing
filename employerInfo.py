@@ -110,30 +110,31 @@ def add_job_post(employer_id):
     if 'employer_id' in session and session['employer_id'] == employer_id:
         # Access user information from the session
         employer_id = session['employer_id']
+        return render_template("addJobPost.html", employer_id=employer_id)
     else:
         return "unauthorized"
 
-    job_name = request.form('job_name')
-    job_description = request.form('job_description')
-    salary = request.form('salary')
+    # job_name = request.form('job_name')
+    # job_description = request.form('job_description')
+    # salary = request.form('salary')
 
-    cursor = db_conn.cursor()
-    try:
-        # SQL INSERT query
-        insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-        cursor.execute(insert_query, (employer_id, job_name,
-                       job_description, salary))
-        db_conn.commit()
+    # cursor = db_conn.cursor()
+    # try:
+    #     # SQL INSERT query
+    #     insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
+    #     cursor.execute(insert_query, (employer_id, job_name,
+    #                    job_description, salary))
+    #     db_conn.commit()
 
-    except Exception as e:
-        db_conn.rollback()
-        return str(e)
+    # except Exception as e:
+    #     db_conn.rollback()
+    #     return str(e)
 
-    finally:
-        cursor.close()
+    # finally:
+    #     cursor.close()
 
-    # Redirect to the output page
-    return render_template('addJobPostOutput.html', employer_id=employer_id)
+    # # Redirect to the output page
+    # return render_template('addJobPostOutput.html', employer_id=employer_id)
 
 
 if __name__ == '__main__':
