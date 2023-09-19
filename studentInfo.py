@@ -128,7 +128,6 @@ def view_and_edit(student_id):
 
 from flask import session, request, redirect, url_for
 
-# ...
 
 @student_app.route("/update-student", methods=['POST'])
 def update_student():
@@ -153,39 +152,25 @@ def update_student():
             cursor = db_conn.cursor()
 
             try:
-                # Retrieve the current student information from the database
-                select_query = "SELECT * FROM students WHERE student_id = %s"
-                cursor.execute(select_query, (updated_info["student_id"],))
-                current_student_info = cursor.fetchone()
+                # SQL UPDATE query to update student information
+                update_query = """
+                    UPDATE students 
+                    SET first_name = %s, last_name = %s, phone_number = %s, 
+                        email = %s, password = %s, current_address = %s, 
+                        course_of_study = %s, year_intake = %s, 
+                        skills_learned = %s, cgpa = %s
+                    WHERE student_id = %s
+                """
+                cursor.execute(update_query, (
+                    updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
+                    updated_info["email"], updated_info["password"], updated_info["current_address"],
+                    updated_info["course_of_study"], updated_info["year_intake"],
+                    updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
+                ))
+                db_conn.commit()
 
-                if current_student_info:
-                    # Use the current_student_info dictionary to update the fields that were not changed
-                    for key in updated_info.keys():
-                        if not updated_info[key]:
-                            updated_info[key] = current_student_info[key]
-
-                    # SQL UPDATE query
-                    update_query = """
-                        UPDATE students 
-                        SET first_name = %s, last_name = %s, phone_number = %s, 
-                            email = %s, password = %s, current_address = %s, 
-                            course_of_study = %s, year_intake = %s, 
-                            skills_learned = %s, cgpa = %s
-                        WHERE student_id = %s
-                    """
-                    cursor.execute(update_query, (
-                        updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
-                        updated_info["email"], updated_info["password"], updated_info["current_address"],
-                        updated_info["course_of_study"], updated_info["year_intake"],
-                        updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
-                    ))
-                    db_conn.commit()
-
-                    # Redirect the student to the view and edit page or another appropriate page
-                    return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
-                else:
-                    return render_template('student_not_found.html')
-
+                # Redirect the student to the view and edit page or another appropriate page
+                return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
             except Exception as e:
                 db_conn.rollback()
                 return str(e)
@@ -200,3 +185,4 @@ def update_student():
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
+

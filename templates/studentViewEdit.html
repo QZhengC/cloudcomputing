@@ -1,4 +1,4 @@
-<!-- studentView.html -->
+<!-- studentViewEdit.html -->
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +12,39 @@
         <form action="/update-student" method="POST">
             <label for="student_id">Student ID:</label><br>
             <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required><br><br>
-            <!-- Add other fields for displaying and editing student information here -->
+
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" name="first_name" value="{{ student.first_name }}" required><br><br>
+
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" id="last_name" name="last_name" value="{{ student.last_name }}" required><br><br>
+
+            <label for="phone_number">Phone Number:</label><br>
+            <input type="text" id="phone_number" name="phone_number" value="{{ student.phone_number }}" required><br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" value="{{ student.email }}" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" value="{{ student.password }}" required><br><br>
+
+            <label for="current_address">Current Address:</label><br>
+            <input type="text" id="current_address" name="current_address" value="{{ student.current_address }}" required><br><br>
+
+            <label for="course_of_study">Course of Study:</label><br>
+            <input type="text" id="course_of_study" name="course_of_study" value="{{ student.course_of_study }}" required><br><br>
+
+            <label for="year_intake">Year Intake:</label><br>
+            <input type="text" id="year_intake" name="year_intake" value="{{ student.year_intake }}" required><br><br>
+
+            <label for="skills_learned">Skills Learned:</label><br>
+            <input type="text" id="skills_learned" name="skills_learned" value="{{ student.skills_learned }}" required><br><br>
+
+            <label for="cgpa">CGPA:</label><br>
+            <input type="text" id="cgpa" name="cgpa" value="{{ student.cgpa }}" required><br><br>
+
+            <!-- Add other fields as needed -->
+
             <button type="submit">Save Changes</button>
         </form>
     </center>
