@@ -105,12 +105,11 @@ def employer_login():
     return render_template('employerLogin.html')
 
 
-@employer_app.route("/add-job-post", methods=['POST'])
-def add_job_post():
-    if 'is_authenticated' in session and session['is_authenticated']:
+@employer_app.route("/add-job-post/<employer_id>", methods=['POST'])
+def add_job_post(employer_id):
+    if 'employer_id' in session and session['employer_id'] == employer_id:
         # Access user information from the session
         employer_id = session['employer_id']
-        company_name = session['company_name']
     else:
         return "unauthorized"
 
@@ -121,8 +120,8 @@ def add_job_post():
     cursor = db_conn.cursor()
     try:
         # SQL INSERT query
-        insert_query = "INSERT INTO job_post (employer_id, company_name, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-        cursor.execute(insert_query, (employer_id, company_name, job_name,
+        insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
+        cursor.execute(insert_query, (employer_id, job_name,
                        job_description, salary))
         db_conn.commit()
 
@@ -134,7 +133,7 @@ def add_job_post():
         cursor.close()
 
     # Redirect to the output page
-    return render_template('employer.html', employer_id=employer_id, company_name=company_name)
+    return render_template('addJobPostOutput.html', employer_id=employer_id)
 
 
 if __name__ == '__main__':
