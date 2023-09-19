@@ -170,7 +170,7 @@ def update_student():
                 db_conn.commit()
 
                 # Redirect the student to the view and edit page or another appropriate page
-                return redirect(url_for('view_and_edit', student_id=updated_info['student_id']))
+                return redirect(url_for('signUpOutput', student_id=updated_info['student_id']))
             except Exception as e:
                 db_conn.rollback()
                 return str(e)
@@ -178,10 +178,10 @@ def update_student():
                 cursor.close()
         else:
             # If the student_id in the session doesn't match the one in the form, handle accordingly
-            return redirect(url_for('student_login_page'))
+            return redirect(url_for('student_app.student_login_page'))
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return redirect(url_for('student_app.student_login_page'))
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
