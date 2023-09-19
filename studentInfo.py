@@ -171,7 +171,8 @@ def update_student():
                 db_conn.commit()
 
                 # Redirect the student to the view and edit page or another appropriate page
-                return redirect(url_for('student_app.signUpOutput', student_id=updated_info['student_id']))
+                return redirect(url_for('student_app.signUpOutput', student_id=updated_info['student_id'], success_message='Edit successful'))
+
             except Exception as e:
                 db_conn.rollback()
                 return str(e)
