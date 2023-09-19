@@ -116,7 +116,7 @@ def add_job_post(employer_id):
 
 
 @employer_app.route("/employer-add-job", methods=["POST"])
-def emloyer_add_job(employer_id):
+def emloyer_add_job():
     if 'employer_id' in session:
         employer_id = session['employer_id']
 
