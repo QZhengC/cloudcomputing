@@ -1,5 +1,4 @@
 <!-- studentViewEdit.html -->
-
 <!DOCTYPE html>
 <html>
 
@@ -11,6 +10,8 @@
     <center>
         <h1>Student View & Edit</h1>
         <form action="/update-student" method="POST">
+            <label for="student_id">Student ID:</label><br>
+            <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required><br><br>
 
             <label for="first_name">First Name:</label><br>
             <input type="text" id="first_name" name="first_name" value="{{ student.first_name }}" required><br><br>
@@ -42,30 +43,11 @@
             <label for="cgpa">CGPA:</label><br>
             <input type="text" id="cgpa" name="cgpa" value="{{ student.cgpa }}" required><br><br>
 
-            <button type="submit" id="submitButton">Save Changes</button>
+            <!-- Add other fields as needed -->
+
+            <button type="submit">Save Changes</button>
         </form>
     </center>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var form = document.querySelector("form");
-            var submitButton = document.getElementById("submitButton");
-
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Prevent the form from submitting normally
-
-                // Your form submission logic here
-                // For demonstration purposes, let's assume the form submission is successful
-                var isSubmissionSuccessful = true;
-
-                if (isSubmissionSuccessful) {
-                    alert("Edit successful!"); // Display a pop-up message for successful edit
-                    form.reset(); // Reset the form fields
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
-
