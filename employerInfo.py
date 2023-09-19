@@ -30,6 +30,23 @@ def employer_sign_up_page():
     return render_template('employerSignUp.html')
 
 
+@employer_app.route("/employerAddJobPage", methods=['GET'])
+def employer_add_job_page():
+    return render_template('addJobPost.html')
+
+
+@employer_app.route("/employer-signup-output", methods=['GET'])
+def employerSignUpOutput():
+    # Retrieve the name from the URL parameter
+    company_name = request.args.get('company_name')
+    return redirect(url_for('employerPage.html'))
+
+
+@employer_app.route("/employer-menu-page", methods=['GET'])
+def employer_Menu():
+    return render_template('employerMenu.html')
+
+
 @employer_app.route("/employer_signup", methods=['POST'])
 def employerSignUp():
     employer_id = request.form['employer_id']
@@ -56,23 +73,6 @@ def employerSignUp():
 
     # Redirect to the output page
     return render_template('employerSignUpOutput.html', employer_id=employer_id, company_name=company_name)
-
-
-@employer_app.route("/employer-signup-output", methods=['GET'])
-def employerSignUpOutput():
-    # Retrieve the name from the URL parameter
-    company_name = request.args.get('company_name')
-    return redirect(url_for('employerPage.html'))
-
-
-@employer_app.route("/employer-add-job-page", methods=['GET'])
-def employerAddJobPost():
-    return render_template('addJobPost.html')
-
-
-@employer_app.route("/employer-menu-page", methods=['GET'])
-def employer_Menu():
-    return render_template('employerMenu.html')
 
 
 @employer_app.route("/employer-login", methods=['GET', 'POST'])
