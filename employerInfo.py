@@ -30,6 +30,23 @@ def employer_sign_up_page():
     return render_template('employerSignUp.html')
 
 
+@employer_app.route("/employerAddJobPage", methods=['GET'])
+def employer_add_job_page():
+    return render_template('addJobPost.html')
+
+
+@employer_app.route("/employer-signup-output", methods=['GET'])
+def employerSignUpOutput():
+    # Retrieve the name from the URL parameter
+    company_name = request.args.get('company_name')
+    return redirect(url_for('employerPage.html'))
+
+
+@employer_app.route("/employer-menu-page", methods=['GET'])
+def employer_Menu():
+    return render_template('employerMenu.html')
+
+
 @employer_app.route("/employer_signup", methods=['POST'])
 def employerSignUp():
     employer_id = request.form['employer_id']
@@ -58,18 +75,6 @@ def employerSignUp():
     return render_template('employerSignUpOutput.html', employer_id=employer_id, company_name=company_name)
 
 
-@employer_app.route("/employer-signup-output", methods=['GET'])
-def employerSignUpOutput():
-    # Retrieve the name from the URL parameter
-    company_name = request.args.get('company_name')
-    return redirect(url_for('employerPage.html'))
-
-
-@employer_app.route("/employer-add-job-page", methods=['GET'])
-def employerAddJobPost():
-    return redirect(url_for('addJobPost.html'))
-
-
 @employer_app.route("/employer-login", methods=['GET', 'POST'])
 def employer_login():
     if request.method == 'POST':
@@ -85,9 +90,8 @@ def employer_login():
             if employer:
                 # Authentication successful, set session variables
                 session['employer_id'] = employer_id
-                session['is_authenticated'] = True
                 # Redirect to the dashboard route
-                return redirect(url_for('employer_app.dashboard'))
+                return redirect(url_for('employer_app.employer_Menu'))
             else:
                 return "Login Failed"
 
@@ -100,69 +104,37 @@ def employer_login():
 
     return render_template('employerLogin.html')
 
-    # employer_id = request.form['employer_id']
-    # employer_password = request.form['employer_password']
+
+@employer_app.route("/add-job-post/<employer_id>", methods=['GET'])
+def add_job_post(employer_id):
+    if 'employer_id' in session and session['employer_id'] == employer_id:
+        # Access user information from the session
+        employer_id = session['employer_id']
+        return render_template("addJobPost.html", employer_id=employer_id)
+    else:
+        return "unauthorized"
+
+    # job_name = request.form('job_name')
+    # job_description = request.form('job_description')
+    # salary = request.form('salary')
 
     # cursor = db_conn.cursor()
-
     # try:
-    #     # Query the database to check if the student exists and the password is correct
-    #     query = "SELECT * FROM employer WHERE employer_id = %s AND employer_password = %s"
-    #     cursor.execute(query, (employer_id, employer_password))
-    #     employer = cursor.fetchone()
-
-    #     if employer:
-    #         # Student is authenticated, you can set up a session or JWT token here
-    #         # Redirect to the student dashboard or homepage
-    #         # SUBJECT TO BE CHANGES
-    #         session['employer_id'] = employer.id
-    #         # session['company_name'] = employer.company_name
-    #         session['is_autheticated'] = True
-    #         employer = authenticate()
-    #         return redirect(url_for('employerMenu.html'))
-
-    #     else:
-    #         # Authentication failed, you can redirect to an error page or show an error message
-    #         return render_template('employerLogin.html')
+    #     # SQL INSERT query
+    #     insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
+    #     cursor.execute(insert_query, (employer_id, job_name,
+    #                    job_description, salary))
+    #     db_conn.commit()
 
     # except Exception as e:
-    #     # Handle exceptions here, e.g., database connection issues
+    #     db_conn.rollback()
     #     return str(e)
 
     # finally:
     #     cursor.close()
 
-
-@employer_app.route("/add-job-post", methods=['POST'])
-def add_job_post():
-    if 'is_authenticated' in session and session['is_authenticated']:
-        # Access user information from the session
-        employer_id = session['employer_id']
-        # company_name = session['company_name']
-    else:
-        return "unauthorized"
-
-    job_name = request.form('job_name')
-    job_description = request.form('job_description')
-    salary = request.form('salary')
-
-    cursor = db_conn.cursor()
-    try:
-        # SQL INSERT query
-        insert_query = "INSERT INTO job_post (employer_id, company_name, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-        cursor.execute(insert_query, (employer_id, company_name, job_name,
-                       job_description, salary))
-        db_conn.commit()
-
-    except Exception as e:
-        db_conn.rollback()
-        return str(e)
-
-    finally:
-        cursor.close()
-
-    # Redirect to the output page
-    return render_template('employer.html', employer_id=employer_id, company_name=company_name)
+    # # Redirect to the output page
+    # return render_template('addJobPostOutput.html', employer_id=employer_id)
 
 
 if __name__ == '__main__':

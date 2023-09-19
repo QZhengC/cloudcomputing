@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Menu</title>
-    <button href="{{ url_for('employer_app.employerAddJobPost') }}">Add Job</button>
-    <button>Edit Job</button>
-    <button>Delete Job</button>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="{{ url_for('employer_app.add_job_post', employer_id=session['employer_id']) }}">Add Job</a>
+        <a href="#">Edit Job</a>
+        <a href="#">Delete Job</a>
+
+    </div>
 </head>
 
 <body>
