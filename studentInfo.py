@@ -135,6 +135,7 @@ def update_student():
     # Check if the student is logged in (has an active session)
     if 'student_id' in session:
         updated_info = {
+            "student_id": request.form['student_id'],
             "first_name": request.form['first_name'],
             "last_name": request.form['last_name'],
             "phone_number": request.form['phone_number'],
