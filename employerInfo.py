@@ -114,28 +114,6 @@ def add_job_post(employer_id):
     else:
         return "unauthorized"
 
-    # job_name = request.form('job_name')
-    # job_description = request.form('job_description')
-    # salary = request.form('salary')
-
-    # cursor = db_conn.cursor()
-    # try:
-    #     # SQL INSERT query
-    #     insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-    #     cursor.execute(insert_query, (employer_id, job_name,
-    #                    job_description, salary))
-    #     db_conn.commit()
-
-    # except Exception as e:
-    #     db_conn.rollback()
-    #     return str(e)
-
-    # finally:
-    #     cursor.close()
-
-    # # Redirect to the output page
-    # return render_template('addJobPostOutput.html', employer_id=employer_id)
-
 
 @employer_app.route("/employer-add-job/<employer_id>", methods=["POST"])
 def emloyer_add_job(employer_id):
