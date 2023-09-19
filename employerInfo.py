@@ -112,12 +112,12 @@ def add_job_post(employer_id):
         employer_id = session['employer_id']
         return render_template("addJobPost.html", employer_id=employer_id)
     else:
-        return "unauthorized"
+        return render_template('employerLogin.html')
 
 
-@employer_app.route("/employer-add-job/<employer_id>", methods=["POST"])
+@employer_app.route("/employer-add-job", methods=["POST"])
 def emloyer_add_job(employer_id):
-    if 'employer_id' in session and session['employer_id'] == employer_id:
+    if 'employer_id' in session:
         employer_id = session['employer_id']
         job_id = request.form('job_id')
         job_name = request.form('job_name')
@@ -127,8 +127,8 @@ def emloyer_add_job(employer_id):
         cursor = db_conn.cursor()
         try:
             # SQL INSERT query
-            insert_query = "INSERT INTO job_post (employer_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %f)"
-            cursor.execute(insert_query, (employer_id, job_name,
+            insert_query = "INSERT INTO job_post (employer_id, job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %f)"
+            cursor.execute(insert_query, (employer_id, job_id, job_name,
                            job_description, salary))
             db_conn.commit()
         except Exception as e:
