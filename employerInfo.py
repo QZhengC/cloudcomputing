@@ -120,10 +120,10 @@ def emloyer_add_job():
     if 'employer_id' in session:
         employer_id = session['employer_id']
 
-        job_id = request.form('job_id')
-        job_name = request.form('job_name')
-        job_description = request.form('job_description')
-        salary = request.form('salary')
+        job_id = request.form['job_id']
+        job_name = request.form['job_name']
+        job_description = request.form['job_description']
+        salary = request.form['salary']
 
         cursor = db_conn.cursor()
         try:
