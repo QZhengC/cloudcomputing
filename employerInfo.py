@@ -132,7 +132,7 @@ def emloyer_add_job():
             cursor.execute(select_query, (employer_id,))
             company_name = cursor.fetchone()[0]
 
-            insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %f)"
+            insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor.execute(insert_query, (employer_id, company_name, job_id,
                            job_name, job_description, salary))
             db_conn.commit()
