@@ -42,6 +42,12 @@ def employerSignUpOutput():
     return redirect(url_for('employerPage.html'))
 
 
+@employer_app.route("/employer-add-job-output", methods=['GET'])
+def employerAddJobOutput():
+    job_name = request.args.get('job_name')
+    return redirect(url_for('addJobPostOutput.html'))
+
+
 @employer_app.route("/employer-menu-page", methods=['GET'])
 def employer_Menu():
     return render_template('employerMenu.html')
@@ -136,7 +142,7 @@ def emloyer_add_job():
             cursor.execute(insert_query, (employer_id, company_name, job_id,
                            job_name, job_description, salary))
             db_conn.commit()
-            return redirect(url_for('addJobPostOutput.html', job_name=job_name))
+            return redirect(url_for('employer_app.employerAddJobOutput', job_name=job_name))
         except Exception as e:
             db_conn.rollback()
             return str(e)
