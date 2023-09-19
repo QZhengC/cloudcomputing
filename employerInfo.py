@@ -142,7 +142,6 @@ def emloyer_add_job():
             return str(e)
         finally:
             cursor.close()
-            return render_template('addJobPostOutput.html', employer_id, job_name)
 
 
 if __name__ == '__main__':
