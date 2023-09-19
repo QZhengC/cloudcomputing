@@ -39,13 +39,13 @@ def employer_add_job_page():
 def employerSignUpOutput():
     # Retrieve the name from the URL parameter
     company_name = request.args.get('company_name')
-    return redirect(url_for('employerPage.html'))
+    return render_template('employerMenu.html')
 
 
 @employer_app.route("/employer-add-job-output", methods=['GET'])
 def employerAddJobOutput():
     job_name = request.args.get('job_name')
-    return redirect(url_for('addJobPostOutput.html'))
+    return render_template('addJobPostOutput.html')
 
 
 @employer_app.route("/employer-menu-page", methods=['GET'])
