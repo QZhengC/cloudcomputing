@@ -119,6 +119,7 @@ def add_job_post(employer_id):
 def emloyer_add_job(employer_id):
     if 'employer_id' in session:
         employer_id = session['employer_id']
+
         job_id = request.form('job_id')
         job_name = request.form('job_name')
         job_description = request.form('job_description')
@@ -127,16 +128,21 @@ def emloyer_add_job(employer_id):
         cursor = db_conn.cursor()
         try:
             # SQL INSERT query
-            insert_query = "INSERT INTO job_post (employer_id, job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %f)"
-            cursor.execute(insert_query, (employer_id, job_id, job_name,
-                           job_description, salary))
+            select_query = "SELECT company_name FROM employer WHERE employer_id = %s"
+            cursor.execute(select_query, (employer_id,))
+            company_name = cursor.fetchone()[0]
+
+            insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %f)"
+            cursor.execute(insert_query, (employer_id, company_name, job_id,
+                           job_name, job_description, salary))
             db_conn.commit()
+            return redirect(url_for('addJobPostOutput.html', job_name=job_name))
         except Exception as e:
             db_conn.rollback()
             return str(e)
         finally:
             cursor.close()
-        return render_template('addJobPostOutput.html', employer_id, job_name)
+            return render_template('addJobPostOutput.html', employer_id, job_name)
 
 
 if __name__ == '__main__':
