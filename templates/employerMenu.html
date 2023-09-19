@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Menu</title>
-    <button href="{{ url_for('employer_app.employer_add_job_page') }}">Add Job</button>
+    <form action="/employerAddJobPage" autocomplete="on" method="POST">
+        <button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Add
+            Job</button><br><br>
+    </form>
     <button>Edit Job</button>
     <button>Delete Job</button>
 </head>
