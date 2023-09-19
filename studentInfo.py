@@ -4,6 +4,7 @@ from pymysql import connections
 import os
 from flask_session import Session
 from config import *
+from flask import jsonify
 
 student_app = Blueprint('student_app', __name__)
 
@@ -134,7 +135,6 @@ def update_student():
     # Check if the student is logged in (has an active session)
     if 'student_id' in session:
         updated_info = {
-            "student_id": request.form['student_id'],
             "first_name": request.form['first_name'],
             "last_name": request.form['last_name'],
             "phone_number": request.form['phone_number'],
@@ -168,6 +168,7 @@ def update_student():
                     updated_info["skills_learned"], updated_info["cgpa"], updated_info["student_id"]
                 ))
                 db_conn.commit()
+                edit_status = "success"
 
                 # Redirect the student to the view and edit page or another appropriate page
                 return redirect(url_for('student_app.signUpOutput', student_id=updated_info['student_id']))
@@ -178,6 +179,7 @@ def update_student():
                 cursor.close()
         else:
             # If the student_id in the session doesn't match the one in the form, handle accordingly
+            edit_status = "error"
             return redirect(url_for('student_app.student_login_page'))
     else:
         # If the student is not logged in, redirect them to the login page
