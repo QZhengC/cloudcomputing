@@ -168,7 +168,7 @@ def update_student():
                     updated_info["first_name"], updated_info["last_name"], updated_info["phone_number"],
                     updated_info["email"], updated_info["password"], updated_info["current_address"],
                     updated_info["course_of_study"], updated_info["year_intake"],
-                    updated_info["skills_learned"], updated_info["cgpa"], student_id  # Use student_id here
+                    updated_info["skills_learned"], updated_info["cgpa"], student_id
                 ))
                 db_conn.commit()
 
@@ -186,6 +186,7 @@ def update_student():
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_app.student_login_page'))
+
 
 
 if __name__ == '__main__':
