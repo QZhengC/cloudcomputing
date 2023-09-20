@@ -152,7 +152,7 @@ def update_student():
         }
 
         # Verify that the student_id in the session matches the one in the form
-        if student_id == updated_info['student_id']:
+        if student_id == session['student_id']:
             try:
                 # SQL UPDATE query to update student information
                 update_query = """
