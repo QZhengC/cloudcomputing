@@ -150,23 +150,27 @@ def emloyer_add_job():
             cursor.close()
 
 
-@employer_app.route("/view-and-edit-job-post", methods=['GET'])
+@employer_app.route("/view-and-edit-job-post/<employer_id>", methods=['GET'])
 def view_and_edit_job_post(employer_id):
-    if 'employer_id' in session:
+    # Check if the employer is logged in (has an active session)
+    if 'employer_id' in session and session['employer_id'] == employer_id:
         cursor = db_conn.cursor()
         try:
-            query = "SELECT * FROM JOB_POST WHERE EMPLOYER = %s"
+            # Query the database to retrieve job posts associated with the employer
+            query = "SELECT * FROM JOB_POST WHERE EMPLOYER_ID = %s"
             cursor.execute(query, (employer_id,))
             jobs = cursor.fetchall()
             if jobs:
-                return render_template('employerEditJob.html', employer_id=employer_id)
+                return render_template('employerEditJob.html', jobs=jobs, employer_id=employer_id)
             else:
                 return render_template('noJobFound.html')
         except Exception as e:
+            # Handle exceptions here, e.g., database connection issues
             return str(e)
         finally:
             cursor.close()
     else:
+        # If the employer is not logged in, redirect them to the login page
         return redirect(url_for('employer_login_page'))
 
 
