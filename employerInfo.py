@@ -177,10 +177,18 @@ def view_job_post(employer_id):
             query = "SELECT * FROM job_post WHERE employer_id = %s"
             cursor.execute(query, (employer_id,))
             job_post = cursor.fetchall()
-            if job_post:
-                return render_template('viewJobPost.html', jobs_post=job_post)
-            else:
-                return render_template('noJobFound.html')
+            if not job_post:
+                return render_template('noJobsFound.html')
+
+            jobs = {
+                "job_id": job_post[2],
+                "job_name": job_post[3],
+                "job_description": job_post[4],
+                "salary": job_post[5]
+            }
+
+            return render_template('viewJobPost.html', jobs=jobs)
+
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
             return str(e)
