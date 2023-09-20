@@ -146,6 +146,7 @@ def update_student():
             return render_template('student_not_found.html')
 
         updated_info = {
+            "student_id": request.form['student_id'],
             "first_name": request.form['first_name'],
             "last_name": request.form['last_name'],
             "phone_number": request.form['phone_number'],
