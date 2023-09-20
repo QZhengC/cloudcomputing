@@ -165,7 +165,7 @@ def view_student():
     # Check if the student is logged in (has an active session)
     if 'student_id' in session:
         student_id = session['student_id']
-        cursor = db_conn.cursor(dictionary=True)  # Use dictionary cursor for easier data access
+        cursor = db_conn.cursor()  # Use dictionary cursor for easier data access
 
         try:
             # Retrieve the student's information from the database
