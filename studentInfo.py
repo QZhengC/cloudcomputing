@@ -137,6 +137,7 @@ def update_student():
     if 'student_id' in session:
         # Retrieve the student's ID from the session
         student_id = session['student_id']
+        cursor = db_conn.cursor()
 
         updated_info = {
             "first_name": request.form['first_name'],
