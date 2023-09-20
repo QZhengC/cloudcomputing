@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="leftSideBar">
+        <h1 class="center">Admin Dashboard</h1>
+        <div class="leftOption">
+            <a href="{{ url_for('admin_app.admin_admin') }}">
+                <button class="leftButton">Admin</button>
+            </a>
+            <a href="{{ url_for('admin_app.admin_student') }}">
+                <button class="leftButton">Student</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_employer') }}">
+                <button class="leftButton">Employer</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_tutor') }}">
+                <button class="leftButton">Tutor</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="rightBoard">
+        <h1>Admin Tab</h1>
+        <div>
+        <a><button onclick="document.getElementById('adminAdd').style.display='block'" style="width:100%;">Add Admin</button></a><br>
+        <a><button onclick="document.getElementById('adminUpdate').style.display='block'" style="width:100%;">Update Admin</button></a><br>
+        <a><button onclick="document.getElementById('adminDelete').style.display='block'" style="width:100%;">Delete Admin</button></a><br>
+        </div>
+    </div>
+
+    <div id="adminAdd" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-add-admin" method="POST">
+            <h1 class="center">Add Admin</h1>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Admin ID</b></label><br>
+                <input type="text" placeholder="Admin ID" id="admin_id" name="admin_id" required><br><br>
+
+                <label for="admin_password"><b>Password</b></label><br>
+                <input type="password" placeholder="Password" id="admin_password" name="admin_password" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminUpdate" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findu-admin" method="POST">
+            <h1 class="center">Update Admin</h1>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Admin ID</b></label><br>
+                <input type="text" placeholder="Admin ID" id="admin_id" name="admin_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminDelete" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findd-admin" method="POST">
+            <h1 class="center">Delete Admin</h1>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Admin ID</b></label><br>
+                <input type="text" placeholder="Admin ID" id="admin_id" name="admin_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    {% if obj1 == "uFindSuccess": %}
+    <div id="finduSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-update-admin" method="POST">
+            <h1 class="center">Updating Admin {{att1}}</h1>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Admin ID</b></label><br>
+                <input type="text" value="{{att1}}" id="admin_id" name="admin_id" required style="background-color: lightgrey;" readonly><br><br>
+
+                <label for="admin_password"><b>Password</b></label><br>
+                <input type="password" value="{{att2}}" id="admin_password" name="admin_password" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_student') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Update</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "dFindSuccess": %}
+    <div id="finddSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-delete-admin" method="POST">
+            <h1 class="center">Deleting Admin {{att1}}</h1>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Admin ID</b></label><br>
+                <input type="text" value="{{att1}}" id="admin_id" name="admin_id" required style="background-color: lightgrey;" readonly><br><br>
+
+                <label for="admin_password"><b>Password</b></label><br>
+                <input type="password" value="{{att2}}" id="admin_password" name="admin_password" required style="background-color: lightgrey;" readonly><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Delete</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "addSuccess": %}
+    <div id="updateSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Added Successfully</h1>
+            <div class="popOut-container">
+                <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "updateSuccess": %}
+    <div id="updateSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Updated Successfully</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "deleteSuccess": %}
+    <div id="deleteSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Deleted Successfully</h1>
+            <div class="popOut-container"></div>
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "findFailed": %}
+    <div id="findFailed" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Record Not Found</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
