@@ -150,5 +150,25 @@ def emloyer_add_job():
             cursor.close()
 
 
+@employer_app.route("/view-and-edit-job-post", methods=['GET'])
+def view_and_edit_job_post(employer_id):
+    if 'employer_id' in session:
+        cursor = db_conn.cursor()
+        try:
+            query = "SELECT * FROM JOB_POST WHERE EMPLOYER = %s"
+            cursor.execute(query, (employer_id,))
+            jobs = cursor.fetchall()
+            if jobs:
+                return render_template('employerEditJob.html', employer_id=employer_id)
+            else:
+                return render_template('noJobFound.html')
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('employer_login_page'))
+
+
 if __name__ == '__main__':
     employer_app.run(host='0.0.0.0', port=80, debug=True)
