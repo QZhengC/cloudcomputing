@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from flask import Flask
 from pymysql import connections
 import os
 from flask_session import Session
 from config import *
-from flask import jsonify
+import boto3
+from botocore.exceptions import NoCredentialsError
 
 student_app = Blueprint('student_app', __name__)
 
@@ -267,7 +267,35 @@ def update_student():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_app.student_login_page'))
 
+# AWS S3 configuration
+AWS_ACCESS_KEY = 'your_access_key'
+AWS_SECRET_KEY = 'your_secret_key'
+S3_BUCKET_NAME = 'kungweixin-employee'
 
+s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
+
+@student_app.route('/upload-resume', methods=['POST'])
+def upload_resume():
+    try:
+        # Get the uploaded file from the request
+        resume_file = request.files['resume']
+
+        if resume_file:
+            # Generate a unique key for the S3 object (file)
+            resume_key = os.path.join('resumes', resume_file.filename)
+
+            # Upload the file to S3
+            s3.upload_fileobj(resume_file, S3_BUCKET_NAME, resume_key)
+
+            # Optionally, you can store the S3 URL in a database or session for future reference
+            s3_url = f"https://{S3_BUCKET_NAME}.s3.amazonaws.com/{resume_key}"
+
+            return f"Resume uploaded successfully. S3 URL: {s3_url}"
+        else:
+            return "No file selected for upload."
+
+    except NoCredentialsError:
+        return "AWS credentials not available. Upload failed."
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
