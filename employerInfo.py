@@ -166,8 +166,8 @@ def view_job_post(employer_id):
         return render_template('employerLogin.html')
 
 
-# EDIT JOB FUNCTION
-@employer_app.route("/view-and-edit-job-post/<employer_id>", methods=['GET'])
+# DISPLAY JOB FUNCTION
+@employer_app.route("/view-job-post/<employer_id>", methods=['GET'])
 def edit_job_post(employer_id):
     # Check if the employer is logged in (has an active session)
     if 'employer_id' in session and session['employer_id'] == employer_id:
@@ -176,9 +176,9 @@ def edit_job_post(employer_id):
             # Query the database to retrieve job posts associated with the employer
             query = "SELECT * FROM job_post WHERE employer_id = %s"
             cursor.execute(query, (employer_id,))
-            jobs = cursor.fetchall()
-            if jobs:
-                return render_template('editJobPost.html', jobs=jobs)
+            job_post = cursor.fetchall()
+            if job_post:
+                return render_template('viewJobPost.html', jobs_post=job_post)
             else:
                 return render_template('noJobFound.html')
         except Exception as e:
