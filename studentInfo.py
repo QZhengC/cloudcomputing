@@ -29,6 +29,7 @@ def student_signUp_page():
 @student_app.route("/signup", methods=['POST'])
 def signUp():
     student_id = request.form['student_id']
+    supervisor_id = request.form['supervisor_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     phone_number = request.form['phone_number']
@@ -44,8 +45,8 @@ def signUp():
 
     try:
         # SQL INSERT query
-        insert_query = "INSERT INTO students (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, (student_id, first_name, last_name, phone_number, email,
+        insert_query = "INSERT INTO students (student_id, supervisor_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (student_id, supervisor_id, first_name, last_name, phone_number, email,
                        password, current_address, course_of_study, year_intake, skills_learned, cgpa))
         db_conn.commit()
         stud_name = "" + first_name + " " + last_name
@@ -184,16 +185,17 @@ def view_student():
             # Convert the result into a dictionary for easier data access
             student = {
                 "student_id": student_data[0],
-                "first_name": student_data[1],
-                "last_name": student_data[2],
-                "phone_number": student_data[3],
-                "email": student_data[4],
-                "password": student_data[5],
-                "current_address": student_data[6],
-                "course_of_study": student_data[7],
-                "year_intake": student_data[8],
-                "skills_learned": student_data[9],
-                "cgpa": student_data[10]
+                "supervisor_id": student_data[1],
+                "first_name": student_data[2],
+                "last_name": student_data[3],
+                "phone_number": student_data[4],
+                "email": student_data[5],
+                "password": student_data[6],
+                "current_address": student_data[7],
+                "course_of_study": student_data[8],
+                "year_intake": student_data[9],
+                "skills_learned": student_data[10],
+                "cgpa": student_data[11]
             }
 
             # Render a template to display the student's information
