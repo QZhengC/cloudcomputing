@@ -161,7 +161,7 @@ def view_and_edit_job_post(employer_id):
             cursor.execute(query, (employer_id,))
             jobs = cursor.fetchall()
             if jobs:
-                return render_template('employerEditJob.html', jobs=jobs, employer_id=employer_id)
+                return render_template('editJobPost.html', jobs=jobs, employer_id=employer_id)
             else:
                 return render_template('noJobFound.html')
         except Exception as e:
