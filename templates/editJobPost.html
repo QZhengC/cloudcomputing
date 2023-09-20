@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View and Edit Students</title>
+</head>
+
+<body>
+    <h1>Student Information</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Job ID</th>
+                <th>Job Name</th>
+                <th>Salary</th>
+                <!-- Add more table headers for other student attributes -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for job_post in employer_id %}
+            <tr>
+                <td>{{ .student_id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <!-- Add more table cells for other student attributes -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('student_login_page') }}">Back to Login</a>
+</body>
+
+</html>
