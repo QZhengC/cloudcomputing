@@ -168,7 +168,7 @@ def view_job_post(employer_id):
 
 # DISPLAY JOB FUNCTION
 @employer_app.route("/view-job-post/<employer_id>", methods=['GET'])
-def edit_job_post(employer_id):
+def view_job_post(employer_id):
     # Check if the employer is logged in (has an active session)
     if 'employer_id' in session and session['employer_id'] == employer_id:
         cursor = db_conn.cursor()

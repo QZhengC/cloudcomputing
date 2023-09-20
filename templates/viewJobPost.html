@@ -17,16 +17,18 @@
                 <!-- Add more table headers for other job attributes -->
             </tr>
         </thead>
-        <tbody>
-            {% for job_post in job_post %}
-            <tr>
-                <td>{{ job_post.job_id }}</td>
-                <td>{{ job_post.job_name }}</td>
-                <td>{{ job_post.salary }}</td>
-                <!-- Add more table cells for other job attributes -->
-            </tr>
-            {% endfor %}
-        </tbody>
+        <form action="/view-job-post" method="GET">
+            <tbody>
+                {% for jobs in job_post %}
+                <tr>
+                    <td>{{ jobs.job_id }}</td>
+                    <td>{{ jobs.job_name }}</td>
+                    <td>{{ jobs.salary }}</td>
+                    <!-- Add more table cells for other job attributes -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </form>
     </table>
 
     <a href="{{ url_for('employer_app.employer_Menu') }}">Back to Menu</a>
