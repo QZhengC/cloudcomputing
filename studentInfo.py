@@ -61,7 +61,6 @@ def signUp():
 
     return render_template('studentSignUpOutput.html', student_id=student_id, name=stud_name)
 
-
 @student_app.route("/signup-output", methods=['GET'])
 def signUpOutput():
     return render_template('studentMenu.html')
