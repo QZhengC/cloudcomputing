@@ -18,9 +18,9 @@
                 <!-- Add more table headers for other job attributes -->
             </tr>
         </thead>
-        <form action="/view-job-post" method="POST">
+        <form action="/view-job-post" method="GET">
             <tbody>
-                {% for jobs in jobs %}
+                {% for job_post in jobs %}
                 <tr>
                     <td>{{ jobs.job_id }}</td>
                     <td>{{ jobs.job_name }}</td>
