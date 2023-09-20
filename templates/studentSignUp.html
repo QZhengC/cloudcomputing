@@ -65,6 +65,7 @@
     <script>
         function validateForm() {
             var studentId = document.getElementById("student_id").value;
+            var supervisorId = document.getElementById("supervisor_id").value;
             var firstName = document.getElementById("first_name").value;
             var lastName = document.getElementById("last_name").value;
             var phoneNumber = document.getElementById("phone_number").value;
@@ -72,7 +73,7 @@
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirm_password").value;
 
-            if (studentId === "" || firstName === "" || lastName === "" || phoneNumber === "" || email === "" || password === "" || confirmPassword === "") {
+            if (studentId === "" || supervisorId === "" || firstName === "" || lastName === "" || phoneNumber === "" || email === "" || password === "" || confirmPassword === "") {
                 alert("All fields are required. Please fill them in.");
                 return false;
             }
