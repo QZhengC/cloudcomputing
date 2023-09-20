@@ -157,7 +157,38 @@ def view(student_id):
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
-    
+
+from flask import render_template, url_for, redirect
+
+@student_app.route("/view-student", methods=['GET'])
+def view_student():
+    # Check if the student is logged in (has an active session)
+    if 'student_id' in session:
+        student_id = session['student_id']
+        cursor = db_conn.cursor(dictionary=True)  # Use dictionary cursor for easier data access
+
+        try:
+            # Retrieve the student's information from the database
+            select_query = "SELECT * FROM students WHERE student_id = %s"
+            cursor.execute(select_query, (student_id,))
+            student = cursor.fetchone()
+
+            if not student:
+                # Handle the case where the student doesn't exist
+                return render_template('student_not_found.html')
+
+            # Render a template to display the student's information
+            return render_template('student_view.html', student=student)
+        except Exception as e:
+            # Handle any database errors
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_app.student_login_page'))
+
+        
 from flask import session, request, redirect, url_for
 
 from flask import render_template  # Import render_template
