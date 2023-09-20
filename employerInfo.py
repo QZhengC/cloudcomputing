@@ -157,7 +157,7 @@ def emloyer_add_job():
 
 # EDIT JOB -> REDIRECT TO DISPLAY
 @employer_app.route("/edit-job-post/<employer_id>", methods=['GET'])
-def view_job_post(employer_id):
+def view_job_post_page(employer_id):
     if 'employer_id' in session and session['employer_id'] == employer_id:
         # Access user information from the session
         employer_id = session['employer_id']
