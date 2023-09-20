@@ -25,6 +25,11 @@ def employer_login_page():
     return render_template('employerLogin.html')
 
 
+@employer_app.route("/employerSignUpPop", methods=['GET'])
+def employer_sign_up_pop():
+    return render_template('login.html', obj1="empSign")
+
+
 @employer_app.route("/employerSignUpPage", methods=['GET'])
 def employer_sign_up_page():
     return render_template('employerSignUp.html')

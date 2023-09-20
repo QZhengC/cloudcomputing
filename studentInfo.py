@@ -21,6 +21,11 @@ def student_login_page():
     return render_template('studentLogin.html')
 
 
+@student_app.route("/studentSignUpPop", methods=['GET'])
+def student_sign_up_pop():
+    return render_template('login.html', obj1="stuSign")
+
+
 @student_app.route("/studentSignUpPage", methods=['GET'])
 def student_signUp_page():
     return render_template('studentSignUp.html')
