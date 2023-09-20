@@ -14,10 +14,6 @@ db_conn = connections.Connection(
 
 admin_app = Blueprint('admin_app', __name__)
 
-@admin_app.route("/adminLogout", methods=['GET'])
-def admin_logout():
-    return render_template('login.html')
-
 @admin_app.route("/adminAdmin", methods=['GET'])
 def admin_admin():
     return render_template('adminAdmin.html')
@@ -47,7 +43,7 @@ def admin_login():
         admin = cursor.fetchone()
 
         if admin:
-            return render_template('adminAdmin.html')
+            return render_template('adminAdmin.html', obj1="first", att1=admin_id)
         else:
             return render_template('login.html')
 
