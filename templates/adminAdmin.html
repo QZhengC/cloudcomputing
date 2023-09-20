@@ -22,6 +22,11 @@
             <a href="{{ url_for('admin_app.admin_tutor') }}">
                 <button class="leftButton">Tutor</button>
             </a>
+
+            <br><br>
+            <a href="{{ url_for('main_app.home') }}">
+                <button style="background-color: red;" class="leftButton">Logout</button>
+            </a>
         </div>
     </div>
 
@@ -138,7 +143,7 @@
         <form class="popOut-content animate">
             <h1 class="center">Added Successfully</h1>
             <div class="popOut-container">
-                <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
                 <a href="{{ url_for('admin_app.admin_admin') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
@@ -182,6 +187,21 @@
 
         <form class="popOut-content animate">
             <h1 class="center">Record Not Found</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_admin') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "first": %}
+    <div id="findFailed" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Welcome {{att1}}</h1>
             <div class="popOut-container">
                 <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
                 <a href="{{ url_for('admin_app.admin_admin') }}">

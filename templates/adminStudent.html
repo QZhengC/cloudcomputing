@@ -22,6 +22,11 @@
             <a href="{{ url_for('admin_app.admin_tutor') }}">
                 <button class="leftButton">Tutor</button>
             </a>
+
+            <br><br>
+            <a href="{{ url_for('main_app.home') }}">
+                <button style="background-color: red;" class="leftButton">Logout</button>
+            </a>
         </div>
     </div>
 
@@ -42,6 +47,9 @@
                 <label for="stu_id"><b>Student ID</b></label><br>
                 <input type="text" placeholder="Student ID" id="stu_id" name="stu_id" required><br><br>
 
+                <label for="stu_suid"><b>Supervisor ID</b></label><br>
+                <input type="text" placeholder="Supervisor ID" id="stu_suid" name="stu_suid" required><br><br>
+
                 <label for="stu_first_name"><b>First Name</b></label><br>
                 <input type="text" placeholder="First Name" id="stu_first_name" name="stu_first_name" required><br><br>
                 
@@ -55,7 +63,7 @@
                 <input type="text" placeholder="Email Address" id="stu_mail" name="stu_mail" required><br><br>
 
                 <label for="stu_pass"><b>Password</b></label><br>
-                <input type="text" placeholder="Password" id="stu_pass" name="stu_pass" required><br><br>
+                <input type="password" placeholder="Password" id="stu_pass" name="stu_pass" required><br><br>
 
                 <label for="stu_addr"><b>Current Address</b></label><br>
                 <input type="text" placeholder="Current Address" id="stu_addr" name="stu_addr" required><br><br>
@@ -124,35 +132,38 @@
                 <label for="stu_id"><b>Student ID</b></label><br>
                 <input type="text" value="{{att1}}" id="stu_id" name="stu_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
+                <label for="stu_suid"><b>Supervisor ID</b></label><br>
+                <input type="text" value="{{att2}}" id="stu_suid" name="stu_suid" required><br><br>
+
                 <label for="stu_first_name"><b>First Name</b></label><br>
-                <input type="text" value="{{att2}}" id="stu_first_name" name="stu_first_name" required><br><br>
+                <input type="text" value="{{att3}}" id="stu_first_name" name="stu_first_name" required><br><br>
                 
                 <label for="stu_last_name"><b>Last Name</b></label><br>
-                <input type="text" value="{{att3}}" id="stu_last_name" name="stu_last_name" required><br><br>
+                <input type="text" value="{{att4}}" id="stu_last_name" name="stu_last_name" required><br><br>
 
                 <label for="stu_phone"><b>Phone Number</b></label><br>
-                <input type="text" value="{{att4}}" id="stu_phone" name="stu_phone" required><br><br>
+                <input type="text" value="{{att5}}" id="stu_phone" name="stu_phone" required><br><br>
 
                 <label for="stu_mail"><b>Email Address</b></label><br>
-                <input type="text" value="{{att5}}" id="stu_mail" name="stu_mail" required><br><br>
+                <input type="text" value="{{att6}}" id="stu_mail" name="stu_mail" required><br><br>
 
                 <label for="stu_pass"><b>Password</b></label><br>
-                <input type="text" value="{{att6}}" id="stu_pass" name="stu_pass" required><br><br>
+                <input type="password" value="{{att7}}" id="stu_pass" name="stu_pass" required><br><br>
 
                 <label for="stu_addr"><b>Current Address</b></label><br>
-                <input type="text" value="{{att7}}" id="stu_addr" name="stu_addr" required><br><br>
+                <input type="text" value="{{att8}}" id="stu_addr" name="stu_addr" required><br><br>
 
                 <label for="stu_course"><b>Course of Study</b></label><br>
-                <input type="text" value="{{att8}}" id="stu_course" name="stu_course" required><br><br>
+                <input type="text" value="{{att9}}" id="stu_course" name="stu_course" required><br><br>
 
                 <label for="stu_intake"><b>Year Intake</b></label><br>
-                <input type="text" value="{{att9}}" id="stu_intake" name="stu_intake" required><br><br>
+                <input type="text" value="{{att10}}" id="stu_intake" name="stu_intake" required><br><br>
 
                 <label for="stu_skill"><b>Skill Learned</b></label><br>
-                <input type="text" value="{{att10}}" id="stu_skill" name="stu_skill" required><br><br>
+                <input type="text" value="{{att11}}" id="stu_skill" name="stu_skill" required><br><br>
 
                 <label for="stu_cgpa"><b>CGPA</b></label><br>
-                <input type="text" value="{{att11}}" id="stu_cgpa" name="stu_cgpa" required><br><br>
+                <input type="text" value="{{att12}}" id="stu_cgpa" name="stu_cgpa" required><br><br>
             </div>
             <div class="popOut-container">
                 <a href="{{ url_for('admin_app.admin_student') }}">
@@ -173,35 +184,38 @@
                 <label for="stu_id"><b>Student ID</b></label><br>
                 <input type="text" value="{{att1}}" id="stu_id" name="stu_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
+                <label for="stu_suid"><b>Supervisor ID</b></label><br>
+                <input type="text" value="{{att2}}" id="stu_suid" name="stu_suid" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
                 <label for="stu_first_name"><b>First Name</b></label><br>
-                <input type="text" value="{{att2}}" id="stu_first_name" name="stu_first_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att3}}" id="stu_first_name" name="stu_first_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
                 
                 <label for="stu_last_name"><b>Last Name</b></label><br>
-                <input type="text" value="{{att3}}" id="stu_last_name" name="stu_last_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att4}}" id="stu_last_name" name="stu_last_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_phone"><b>Phone Number</b></label><br>
-                <input type="text" value="{{att4}}" id="stu_phone" name="stu_phone" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att5}}" id="stu_phone" name="stu_phone" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_mail"><b>Email Address</b></label><br>
-                <input type="text" value="{{att5}}" id="stu_mail" name="stu_mail" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att6}}" id="stu_mail" name="stu_mail" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_pass"><b>Password</b></label><br>
-                <input type="text" value="{{att6}}" id="stu_pass" name="stu_pass" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="password" value="{{att7}}" id="stu_pass" name="stu_pass" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_addr"><b>Current Address</b></label><br>
-                <input type="text" value="{{att7}}" id="stu_addr" name="stu_addr" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att8}}" id="stu_addr" name="stu_addr" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_course"><b>Course of Study</b></label><br>
-                <input type="text" value="{{att8}}" id="stu_course" name="stu_course" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att9}}" id="stu_course" name="stu_course" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_intake"><b>Year Intake</b></label><br>
-                <input type="text" value="{{att9}}" id="stu_intake" name="stu_intake" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att10}}" id="stu_intake" name="stu_intake" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_skill"><b>Skill Learned</b></label><br>
-                <input type="text" value="{{att10}}" id="stu_skill" name="stu_skill" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att11}}" id="stu_skill" name="stu_skill" readonly="readonly" required style="background-color: lightgrey;"><br><br>
 
                 <label for="stu_cgpa"><b>CGPA</b></label><br>
-                <input type="text" value="{{att11}}" id="stu_cgpa" name="stu_cgpa" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <input type="text" value="{{att12}}" id="stu_cgpa" name="stu_cgpa" readonly="readonly" required style="background-color: lightgrey;"><br><br>
             </div>
             <div class="popOut-container">
                 <a href="{{ url_for('admin_app.admin_student') }}">
@@ -219,7 +233,7 @@
         <form class="popOut-content animate">
             <h1 class="center">Added Successfully</h1>
             <div class="popOut-container">
-                <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
                 <a href="{{ url_for('admin_app.admin_student') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
