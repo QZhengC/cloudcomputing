@@ -13,16 +13,18 @@
             <tr>
                 <th>Job ID</th>
                 <th>Job Name</th>
+                <th>Job Description</th>
                 <th>Salary</th>
                 <!-- Add more table headers for other job attributes -->
             </tr>
         </thead>
-        <form action="/view-job-post" method="GET">
+        <form action="/view-job-post" method="POST">
             <tbody>
                 {% for jobs in job_post %}
                 <tr>
                     <td>{{ jobs.job_id }}</td>
                     <td>{{ jobs.job_name }}</td>
+                    <td>{{ jobs.job_description }}</td>
                     <td>{{ jobs.salary }}</td>
                     <!-- Add more table cells for other job attributes -->
                 </tr>
