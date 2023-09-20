@@ -9,7 +9,7 @@
     <div class="sidebar">
         <h2>Menu</h2>
         <a href="{{ url_for('employer_app.add_job_post', employer_id=session['employer_id']) }}">Add Job</a>
-        <a href="{{ url_for('employer_app.view_and_edit_job_post', employer_id=session['employer_id']) }}">Edit Job</a>
+        <a href="{{ url_for('employer_app.view_job_post', employer_id=session['employer_id']) }}">Edit Job</a>
         <a href="#">Delete Job</a>
 
     </div>
