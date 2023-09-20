@@ -22,10 +22,10 @@
             <tbody>
                 {% for job_post in jobs %}
                 <tr>
-                    <td>{{ job_post[0] }}</td>
-                    <td>{{ job_post[1] }}</td>
-                    <td>{{ job_post[5] }}</td>
-                    <td>{{ job_post[4] }}</td>
+                    <td>{{ jobs.job_id }}</td>
+                    <td>{{ jobs.job_name }}</td>
+                    <td>{{ jobs.job_description }}</td>
+                    <td>{{ jobs.salary }}</td>
                     <!-- Add more table cells for other job attributes -->
                 </tr>
                 {% endfor %}
