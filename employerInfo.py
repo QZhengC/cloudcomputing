@@ -157,7 +157,7 @@ def view_and_edit_job_post(employer_id):
         cursor = db_conn.cursor()
         try:
             # Query the database to retrieve job posts associated with the employer
-            query = "SELECT * FROM JOB_POST WHERE EMPLOYER_ID = %s"
+            query = "SELECT * FROM job_post WHERE employer_id = %s"
             cursor.execute(query, (employer_id,))
             jobs = cursor.fetchall()
             if jobs:
