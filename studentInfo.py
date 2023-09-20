@@ -193,7 +193,7 @@ def view_student():
             }
 
             # Render a template to display the student's information
-            return render_template('student_view.html', student=student)
+            return render_template('studentView.html', student=student)
         except Exception as e:
             # Handle any database errors
             return str(e)
