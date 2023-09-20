@@ -173,7 +173,7 @@ def update_student():
                 db_conn.commit()
 
                 # Redirect the student to the view and edit page with the success message
-                return render_template('studentViewEdit.html', student=student, success_message='Edit successful')
+                return render_template('studentViewEdit.html', student_id=student_id, success_message='Edit successful')
 
             except Exception as e:
                 db_conn.rollback()
@@ -190,4 +190,6 @@ def update_student():
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
+
+
 
