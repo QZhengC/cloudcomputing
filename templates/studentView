@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student View</title>
+</head>
+
+<body>
+    <center>
+        <h1>Student Information</h1>
+        <p><strong>First Name:</strong> {{ student.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ student.last_name }}</p>
+        <!-- Add more details here -->
+        
+        <form action="{{ url_for('student_app.view_and_edit', student_id=session['student_id']) }}">
+            <button type="submit" class="edit-button">Edit Information</button>
+        </form>
+        
+    </center>
+</body>
+
+</html>
+
