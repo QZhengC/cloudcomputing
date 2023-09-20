@@ -52,6 +52,8 @@ def employerAddJobOutput():
 def employer_Menu():
     return render_template('employerMenu.html')
 
+# SIGN UP AND LOGIN
+
 
 @employer_app.route("/employer_signup", methods=['POST'])
 def employerSignUp():
@@ -110,6 +112,8 @@ def employer_login():
 
     return render_template('employerLogin.html')
 
+# ADD JOB REDIRECT PAGE
+
 
 @employer_app.route("/add-job-post/<employer_id>", methods=['GET'])
 def add_job_post(employer_id):
@@ -121,6 +125,7 @@ def add_job_post(employer_id):
         return render_template('employerLogin.html')
 
 
+# ADD JOB FUNCTION
 @employer_app.route("/employer-add-job", methods=["POST"])
 def emloyer_add_job():
     if 'employer_id' in session:
@@ -150,8 +155,20 @@ def emloyer_add_job():
             cursor.close()
 
 
+# EDIT JOB -> REDIRECT TO DISPLAY
+@employer_app.route("/edit-job-post/<employer_id>", methods=['GET'])
+def view_job_post(employer_id):
+    if 'employer_id' in session and session['employer_id'] == employer_id:
+        # Access user information from the session
+        employer_id = session['employer_id']
+        return render_template("viewJobPost.html", employer_id=employer_id)
+    else:
+        return render_template('employerLogin.html')
+
+
+# EDIT JOB FUNCTION
 @employer_app.route("/view-and-edit-job-post/<employer_id>", methods=['GET'])
-def view_and_edit_job_post(employer_id):
+def edit_job_post(employer_id):
     # Check if the employer is logged in (has an active session)
     if 'employer_id' in session and session['employer_id'] == employer_id:
         cursor = db_conn.cursor()
