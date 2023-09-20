@@ -65,6 +65,10 @@ def signUp():
 def signUpOutput():
     return render_template('studentMenu.html')
 
+@student_app.route("/resume-student", methods=['GET'])
+def resume_student():
+    return render_template('studentResume.html')
+
 @student_app.route("/student-login", methods=['POST'])
 def student_login():
     student_id = request.form['student_id']

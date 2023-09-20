@@ -46,7 +46,7 @@
     <div class="sidebar">
         <h2>Menu</h2>
         <a href="{{ url_for('student_app.view_student', student_id=session['student_id']) }}">View & Edit</a>
-        <a href="#">Resume</a>
+        <a href="{{url_for('student_app.resume_student')}}">Resume</a>
         <a href="#">Look for Intern</a>
     </div>
 
