@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="leftSideBar">
+        <h1 class="center">Admin Dashboard</h1>
+        <div class="leftOption">
+            <a href="{{ url_for('admin_app.admin_admin') }}">
+                <button class="leftButton">Admin</button>
+            </a>
+            <a href="{{ url_for('admin_app.admin_student') }}">
+                <button class="leftButton">Student</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_employer') }}">
+                <button class="leftButton">Employer</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_tutor') }}">
+                <button class="leftButton">Tutor</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="rightBoard">
+        <a>Tutor</a>
+    </div>
+</body>
+</html>

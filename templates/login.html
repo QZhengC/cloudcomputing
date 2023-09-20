@@ -3,21 +3,49 @@
 
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <center>
-        <h1>Login</h1>
-        <p>Please select your role:</p>
-        <ul>
-            <li><a href="{{ url_for('admin_app.admin_login_page') }}">Login as Admin</a></li>
-            <li><a href="tutorLogin.html">Login as Tutor</a></li>
-            <li><a href="{{ url_for('employer_app.employer_login_page') }}">Login as Employer</a></li>
-            <li><a href="{{ url_for('student_app.student_login_page') }}">Login as Student</a></li>
+    <div class="center">
+        <h1 class="center">Login</h1>
+            <a><button onclick="document.getElementById('adminLogin').style.display='block'" style="width:20%;">Admin</button></a><br>
+            <a href="{{ url_for('employer_app.employer_login_page') }}"><button style="width:20%;">Employer</button></a><br>
+            <a href="{{ url_for('student_app.student_login_page') }}"><button style="width:20%;">Student</button></a><br>
+    </div>
 
+    <div id="adminLogin" class="popOut">
 
-        </ul>
-    </center>
+        <form class="popOut-content animate" action="/admin-login" method="POST">
+            <h1 class="center">Admin Login</h1>
+            <div class="popOut-imgcontainer">
+                <img src="{{url_for('static', filename='adminAvatar.png')}}" width="20%" height="20%"/>
+            </div>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Username</b></label><br>
+                <input type="text" placeholder="Username" id="admin_id" name="admin_id" required><br><br>
+
+                <label for="admin_password"><b>Password</b></label><br>
+                <input type="password" placeholder="Password" id="admin_password" name="admin_password" required><br>
+
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </div>
+            <div class="popOut-container"></div>
+                <button type="button" onclick="document.getElementById('adminLogin').style.display='none'" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var popOut = document.getElementById('adminLogin');
+
+        window.onclick = function (event) {
+            if (event.target == popOut) {
+                popOut.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
