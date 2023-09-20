@@ -129,13 +129,29 @@ def view_and_edit(student_id):
 
 from flask import session, request, redirect, url_for
 
+from flask import render_template  # Import render_template
+
+# ...
 
 @student_app.route("/update-student", methods=['POST'])
 def update_student():
     # Check if the student is logged in (has an active session)
     if 'student_id' in session:
+        # Retrieve the student's information from the database
+        cursor = db_conn.cursor()
+        select_query = "SELECT * FROM students WHERE student_id = %s"
+        cursor.execute(select_query, (session['student_id'],))
+        student = cursor.fetchone()
+
+        if not student:
+            # Handle the case where the student doesn't exist
+            return render_template('student_not_found.html')
+
+        # Extract the student ID from the retrieved student record
+        student_id = student['student_id']
+
         updated_info = {
-            "student_id": request.form['student_id'],
+            "student_id": student_id,
             "first_name": request.form['first_name'],
             "last_name": request.form['last_name'],
             "phone_number": request.form['phone_number'],
@@ -150,8 +166,6 @@ def update_student():
 
         # Verify that the student_id in the session matches the one in the form
         if session['student_id'] == updated_info['student_id']:
-            cursor = db_conn.cursor()
-
             try:
                 # SQL UPDATE query to update student information
                 update_query = """
@@ -170,8 +184,8 @@ def update_student():
                 ))
                 db_conn.commit()
 
-                # Redirect the student to the view and edit page or another appropriate page
-                return redirect(url_for('student_app.signUpOutput', student_id=updated_info['student_id'], success_message='Edit successful'))
+                # Redirect the student to the view and edit page with the success message
+                return render_template('studentViewEdit.html', student=student, success_message='Edit successful')
 
             except Exception as e:
                 db_conn.rollback()
