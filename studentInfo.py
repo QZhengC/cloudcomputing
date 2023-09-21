@@ -259,7 +259,7 @@ def update_student():
             "course_of_study": request.form['course_of_study'],
             "year_intake": request.form['year_intake'],
             "skills_learned": request.form['skills_learned'],
-            "cgpa": request.form['cgpa']
+            "cgpa": request.form['cgpa'],
         }
 
         # Verify that the student_id in the session matches the one in the form
@@ -284,6 +284,31 @@ def update_student():
                 ))
                 db_conn.commit()
 
+                # Check if a new profile picture was uploaded
+                if 'profile_picture' in request.files:
+                    profile_picture = request.files['profile_picture']
+                    # Use the same naming convention for the profile picture in S3
+                    profile_picture_in_s3 = "student_id-" + str(updated_info["student_id"]) + "_image_file"
+                    s3 = boto3.resource('s3')
+
+                    try:
+                        s3.Bucket(custombucket).put_object(Key=profile_picture_in_s3, Body=profile_picture)
+                        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                        s3_location = (bucket_location['LocationConstraint'])
+
+                        if s3_location is None:
+                            s3_location = ''
+                        else:
+                            s3_location = '-' + s3_location
+
+                        object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                            s3_location,
+                            custombucket,
+                            profile_picture_in_s3)
+                        
+                    except Exception as e:
+                        return str(e)
+
                 # Redirect the student to the view and edit page or another appropriate page
                 return redirect(url_for('student_app.signUpOutput', student_id=updated_info['student_id']))
             except Exception as e:
@@ -297,29 +322,6 @@ def update_student():
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_app.student_login_page'))
-
-@student_app.route('/upload-resume', methods=['POST'])
-def upload_resume():
-    try:
-        # Get the uploaded file from the request
-        resume_file = request.files['resume']
-
-        if resume_file:
-            # Generate a unique key for the S3 object (file)
-            resume_key = os.path.join('resumes', resume_file.filename)
-
-            # Upload the file to S3
-            s3.upload_fileobj(resume_file, S3_BUCKET_NAME, resume_key)
-
-            # Optionally, you can store the S3 URL in a database or session for future reference
-            s3_url = f"https://{S3_BUCKET_NAME}.s3.amazonaws.com/{resume_key}"
-
-            return f"Resume uploaded successfully. S3 URL: {s3_url}"
-        else:
-            return "No file selected for upload."
-
-    except NoCredentialsError:
-        return "AWS credentials not available. Upload failed."
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
