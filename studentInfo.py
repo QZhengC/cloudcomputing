@@ -298,13 +298,6 @@ def update_student():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_app.student_login_page'))
 
-# AWS S3 configuration
-AWS_ACCESS_KEY = 'your_access_key'
-AWS_SECRET_KEY = 'your_secret_key'
-S3_BUCKET_NAME = 'kungweixin-employee'
-
-s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
-
 @student_app.route('/upload-resume', methods=['POST'])
 def upload_resume():
     try:
