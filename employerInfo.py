@@ -192,7 +192,7 @@ def view_job_post(employer_id):
                 "salary": job_post[5]
             }
 
-            return render_template('viewJobPost.html', jobs=jobs)
+            return render_template('viewJobPost.html', jobs=job_post)
 
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
