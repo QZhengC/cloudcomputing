@@ -322,6 +322,49 @@ def update_student():
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_app.student_login_page'))
+    
+@student_app.route("/upload-resume", methods=['POST'])
+def upload_resume():
+    # Check if the student is logged in (has an active session)
+    if 'student_id' in session:
+        try:
+            # Get the uploaded resume file
+            resume = request.files['resume']
+
+            if resume:
+                # Generate a unique key for the resume file in S3
+                student_id = session['student_id']
+                student_resume = f"student_id-{student_id}_resume.{resume.filename.split('.')[-1]}"
+                s3 = boto3.resource('s3')
+
+                try:
+                        s3.Bucket(custombucket).put_object(Key=student_resume, Body=resume)
+                        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                        s3_location = (bucket_location['LocationConstraint'])
+
+                        if s3_location is None:
+                            s3_location = ''
+                        else:
+                            s3_location = '-' + s3_location
+
+                        object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                            s3_location,
+                            custombucket,
+                            profile_picture_in_s3)
+                        
+                except Exception as e:
+                    return str(e)
+
+                # Redirect to a success page or any other appropriate action
+                return render_template('studentMenu.html')
+            
+        except Exception as e:
+            return str(e)
+
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
+
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)

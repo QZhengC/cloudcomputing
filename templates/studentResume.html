@@ -11,11 +11,17 @@
         <form action="/upload-resume" method="POST" enctype="multipart/form-data">
             <label for="resume">Upload Resume (PDF, DOC, DOCX):</label><br>
             <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required><br><br>
-            <button type="submit">Upload</button>
+            <button onclick="success()" type="submit">Upload</button>
         </form>
 
         <button onclick="history.back()">Back to Menu</button>
     </center>
+
+    <script>
+        function success() {
+          alert("Upload is Successful");
+        }
+        </script>
 </body>
 
 </html>
