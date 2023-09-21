@@ -350,7 +350,7 @@ def upload_resume():
                         object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                             s3_location,
                             custombucket,
-                            profile_picture_in_s3)
+                            student_resume)
                         
                 except Exception as e:
                     return str(e)
