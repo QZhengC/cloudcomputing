@@ -8,6 +8,9 @@ from botocore.exceptions import NoCredentialsError
 
 student_app = Blueprint('student_app', __name__)
 
+bucket = custombucket
+region = customregion
+
 db_conn = connections.Connection(
     host=customhost,
     port=3306,
@@ -45,6 +48,7 @@ def signUp():
     year_intake = request.form['year_intake']
     skills_learned = request.form['skills_learned']
     cgpa = request.form['cgpa']
+    profile_picture = request.files['profile_picture']
 
     cursor = db_conn.cursor()
 
@@ -57,6 +61,26 @@ def signUp():
         stud_name = "" + first_name + " " + last_name
 
         session['student_id'] = student_id
+        profile_picture_in_s3 = "student_id-" + str(student_id) + "_image_file"
+        s3 = boto3.resource('s3')
+
+        try:
+            s3.Bucket(custombucket).put_object(Key=profile_picture_in_s3, Body=profile_picture)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                profile_picture_in_s3)
+            
+        except Exception as e:
+            return str(e)
 
     except Exception as e:
         db_conn.rollback()
