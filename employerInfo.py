@@ -193,7 +193,7 @@ def view_job_post(employer_id):
                     "job_description": row[4],
                     "salary": row[5]
                 }
-            jobs.append(job)
+                jobs.append(job)
 
             # jobs = {
             #     "job_id": job_post[2],
