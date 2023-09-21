@@ -185,7 +185,7 @@ def view_job_post(employer_id):
             if not job_post:
                 return render_template('noJobsFound.html')
 
-            jobs = []
+            job_post = []
             for row in job_post:
                 jobs = {
                     "job_id": row[2],
