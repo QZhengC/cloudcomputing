@@ -20,7 +20,7 @@
         </thead>
         <form action="/view-job-post" method="POST">
             <tbody>
-                {% for job_post in jobs %}
+                {% for jobs in jobs %}
                 <tr>
                     <td>{{ jobs.job_id }}</td>
                     <td>{{ jobs.job_name }}</td>

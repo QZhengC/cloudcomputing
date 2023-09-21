@@ -187,13 +187,13 @@ def view_job_post(employer_id):
 
             jobs = []
             for row in job_post:
-                jobs = {
+                job = {
                     "job_id": row[2],
                     "job_name": row[3],
                     "job_description": row[4],
                     "salary": row[5]
                 }
-            job_post.append(jobs)
+                jobs.append(job)
 
             # jobs = {
             #     "job_id": job_post[2],
@@ -202,7 +202,7 @@ def view_job_post(employer_id):
             #     "salary": job_post[5]
             # }
 
-            return render_template('viewJobPost.html', jobs=job_post)
+            return render_template('viewJobPost.html', jobs=jobs)
 
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
