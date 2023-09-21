@@ -181,7 +181,7 @@ def view_job_post(employer_id):
             # Query the database to retrieve job posts associated with the employer
             query = "SELECT * FROM job_post WHERE employer_id = %s"
             cursor.execute(query, (employer_id,))
-            job_post = cursor.fetchone()
+            job_post = cursor.fetchmany()
             if not job_post:
                 return render_template('noJobsFound.html')
 
