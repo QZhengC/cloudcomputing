@@ -185,12 +185,21 @@ def view_job_post(employer_id):
             if not job_post:
                 return render_template('noJobsFound.html')
 
-            jobs = {
-                "job_id": job_post[2],
-                "job_name": job_post[3],
-                "job_description": job_post[4],
-                "salary": job_post[5]
-            }
+            for row in job_post:
+                jobs = {
+                    "job_id": row[2],
+                    "job_name": row[3],
+                    "job_description": row[4],
+                    "salary": row[5]
+                }
+            job_post.append(jobs)
+
+            # jobs = {
+            #     "job_id": job_post[2],
+            #     "job_name": job_post[3],
+            #     "job_description": job_post[4],
+            #     "salary": job_post[5]
+            # }
 
             return render_template('viewJobPost.html', jobs=job_post)
 
