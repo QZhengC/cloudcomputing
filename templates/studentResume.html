@@ -10,17 +10,29 @@
             text-align: center; /* Center-align the contents */
         }
 
-        /* Styling for the buttons */
-        button {
+        .upload-button {
             background: green;
             height: 45px;
             width: 200px;
             color: white;
             font: oblique;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
         }
 
-        button.back-button {
+        /* Style for the back button */
+        .back-button {
             background: grey;
+            height: 45px;
+            width: 200px;
+            color: white;
+            font: oblique;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -32,7 +44,7 @@
             <label for="resume">Upload Resume (PDF, DOC, DOCX):</label><br>
             <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required><br><br>
 
-            <button onclick="success()" type="submit">Upload</button>
+            <button onclick="success()" type="submit" class="upload-button">Upload</button>
         </form>
         <br>
         <button onclick="history.back()" class="back-button">Back to Menu</button>
