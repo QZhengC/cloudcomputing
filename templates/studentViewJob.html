@@ -16,9 +16,9 @@
             {% for job in jobs %}
                 <div class="job-card">
                     <h2>{{ job.company_name }}</h2>
-                    <p>{{ job.job_name }}</p>
-                    <p>Salary: ${{ job.job_salary }}</p>
-                    <p>Employer ID: {{ job.job_descirption }}</p>
+                    <p>Postion : {{ job.job_name }}</p>
+                    <p>Allowance : ${{ job.job_salary }}</p>
+                    <p>Job Description : {{ job.job_description }}</p>
                     <form action="/apply-for-job" method="POST">
                         <input type="hidden" name="job_id" value="{{ job.job_id }}">
                         <button type="submit">Apply</button>
