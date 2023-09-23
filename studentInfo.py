@@ -413,6 +413,14 @@ def apply_for_job():
 
         cursor = db_conn.cursor()
         try:
+            # Check if the student has already applied for the same job
+            cursor.execute("SELECT * FROM job_applied WHERE student_id = %s AND job_id = %s", (student_id, job_id))
+            existing_application = cursor.fetchone()
+
+            if existing_application:
+                # Provide a message to the user indicating that they've already applied for this job
+                return "You have already applied for this job."
+
             # Query the database to get the maximum application ID
             cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
             result = cursor.fetchone()
