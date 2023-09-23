@@ -1,15 +1,51 @@
-<!-- studentViewEdit.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Student View & Edit</title>
     <style>
+        /* Center align the content */
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
+            text-align: center;
         }
 
+        /* Style for the container */
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 80%; /* Adjust the width as needed */
+            margin: 0 auto;
+        }
+
+        /* Style for the headings */
+        h1 {
+            color: #333;
+        }
+
+        /* Style for labels and input fields */
+        label {
+            text-align: left;
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        /* Style for buttons */
         .save-button {
             background: green;
             height: 45px;
@@ -37,58 +73,54 @@
 </head>
 
 <body>
-    <center>
+    <div class="container">
         <h1>Student View & Edit</h1>
         <form action="/update-student" method="POST" enctype="multipart/form-data">
 
-            <label for="student_id">Student ID (Must be same):</label><br>
-            <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required><br><br>
+            <label for="student_id">Student ID (Must be same):</label>
+            <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required>
 
             <p><strong>Supervisor ID is NOT Editable</strong></p>
 
-            <label for="profile_picture">Profile Picture:</label><br>
-            <input type="file" id="profile_picture" name="profile_picture"><br><br>
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture">
 
-            <label for="first_name">First Name:</label><br>
-            <input type="text" id="first_name" name="first_name" value="{{ student.first_name }}" required><br><br>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ student.first_name }}" required>
 
-            <label for="last_name">Last Name:</label><br>
-            <input type="text" id="last_name" name="last_name" value="{{ student.last_name }}" required><br><br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ student.last_name }}" required>
 
-            <label for="phone_number">Phone Number:</label><br>
-            <input type="text" id="phone_number" name="phone_number" value="{{ student.phone_number }}"
-                required><br><br>
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ student.phone_number }}" required>
 
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" value="{{ student.email }}" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ student.email }}" required>
 
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" value="{{ student.password }}" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="{{ student.password }}" required>
 
-            <label for="current_address">Current Address:</label><br>
-            <input type="text" id="current_address" name="current_address" value="{{ student.current_address }}"
-                required><br><br>
+            <label for="current_address">Current Address:</label>
+            <input type="text" id="current_address" name="current_address" value="{{ student.current_address }}" required>
 
-            <label for="course_of_study">Course of Study:</label><br>
-            <input type="text" id="course_of_study" name="course_of_study" value="{{ student.course_of_study }}"
-                required><br><br>
+            <label for="course_of_study">Course of Study:</label>
+            <input type="text" id="course_of_study" name="course_of_study" value="{{ student.course_of_study }}" required>
 
-            <label for="year_intake">Year Intake:</label><br>
-            <input type="text" id="year_intake" name="year_intake" value="{{ student.year_intake }}" required><br><br>
+            <label for="year_intake">Year Intake:</label>
+            <input type="text" id="year_intake" name="year_intake" value="{{ student.year_intake }}" required>
 
-            <label for="skills_learned">Skills Learned:</label><br>
-            <input type="text" id="skills_learned" name="skills_learned" value="{{ student.skills_learned }}"
-                required><br><br>
+            <label for="skills_learned">Skills Learned:</label>
+            <input type="text" id="skills_learned" name="skills_learned" value="{{ student.skills_learned }}" required>
 
-            <label for="cgpa">CGPA:</label><br>
-            <input type="text" id="cgpa" name="cgpa" value="{{ student.cgpa }}" required><br><br>
+            <label for="cgpa">CGPA:</label>
+            <input type="text" id="cgpa" name="cgpa" value="{{ student.cgpa }}" required>
 
             <button onclick="success()" type="submit" class="save-button">Save Changes</button>
 
-            <button onclick="history.back()" class="back-button">Back to Menu</button>
-
         </form>
-    </center>
+
+        <button onclick="history.back()" class="back-button">Back to Menu</button>
+    </div>
 
     <script>
         function success() {
