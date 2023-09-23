@@ -53,6 +53,12 @@ def employerAddJobOutput():
     return render_template('addJobPostOutput.html')
 
 
+@employer_app.route("/employer-update-job-output", methods=['GET'])
+def employerUpdateJobOutput():
+    job_id = request.args.get('job_id')
+    return render_template('updateJobOutput.html')
+
+
 @employer_app.route("/employer-menu-page", methods=['GET'])
 def employer_Menu():
     return render_template('employerMenu.html')
@@ -255,7 +261,7 @@ def update_job():
                 updated_info["job_id"], updated_info["job_name"], updated_info["job_description"], updated_info["salary"]
             ))
             db_conn.commit()
-            return redirect(url_for('employer_app.updatedOutput', job_id=updated_info['job_id']))
+            return redirect(url_for('employer_app.employerUpdateJobOutput', job_id=updated_info['job_id']))
         except Exception as e:
             db_conn.rollback()
             return str(e)
