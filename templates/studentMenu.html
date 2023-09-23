@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Styling for the top menu bar */
         .top-menu {
@@ -37,20 +38,34 @@
 </head>
 <body>
 
-    <!-- Sidebar menu -->
-    <div class="sidebar">
-        <h2>Menu</h2>
-        <a href="{{ url_for('student_app.view_student', student_id=session['student_id']) }}">View & Edit</a>
-        <a href="{{url_for('student_app.resume_student')}}">Resume</a>
-        <a href="{{url_for('student_app.student_view_jobs')}}">Look for Intern</a>
-        <a href="{{url_for('student_app.student_view_applied')}}">View Applied Jobs</a>
-        <a href="{{url_for('student_app.logout')}}">Logout</a>
+    <div class="leftSideBar">
+        <h1 class="center">Student Dashboard</h1>
+        <div class="leftOption">
+            <a href="{{( student_app.view_student', student_id=session['student_id']) }}">
+                <button class="leftButton">View & Edit Information</button>
+            </a>
+            <a href="{{url_for('student_app.resume_student')}}">
+                <button class="leftButton">Upload Resume</button>
+            </a>
+
+            <a href="{{url_for('student_app.student_view_jobs')}}">
+                <button class="leftButton">Look for Intern</button>
+            </a>
+
+            <a href="{{url_for('student_app.student_view_applied')}}">
+                <button class="leftButton">View Applied Jobs</button>
+            </a>
+
+            <a href="{{url_for('student_app.student_view_applied')}}">
+                <button class="leftButton">View Applied Jobs</button>
+            </a>
+            <br><br>
+            <a href="{{ url_for('main_app.home') }}">
+                <button style="background-color: red;" class="leftButton">Logout</button>
+            </a>
+        </div>
     </div>
 
-    <!-- Content area -->
-    <div class="content">
-        <!-- Your content goes here -->
-    </div>
 </body>
 </html>
 
