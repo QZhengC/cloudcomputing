@@ -497,6 +497,41 @@ def logout():
     session.pop('student_id', None)
     return redirect(url_for('student_app.student_login_page'))
 
+@student_app.route("/cancel-application", methods=['POST'])
+def cancel_application():
+    if 'student_id' in session:
+        # Get the application ID from the form data
+        application_id = request.form['application_id']
+
+        cursor = db_conn.cursor()
+        try:
+            # Check if the application exists and belongs to the logged-in student
+            cursor.execute("SELECT * FROM job_applied WHERE application_id = %s AND student_id = %s", (application_id, session['student_id']))
+            existing_application = cursor.fetchone()
+
+            if existing_application:
+                # Application exists and belongs to the student, so it can be canceled
+                # Implement the logic to delete the application record based on the application_id
+                delete_query = "DELETE FROM job_applied WHERE application_id = %s"
+                cursor.execute(delete_query, (application_id,))
+                db_conn.commit()
+                
+                # Redirect to a success page or any other appropriate page
+                return render_template('studentMenu.html')
+            else:
+                # Application does not exist or does not belong to the student
+                # You can provide a message indicating that the application could not be canceled
+                return "Unable to cancel the application. Please make sure the application exists and belongs to you."
+
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
+
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
 

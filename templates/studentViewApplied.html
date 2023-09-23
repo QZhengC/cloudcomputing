@@ -14,7 +14,7 @@
                 <th>Job Name</th>
                 <th>Job Description</th>
                 <th>Salary</th>
-                <th>Action</th> <!-- New column for the "Cancel" button -->
+                <th>Action</th> <!-- Add a new column for action buttons -->
             </tr>
             {% for job in jobs %}
             <tr>
@@ -23,7 +23,7 @@
                 <td>{{ job.job_description }}</td>
                 <td>{{ job.salary }}</td>
                 <td>
-                    <form action="{{ url_for('student_app.cancel_application') }}" method="POST">
+                    <form method="POST" action="/cancel-application">
                         <input type="hidden" name="application_id" value="{{ job.application_id }}">
                         <button type="submit">Cancel</button>
                     </form>
@@ -37,4 +37,3 @@
 </body>
 
 </html>
-
