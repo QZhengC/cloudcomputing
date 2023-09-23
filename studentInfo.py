@@ -419,7 +419,7 @@ def apply_for_job():
 
             if existing_application:
                 # Provide a message to the user indicating that they've already applied for this job
-                return "You have already applied for this job."
+                return redirect(url_for('studentAlreadyApplied.html'))
 
             # Query the database to get the maximum application ID
             cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
