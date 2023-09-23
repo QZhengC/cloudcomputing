@@ -53,6 +53,12 @@ def employerAddJobOutput():
     return render_template('addJobPostOutput.html')
 
 
+@employer_app.route("/employer-update-job-output", methods=['GET'])
+def employerUpdateJobOutput():
+    job_id = request.args.get('job_id')
+    return render_template('updateJobOutput.html', job_id=job_id)
+
+
 @employer_app.route("/employer-menu-page", methods=['GET'])
 def employer_Menu():
     return render_template('employerMenu.html')
@@ -146,7 +152,7 @@ def emloyer_add_job():
             # SQL INSERT query
             select_query = "SELECT company_name FROM employer WHERE employer_id = %s"
             cursor.execute(select_query, (employer_id,))
-            company_name = cursor.fetchone()[0]
+            company_name = cursor.fetchone()
 
             insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor.execute(insert_query, (employer_id, company_name, job_id,
@@ -195,13 +201,6 @@ def view_job_post(employer_id):
                 }
                 jobs.append(job)
 
-            # jobs = {
-            #     "job_id": job_post[2],
-            #     "job_name": job_post[3],
-            #     "job_description": job_post[4],
-            #     "salary": job_post[5]
-            # }
-
             return render_template('viewJobPost.html', jobs=jobs)
 
         except Exception as e:
@@ -211,7 +210,78 @@ def view_job_post(employer_id):
             cursor.close()
     else:
         # If the employer is not logged in, redirect them to the login page
-        return redirect(url_for('employer_login_page'))
+        return redirect(url_for('employer_app.employer_login_page'))
+
+
+@employer_app.route("/display-update-job", methods=['POST'])
+def display_choice_of_update():
+    if 'employer_id' in session:
+        cursor = db_conn.cursor()
+        job_id = request.form['job_id']
+        try:
+            query = "SELECT * FROM job_post WHERE job_id = %s"
+            cursor.execute(query, (job_id,))
+            job_data = cursor.fetchone()
+            if not job_data:
+                return render_template('noJobsFound.html')
+
+            job = {
+                "job_id": job_data[2],
+                "job_name": job_data[3],
+                "job_description": job_data[4],
+                "salary": job_data[5]
+            }
+
+            return render_template('displayUpdateDetails.html', job=job)
+
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor: cursor.close()
+
+
+@employer_app.route("/update-job", methods=['POST'])
+def update_job():
+    if 'employer_id' in session:
+
+        cursor = db_conn.cursor()
+        employer_id = session['employer_id']
+
+        updated_info = {
+            "job_id": request.form['job_id'],
+            "job_name": request.form['job_name'],
+            "job_description": request.form['job_description'],
+            "salary": request.form['salary'],
+        }
+
+        try:
+            companyNameQuery = "SELECT company_name FROM employer WHERE employer_id = %s"
+            cursor.execute(companyNameQuery, (employer_id,))
+            company_name = cursor.fetchone()
+
+            update_query = """
+                            UPDATE job_post 
+                            SET employer_id = %s, company_name = %s, job_id = %s, 
+                                job_name = %s, job_description = %s, salary = %s 
+                            WHERE job_id = %s
+                        """
+            cursor.execute(update_query, (
+                employer_id, company_name,
+                updated_info["job_id"], updated_info["job_name"],
+                updated_info["job_description"], updated_info["salary"],
+                updated_info['job_id'],
+            ))
+            db_conn.commit()
+
+            return redirect(url_for('employer_app.employerUpdateJobOutput', job_id=updated_info['job_id']))
+
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('student_app.employer_login_page'))
 
 
 if __name__ == '__main__':

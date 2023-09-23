@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="leftSideBar">
+        <h1 class="center">Job Dashboard</h1>
+        <div class="leftOption">
+            <a href="{{ url_for('admin_app.admin_admin') }}">
+                <button class="leftButton">Admin</button>
+            </a>
+            <a href="{{ url_for('admin_app.admin_student') }}">
+                <button class="leftButton">Student</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_employer') }}">
+                <button class="leftButton">Employer</button>
+            </a>
+
+            <a href="{{ url_for('admin_app.admin_job') }}">
+                <button class="leftButton">Job</button>
+            </a>
+
+            <br><br>
+            <a href="{{ url_for('main_app.home') }}">
+                <button style="background-color: red;" class="leftButton">Logout</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="rightBoard">
+        <h1>Job Tab</h1>
+        <div>
+        <a><button onclick="document.getElementById('adminAdd1').style.display='block'" style="width:100%;">Add Job Post</button></a><br>
+        <a><button onclick="document.getElementById('adminUpdate1').style.display='block'" style="width:100%;">Update Job Post</button></a><br>
+        <a><button onclick="document.getElementById('adminDelete1').style.display='block'" style="width:100%;">Delete Job Post</button></a><br>
+        </div>
+        <br><br>
+        <div>
+            <a><button onclick="document.getElementById('adminAdd2').style.display='block'" style="width:100%;">Add Job Applied</button></a><br>
+            <a><button onclick="document.getElementById('adminUpdate2').style.display='block'" style="width:100%;">Update Job Applied</button></a><br>
+            <a><button onclick="document.getElementById('adminDelete2').style.display='block'" style="width:100%;">Delete Job Applied</button></a><br>
+        </div>
+    </div>
+
+    <div id="adminAdd1" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-add-jobpost" method="POST">
+            <h1 class="center">Add Job Post</h1>
+            <div class="popOut-container">
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" placeholder="Employer ID" id="emp_id" name="emp_id" required><br><br>
+
+                <label for="emp_name"><b>Company Name</b></label><br>
+                <input type="text" placeholder="Company Name" id="emp_name" name="emp_name" required><br><br>
+
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" placeholder="Job ID" id="job_id" name="job_id" required><br><br>
+
+                <label for="job_name"><b>Job Name</b></label><br>
+                <input type="text" placeholder="Job Name" id="job_name" name="job_name" required><br><br>
+
+                <label for="job_des"><b>Job Description</b></label><br>
+                <input type="text" placeholder="Job Description" id="job_des" name="job_des" required><br><br>
+
+                <label for="job_sal"><b>Salary</b></label><br>
+                <input type="text" placeholder="Salary" id="job_sal" name="job_sal" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminUpdate1" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findu-jobpost" method="POST">
+            <h1 class="center">Update Job Post</h1>
+            <div class="popOut-container">
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" placeholder="Job ID" id="job_id" name="job_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminDelete1" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findd-jobpost" method="POST">
+            <h1 class="center">Delete Job Post</h1>
+            <div class="popOut-container">
+                <label for="emp_id"><b>Job ID</b></label><br>
+                <input type="text" placeholder="Job ID" id="job_id" name="job_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminAdd2" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-add-jobapplied" method="POST">
+            <h1 class="center">Add Job Applied</h1>
+            <div class="popOut-container">
+                <label for="app_id"><b>Application ID</b></label><br>
+                <input type="text" placeholder="Application ID" id="app_id" name="app_id" required><br><br>
+
+                <label for="stu_id"><b>Student ID</b></label><br>
+                <input type="text" placeholder="Student ID" id="stu_id" name="stu_id" required><br><br>
+
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" placeholder="Employer ID" id="emp_id" name="emp_id" required><br><br>
+
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" placeholder="Job ID" id="job_id" name="job_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminUpdate2" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findu-jobapplied" method="POST">
+            <h1 class="center">Update Job Applied</h1>
+            <div class="popOut-container">
+                <label for="app_id"><b>Application ID</b></label><br>
+                <input type="text" placeholder="Application ID" id="app_id" name="app_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminDelete2" class="popOut">
+
+        <form class="popOut-content animate" action="/admin-findd-jobapplied" method="POST">
+            <h1 class="center">Delete Job Applied</h1>
+            <div class="popOut-container">
+                <label for="app_id"><b>Application ID</b></label><br>
+                <input type="text" placeholder="Application ID" id="app_id" name="app_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
+            </div>
+        </form>
+    </div>
+
+    {% if obj1 == "uFind1Success": %}
+    <div id="findu1Success" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-update-jobpost" method="POST">
+            <h1 class="center">Updating Job Post {{att3}}</h1>
+            <div class="popOut-container">
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" value="{{att1}}" id="emp_id" name="emp_id" required><br><br>
+
+                <label for="emp_name"><b>Company Name</b></label><br>
+                <input type="text" value="{{att2}}" id="emp_name" name="emp_name" required><br><br>
+                
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" value="{{att3}}" id="job_id" name="job_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="job_name"><b>Job Name</b></label><br>
+                <input type="text" value="{{att4}}" id="job_name" name="job_name" required><br><br>
+
+                <label for="job_des"><b>Job Description</b></label><br>
+                <input type="text" value="{{att5}}" id="job_des" name="job_des" required><br><br>
+
+                <label for="job_sal"><b>Salary</b></label><br>
+                <input type="text" value="{{att6}}" id="job_sal" name="job_sal" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Update</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "dFind1Success": %}
+    <div id="findd1Success" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-delete-jobpost" method="POST">
+            <h1 class="center">Deleting Job Post {{att3}}</h1>
+            <div class="popOut-container">
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" value="{{att1}}" id="emp_id" name="emp_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="emp_name"><b>Company Name</b></label><br>
+                <input type="text" value="{{att2}}" id="emp_name" name="emp_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" value="{{att3}}" id="job_id" name="job_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="job_name"><b>Job Name</b></label><br>
+                <input type="text" value="{{att4}}" id="job_name" name="job_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="job_des"><b>Job Description</b></label><br>
+                <input type="text" value="{{att5}}" id="job_des" name="job_des" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="job_sal"><b>Salary</b></label><br>
+                <input type="text" value="{{att6}}" id="job_sal" name="job_sal" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Delete</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "uFind2Success": %}
+    <div id="findu1Success" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-update-jobapplied" method="POST">
+            <h1 class="center">Updating Job Applied {{att1}}</h1>
+            <div class="popOut-container">
+                <label for="app_id"><b>Application ID</b></label><br>
+                <input type="text" value="{{att1}}" id="app_id" name="app_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="stu_id"><b>Student ID</b></label><br>
+                <input type="text" value="{{att2}}" id="stu_id" name="stu_id" required><br><br>
+
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" value="{{att3}}" id="emp_id" name="emp_id" required><br><br>
+
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" value="{{att4}}" id="job_id" name="job_id" required><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Update</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "dFind2Success": %}
+    <div id="findd1Success" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate" action="/admin-delete-jobapplied" method="POST">
+            <h1 class="center">Deleting Job Applied {{att1}}</h1>
+            <div class="popOut-container">
+                <label for="app_id"><b>Application ID</b></label><br>
+                <input type="text" value="{{att1}}" id="app_id" name="app_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="stu_id"><b>Student ID</b></label><br>
+                <input type="text" value="{{att2}}" id="stu_id" name="stu_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="emp_id"><b>Employer ID</b></label><br>
+                <input type="text" value="{{att3}}" id="emp_id" name="emp_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+
+                <label for="job_id"><b>Job ID</b></label><br>
+                <input type="text" value="{{att4}}" id="job_id" name="job_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+            </div>
+            <div class="popOut-container">
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+                </a>
+                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Delete</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "addSuccess": %}
+    <div id="updateSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Added Successfully</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "updateSuccess": %}
+    <div id="updateSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Updated Successfully</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "deleteSuccess": %}
+    <div id="deleteSuccess" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Deleted Successfully</h1>
+            <div class="popOut-container"></div>
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if obj1 == "findFailed": %}
+    <div id="findFailed" class="popOut" style="display: unset;">
+
+        <form class="popOut-content animate">
+            <h1 class="center">Record Not Found</h1>
+            <div class="popOut-container">
+                <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
+                <a href="{{ url_for('admin_app.admin_job') }}">
+                    <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
