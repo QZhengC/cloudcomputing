@@ -254,7 +254,7 @@ def update_job():
         }
 
         try:
-            companyNameQuery = "SELECT company_name WHERE employer_id = %s"
+            companyNameQuery = "SELECT company_name FROM employer WHERE employer_id = %s"
             cursor.execute(companyNameQuery, (employer_id,))
             company_name = cursor.fetchone()
 
