@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <center>
-        <font color="DodgerBlue" size="5" style="font-family: avenir">
-            <body bgcolor="lightgrey">
-                <h1>Registration Successful</h1><br>
-                <h2>You have successfully registered as a student</h2><br>
-                <h2>Welcome!!!</h2><br>
-                <title>Student Sign-Up Output</title>
-                <form action="/signup-output" autocomplete="on" method="GET">
-                    <button type="submit" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">CONTINUE</button><br><br>
-                </form>
-              
-                <form action="/backToMenu" autocomplete="on" method="POST">
-                    <button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
-                </form>
-                
-            </body>
-        </font>
-    </center>
+    <style>
+        body {
+            background-color: lightgrey;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: DodgerBlue;
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .go-back-button {
+            background-color: grey;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="container">
+        <h1>Registration Successful</h1>
+        <h2>You have successfully registered as a student</h2>
+        <h2>Welcome!!!</h2>
 
+        <form action="/signup-output" autocomplete="on" method="GET">
+            <button type="submit">CONTINUE</button>
+        </form>
+
+        <form action="/backToMenu" autocomplete="on" method="POST">
+            <button class="go-back-button" type="submit">GO BACK</button>
+        </form>
+    </div>
 </body>
+
 </html>
-
-
-
