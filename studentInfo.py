@@ -383,7 +383,9 @@ def student_view_jobs():
             jobs = []
             for row in job_posts:
                 job = {
+                    "employer_id" : row[0],
                     "company_name" : row [1],
+                    "job_id" : row [2],
                     "job_name": row[3],
                     "job_description": row[4],
                     "job_salary": row[5],
@@ -401,6 +403,57 @@ def student_view_jobs():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
 
+# Define a function to generate the next application ID
+def generate_application_id():
+    cursor = db_conn.cursor()
+    try:
+        # Query the database to get the maximum application ID
+        cursor.execute("SELECT MAX(application_id) AS max_id FROM application")
+        result = cursor.fetchone()
+        max_id = result['max_id']
+
+        # If no previous applications exist, start with '001'
+        if max_id is None:
+            return '001'
+        
+        # Increment the application ID and format it as a 3-digit string
+        next_id = str(int(max_id) + 1).zfill(3)
+        return next_id
+    finally:
+        cursor.close()
+
+# Route to handle job applications
+@student_app.route("/apply-for-job", methods=['POST'])
+def apply_for_job():
+    if 'student_id' in session:
+        # Get data from the form
+        student_id = request.form['student_id']
+        employer_id = request.form['employer_id']
+        job_id = request.form['job_id']
+
+        # Generate the next application ID
+        application_id = generate_application_id()
+
+        cursor = db_conn.cursor()
+        try:
+            # Insert the job application into the 'application' table
+            insert_query = """
+                INSERT INTO application (application_id, student_id, employer_id, job_id)
+                VALUES (%s, %s, %s, %s)
+            """
+            cursor.execute(insert_query, (application_id, student_id, employer_id, job_id))
+            db_conn.commit()
+
+            # Redirect to a success page or any other appropriate page
+            return render_template('studentMenu.html')
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
