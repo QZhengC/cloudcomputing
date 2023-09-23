@@ -391,7 +391,7 @@ def student_view_jobs():
                 }
                 jobs.append(job)
 
-            return render_template('student_view_jobs.html', jobs=jobs)
+            return render_template('studentViewJob.html', jobs=jobs)
 
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
