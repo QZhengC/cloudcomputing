@@ -3,33 +3,72 @@
 
 <head>
     <title>Applied Jobs</title>
+    <style>
+        /* Style for the table */
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Adjust the width as needed */
+            margin: 20px auto; /* Center the table horizontally */
+        }
+
+        /* Style for table rows */
+        tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Style for table headers */
+        th {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* Style for table data cells */
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* Style for action buttons */
+        .action-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <center>
         <h1>Jobs Applied</h1>
         <table border="1">
-            <tr>
-                <th>Application ID</th>
-                <th>Job Name</th>
-                <th>Job Description</th>
-                <th>Salary</th>
-                <th>Action</th> <!-- Add a new column for action buttons -->
-            </tr>
-            {% for job in jobs %}
-            <tr>
-                <td>{{ job.application_id }}</td>
-                <td>{{ job.job_name }}</td>
-                <td>{{ job.job_description }}</td>
-                <td>{{ job.salary }}</td>
-                <td>
-                    <form method="POST" action="/cancel-application">
-                        <input type="hidden" name="application_id" value="{{ job.application_id }}">
-                        <button type="submit">Cancel</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th>Application ID</th>
+                    <th>Job Name</th>
+                    <th>Job Description</th>
+                    <th>Salary</th>
+                    <th>Action</th> <!-- Add a new column for action buttons -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{ job.application_id }}</td>
+                    <td>{{ job.job_name }}</td>
+                    <td>{{ job.job_description }}</td>
+                    <td>{{ job.salary }}</td>
+                    <td>
+                        <form method="POST" action="/cancel-application">
+                            <input type="hidden" name="application_id" value="{{ job.application_id }}">
+                            <button class="action-button" type="submit">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
         <br>
         <button onclick="history.back()">Back to Menu</button>
