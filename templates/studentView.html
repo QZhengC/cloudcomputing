@@ -24,11 +24,11 @@
 
          </form>
         
-        <form action="{{ url_for('student_app.view_and_edit', student_id=session['student_id']) }}">
-            <button type="submit" class="edit-button">Edit Information</button>
+         <form action="{{ url_for('student_app.view_and_edit', student_id=session['student_id']) }}">
+            <button type="submit" class="edit-button" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">Edit Information</button><br><br>
         </form>
 
-        <button onclick="history.back()">Back to Menu</button>
+        <button onclick="history.back()" type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Back to Menu</button>
         
     </center>
 </body>
