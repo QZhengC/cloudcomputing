@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <center>
+        <title>Employer Delete Data</title>
+        <h1>Employer Delete Job</h1>
+    </center>
+    <form action="/delete-job" method="POST" enctype="multipart/form-data">
+        <center>
+            <label for="job_id">Job ID: </label><br>
+            <input type="number" id="job_id" name="job_id" required><br><br>
+
+            <form action="/delete-job" autocomplete="on" method="POST">
+                <button type="submit"
+                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
+            </form>
+
+            <form action="/employer-menu-page" autocomplete="on" method="GET">
+                <button type="submit"
+                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+                    BACK</button><br><br>
+            </form>
+
+        </center>
+    </form>
+</body>
+
+</html>
