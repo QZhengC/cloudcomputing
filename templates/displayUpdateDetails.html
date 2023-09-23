@@ -13,7 +13,7 @@
     <form action="/display-update-job" method="POST" enctype="multipart/form-data">
         <center>
             <label for="job_id">Job ID: </label><br>
-            <input type="number" id="job_id" name="job_id" value="{{ job.job_id }}"><br><br>
+            <input type="number" id="job_id" name="job_id" value="{{ job.job_id }}" readonly><br><br>
 
             <label for="job_name">Job Name: </label><br>
             <input type="text" id="job_name" name="job_name" value="{{ job.job_name }}" required><br><br>
@@ -25,16 +25,17 @@
             <input type="text" id="salary" name="salary" value="{{ job.salary}}" required><br><br>
 
 
-            <form action="/update-job" autocomplete="on" method="GET">
+            <form action="{{ url_for('employer.update_job', employer_id=session['employer_id']) }}" autocomplete="on"
+                method="GET">
                 <button type="submit"
-                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
+                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">UPDATE</button><br><br>
             </form>
 
-            <form action="/employer-menu-page" autocomplete="on" method="POST">
-                <button type="submit"
-                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-                    BACK</button><br><br>
-            </form>
+
+            <button onclick="history.back()"
+                style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+                BACK</button><br><br>
+
 
         </center>
     </form>

@@ -204,7 +204,7 @@ def view_job_post(employer_id):
             cursor.close()
     else:
         # If the employer is not logged in, redirect them to the login page
-        return redirect(url_for('employer_login_page'))
+        return redirect(url_for('employer_app.employer_login_page'))
 
 
 @employer_app.route("/display-update-job", methods=['POST'])
@@ -232,6 +232,37 @@ def display_choice_of_update():
             return str(e)
         finally:
             cursor: cursor.close()
+
+
+@employer_app.route("update-job", methods=['POST'])
+def update_job():
+    if 'employer_id' in session:
+        updated_info = {
+            "job_id": request.form['job_id'],
+            "job_name": request.form['job_name'],
+            "job_description": request.form['job_description'],
+            "salary": request.form['salary']
+        }
+        cursor = db_conn.cursor()
+        employer_id = session['employer_id']
+        companyNameQuery = "SELECT company_name WHERE employer_id = %s"
+        cursor.execute(companyNameQuery, (employer_id,))
+        company_name = cursor.fetchone()
+        try:
+            update_query = "UPDATE job_post SET employer_id = %s, company_name = %s, job_id = %s, job_name = %s, job_description = %s, salary = %s WHERE job_id = %s"
+            cursor.execute(update_query, (
+                employer_id, company_name,
+                updated_info["job_id"], updated_info["job_name"], updated_info["job_description"], updated_info["salary"]
+            ))
+            db_conn.commit()
+            return redirect(url_for('employer_app.updatedOutput', job_id=updated_info['job_id']))
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('student_app.employer_login_page'))
 
 
 if __name__ == '__main__':
