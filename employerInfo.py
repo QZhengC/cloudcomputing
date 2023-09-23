@@ -56,7 +56,7 @@ def employerAddJobOutput():
 @employer_app.route("/employer-update-job-output", methods=['GET'])
 def employerUpdateJobOutput():
     job_id = request.args.get('job_id')
-    return render_template('updateJobOutput.html')
+    return render_template('updateJobOutput.html', job_id=job_id)
 
 
 @employer_app.route("/employer-menu-page", methods=['GET'])
