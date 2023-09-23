@@ -46,7 +46,8 @@
         }
 
         /* Style for buttons */
-        .save-button {
+        .save-button,
+        .back-button {
             background: green;
             height: 45px;
             width: 200px;
@@ -58,15 +59,9 @@
             margin-top: 20px;
         }
 
+        /* Style for the back button */
         .back-button {
             background: grey;
-            height: 45px;
-            width: 200px;
-            color: white;
-            font: oblique;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             margin-top: 10px;
         }
     </style>
@@ -117,9 +112,8 @@
 
             <button onclick="success()" type="submit" class="save-button">Save Changes</button>
 
+            <button onclick="history.back()" class="back-button">Back to Menu</button>
         </form>
-
-        <button onclick="history.back()" class="back-button">Back to Menu</button>
     </div>
 
     <script>
