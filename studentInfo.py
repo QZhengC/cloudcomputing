@@ -459,7 +459,7 @@ def student_view_applied():
         try:
             # Query the database to retrieve the jobs the student has applied for
             query = """
-                SELECT ja.application_id, jp.job_name, jp.job_description, jp.salary
+                SELECT ja.application_id, jp.job_name, jp.job_description, jp.salary, jp.company_name
                 FROM job_applied ja
                 JOIN job_post jp ON ja.job_id = jp.job_id
                 WHERE ja.student_id = %s
@@ -473,7 +473,7 @@ def student_view_applied():
             jobs = []
             for row in applied_jobs:
                 job = {
-                    "application_id": row[0],
+                    "company_name": row[0],
                     "job_name": row[1],
                     "job_description": row[2],
                     "salary": row[3]
