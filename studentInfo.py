@@ -403,26 +403,6 @@ def student_view_jobs():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
 
-# Define a function to generate the next application ID
-def generate_application_id():
-    cursor = db_conn.cursor()
-    try:
-        # Query the database to get the maximum application ID
-        cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
-        result = cursor.fetchone()
-        max_id = result['max_id']
-
-        # If no previous applications exist, start with '001'
-        if max_id is None:
-            return '001'
-        
-        # Increment the application ID and format it as a 3-digit string
-        next_id = str(int(max_id) + 1).zfill(3)
-        return next_id
-    finally:
-        cursor.close()
-
-# Route to handle job applications
 @student_app.route("/apply-for-job", methods=['POST'])
 def apply_for_job():
     if 'student_id' in session:
@@ -431,12 +411,20 @@ def apply_for_job():
         employer_id = request.form['employer_id']
         job_id = request.form['job_id']
 
-        # Generate the next application ID
-        application_id = generate_application_id()
-
         cursor = db_conn.cursor()
         try:
-           
+            # Query the database to get the maximum application ID
+            cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
+            result = cursor.fetchone()
+            max_id = result['max_id']
+
+            # If no previous applications exist, start with '001'
+            if max_id is None:
+                application_id = '001'
+            else:
+                # Increment the application ID and format it as a 3-digit string
+                application_id = str(int(max_id) + 1).zfill(3)
+
             insert_query = """
                 INSERT INTO job_applied (application_id, student_id, employer_id, job_id)
                 VALUES (%s, %s, %s, %s)
@@ -454,6 +442,7 @@ def apply_for_job():
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
+
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
