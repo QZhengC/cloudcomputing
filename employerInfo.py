@@ -250,7 +250,7 @@ def update_job():
             "job_id": request.form['job_id'],
             "job_name": request.form['job_name'],
             "job_description": request.form['job_description'],
-            "salary": request.form['salary']
+            "salary": request.form['salary'],
         }
 
         try:
@@ -258,7 +258,12 @@ def update_job():
             cursor.execute(companyNameQuery, (employer_id,))
             company_name = cursor.fetchone()
 
-            update_query = "UPDATE job_post SET employer_id = %s, company_name = %s, job_id = %s, job_name = %s, job_description = %s, salary = %s WHERE job_id = %s"
+            update_query = """
+                            UPDATE job_post 
+                            SET employer_id = %s, company_name = %s, job_id = %s, 
+                                job_name = %s, job_description = %s, salary = %s 
+                            WHERE job_id = %s
+                        """
             cursor.execute(update_query, (
                 employer_id, company_name,
                 updated_info["job_id"], updated_info["job_name"],
