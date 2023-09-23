@@ -3,6 +3,26 @@
 
 <head>
     <title>Student Resume Upload</title>
+    <style>
+
+        /* Styling for the center container */
+        center {
+            text-align: center; /* Center-align the contents */
+        }
+
+        /* Styling for the buttons */
+        button {
+            background: green;
+            height: 45px;
+            width: 200px;
+            color: white;
+            font: oblique;
+        }
+
+        button.back-button {
+            background: grey;
+        }
+    </style>
 </head>
 
 <body>
@@ -12,18 +32,17 @@
             <label for="resume">Upload Resume (PDF, DOC, DOCX):</label><br>
             <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required><br><br>
 
-            <button onclick="success()" type="submit" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">Upload</button>
+            <button onclick="success()" type="submit">Upload</button>
         </form>
         <br><br>
-        <button onclick="history.back()" type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Back to Menu</button>
-
+        <button onclick="history.back()" class="back-button">Back to Menu</button>
     </center>
 
     <script>
         function success() {
-          alert("Upload is Successful");
+            alert("Upload is Successful");
         }
-        </script>
+    </script>
 </body>
 
 </html>
