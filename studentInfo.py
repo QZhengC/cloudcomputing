@@ -408,7 +408,7 @@ def generate_application_id():
     cursor = db_conn.cursor()
     try:
         # Query the database to get the maximum application ID
-        cursor.execute("SELECT MAX(application_id) AS max_id FROM application")
+        cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
         result = cursor.fetchone()
         max_id = result['max_id']
 
