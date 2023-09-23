@@ -64,7 +64,7 @@ def employer_Menu():
     return render_template('employerMenu.html')
 
 
-@employer_app.route("/employer-delete-job-page", method=['GET'])
+@employer_app.route("/employer-delete-job-page", methods=['GET'])
 def delete_job_page():
     return render_template('deleteJob.html')
 
