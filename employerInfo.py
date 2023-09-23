@@ -245,15 +245,13 @@ def update_job():
     if 'employer_id' in session:
         cursor = db_conn.cursor()
         employer_id = session['employer_id']
- 
+
         updated_info = {
             "job_id": request.form['job_id'],
             "job_name": request.form['job_name'],
             "job_description": request.form['job_description'],
             "salary": request.form['salary']
         }
-
-        
 
         try:
             companyNameQuery = "SELECT company_name WHERE employer_id = %s"
@@ -263,12 +261,14 @@ def update_job():
             update_query = "UPDATE job_post SET employer_id = %s, company_name = %s, job_id = %s, job_name = %s, job_description = %s, salary = %s WHERE job_id = %s"
             cursor.execute(update_query, (
                 employer_id, company_name,
-                updated_info["job_id"], updated_info["job_name"], updated_info["job_description"], updated_info["salary"]
+                updated_info["job_id"], updated_info["job_name"],
+                updated_info["job_description"], updated_info["salary"],
+                updated_info['job_id']
             ))
             db_conn.commit()
 
             return redirect(url_for('employer_app.employerUpdateJobOutput', job_id=updated_info['job_id']))
-       
+
         except Exception as e:
             db_conn.rollback()
             return str(e)
