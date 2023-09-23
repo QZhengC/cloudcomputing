@@ -4,30 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Delete Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            /* Center the form content */
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 0 auto;
+            /* Center the input box */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Include padding and border in width */
+        }
+
+        button[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: darkgreen;
+        }
+
+        .go-back-button {
+            background-color: grey;
+        }
+
+        .go-back-button:hover {
+            background-color: darkgrey;
+        }
+    </style>
 </head>
 
 <body>
     <center>
-        <title>Employer Delete Data</title>
         <h1>Employer Delete Job</h1>
     </center>
     <form action="/delete-job" method="POST" enctype="multipart/form-data">
-        <center>
-            <label for="job_id">Job ID: </label><br>
-            <input type="number" id="job_id" name="job_id" required><br><br>
+        <label for="job_id">Job ID:</label><br>
+        <input type="number" id="job_id" name="job_id" required><br><br>
 
-            <form action="/delete-job" autocomplete="on" method="POST">
-                <button type="submit"
-                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
-            </form>
-
-            <form action="/employer-menu-page" autocomplete="on" method="GET">
-                <button type="submit"
-                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-                    BACK</button><br><br>
-            </form>
-
-        </center>
+        <button type="submit">SUBMIT</button><br><br>
+        <button class="go-back-button" type="submit" formaction="/employer-menu-page">GO BACK</button><br><br>
     </form>
 </body>
 

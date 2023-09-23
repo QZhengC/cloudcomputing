@@ -5,7 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Menu</title>
+    <link rel="stylesheet" href="styles.css"> <!-- You can link an external CSS file here for styling -->
 
+    <style>
+        /* Define your CSS styles here or link to an external stylesheet */
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
     <div class="sidebar">
         <h2>Menu</h2>
         <a href="{{ url_for('employer_app.add_job_post', employer_id=session['employer_id']) }}">Add Job</a>
@@ -14,10 +42,6 @@
         <br><br>
         <a href="{{url_for('main_app.backhome')}}">Logout</a>
     </div>
-</head>
-
-<body>
-
 </body>
 
 </html>
