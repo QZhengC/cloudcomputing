@@ -3,50 +3,27 @@
 
 <head>
     <title>Student Resume Upload</title>
-    <style>
-        /* Styling for the center container */
-        .center-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Styling for the buttons */
-        .upload-button,
-        .back-button {
-            background: green;
-            height: 45px;
-            width: 200px;
-            color: white;
-            font: oblique;
-            margin: 0 10px; /* Add margin to separate the buttons */
-        }
-
-        .back-button {
-            background: grey;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="center-container">
+    <center>
         <h1>Upload Your Resume</h1>
         <form action="/upload-resume" method="POST" enctype="multipart/form-data">
             <label for="resume">Upload Resume (PDF, DOC, DOCX):</label><br>
             <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required><br><br>
 
-            <!-- Buttons -->
-            <button onclick="success()" type="submit" class="upload-button">Upload</button>
-            <button onclick="history.back()" class="back-button">Back to Menu</button>
+            <button onclick="success()" type="submit" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">Upload</button>
         </form>
-    </div>
+        <br><br>
+        <button onclick="history.back()" type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Back to Menu</button>
+
+    </center>
 
     <script>
         function success() {
-            alert("Upload is Successful");
+          alert("Upload is Successful");
         }
-    </script>
+        </script>
 </body>
 
 </html>
