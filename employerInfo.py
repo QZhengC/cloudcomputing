@@ -152,7 +152,7 @@ def emloyer_add_job():
             # SQL INSERT query
             select_query = "SELECT company_name FROM employer WHERE employer_id = %s"
             cursor.execute(select_query, (employer_id,))
-            company_name = cursor.fetchone()[0]
+            company_name = cursor.fetchone()
 
             insert_query = "INSERT INTO job_post (employer_id, company_name ,job_id, job_name, job_description, salary) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor.execute(insert_query, (employer_id, company_name, job_id,
@@ -243,25 +243,32 @@ def display_choice_of_update():
 @employer_app.route("/update-job", methods=['POST'])
 def update_job():
     if 'employer_id' in session:
+        cursor = db_conn.cursor()
+        employer_id = session['employer_id']
+ 
         updated_info = {
             "job_id": request.form['job_id'],
             "job_name": request.form['job_name'],
             "job_description": request.form['job_description'],
             "salary": request.form['salary']
         }
-        cursor = db_conn.cursor()
-        employer_id = session['employer_id']
-        companyNameQuery = "SELECT company_name WHERE employer_id = %s"
-        cursor.execute(companyNameQuery, (employer_id,))
-        company_name = cursor.fetchone()
+
+        
+
         try:
+            companyNameQuery = "SELECT company_name WHERE employer_id = %s"
+            cursor.execute(companyNameQuery, (employer_id,))
+            company_name = cursor.fetchone()
+
             update_query = "UPDATE job_post SET employer_id = %s, company_name = %s, job_id = %s, job_name = %s, job_description = %s, salary = %s WHERE job_id = %s"
             cursor.execute(update_query, (
                 employer_id, company_name,
                 updated_info["job_id"], updated_info["job_name"], updated_info["job_description"], updated_info["salary"]
             ))
             db_conn.commit()
+
             return redirect(url_for('employer_app.employerUpdateJobOutput', job_id=updated_info['job_id']))
+       
         except Exception as e:
             db_conn.rollback()
             return str(e)
