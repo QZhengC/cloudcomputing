@@ -292,7 +292,7 @@ def update_job():
 @employer_app.route("/delete-job", methods=['POST'])
 def delete_job():
     job_id = request.form['job_id']
-    if 'employer_id' in session['employer_id']:
+    if 'employer_id' in session:
         cursor = db_conn.cursor()
         try:
             query = "DELETE FROM job_post where job_id = %s"
