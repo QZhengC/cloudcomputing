@@ -366,6 +366,43 @@ def upload_resume():
         return redirect(url_for('student_login_page'))
 
 
+@student_app.route("/student_view_jobs")
+def student_view_jobs():
+    # Check if the student is logged in (has an active session)
+    if 'student_id' in session:
+        cursor = db_conn.cursor()
+        try:
+            # Query the database to retrieve all job posts
+            query = "SELECT * FROM job_post"
+            cursor.execute(query)
+            job_posts = cursor.fetchall()
+
+            if not job_posts:
+                return render_template('noJobsFound.html')
+
+            jobs = []
+            for row in job_posts:
+                job = {
+                    "job_id": row[0],
+                    "job_name": row[1],
+                    "job_description": row[2],
+                    "salary": row[3],
+                    "employer_id": row[4]
+                }
+                jobs.append(job)
+
+            return render_template('student_view_jobs.html', jobs=jobs)
+
+        except Exception as e:
+            # Handle exceptions here, e.g., database connection issues
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
+
+
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
 

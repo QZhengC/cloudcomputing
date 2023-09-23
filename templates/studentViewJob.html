@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>All Job Posts</title>
+</head>
+
+<body>
+    <center>
+        <h1>All Job Posts</h1>
+        <table border="1">
+            <tr>
+                <th>Job Title</th>
+                <th>Job Description</th>
+                <th>Salary</th>
+                <th>Apply</th>
+            </tr>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job['job_name'] }}</td>
+                <td>{{ job['job_description'] }}</td>
+                <td>{{ job['salary'] }}</td>
+                <td><a href="{{ url_for('apply_for_job', job_id=job['job_id']) }}">Apply</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+
+</html>
