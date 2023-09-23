@@ -416,7 +416,7 @@ def apply_for_job():
             # Query the database to get the maximum application ID
             cursor.execute("SELECT MAX(application_id) AS max_id FROM job_applied")
             result = cursor.fetchone()
-            max_id = result['max_id']
+            max_id = result[0]  # Access the first element of the tuple
 
             # If no previous applications exist, start with '001'
             if max_id is None:
@@ -442,6 +442,7 @@ def apply_for_job():
     else:
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
+
 
 
 if __name__ == '__main__':
