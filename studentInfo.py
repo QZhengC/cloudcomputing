@@ -443,6 +443,46 @@ def apply_for_job():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
 
+@student_app.route("/student-view-applied")
+def student_view_applied():
+    if 'student_id' in session:
+        student_id = session['student_id']
+        cursor = db_conn.cursor()
+        try:
+            # Query the database to retrieve the jobs the student has applied for
+            query = """
+                SELECT ja.application_id, jp.job_name, jp.job_description, jp.salary
+                FROM job_applied ja
+                JOIN job_post jp ON ja.job_id = jp.job_id
+                WHERE ja.student_id = %s
+            """
+            cursor.execute(query, (student_id,))
+            applied_jobs = cursor.fetchall()
+
+            if not applied_jobs:
+                return render_template('noAppliedJobs.html')
+
+            jobs = []
+            for row in applied_jobs:
+                job = {
+                    "application_id": row[0],
+                    "job_name": row[1],
+                    "job_description": row[2],
+                    "salary": row[3]
+                }
+                jobs.append(job)
+
+            return render_template('studentViewApplied.html', jobs=jobs)
+
+        except Exception as e:
+            # Handle exceptions here, e.g., database connection issues
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        # If the student is not logged in, redirect them to the login page
+        return redirect(url_for('student_login_page'))
+
 
 
 if __name__ == '__main__':
