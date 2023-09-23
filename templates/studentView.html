@@ -13,7 +13,6 @@
 
         /* Style for the container */
         .container {
-            text-align: center;
             background-color: white;
             padding: 20px;
             border-radius: 10px;
@@ -33,6 +32,14 @@
             margin-left: 30px; /* Adjust the margin as needed */
         }
 
+        /* Style for the button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
         /* Style for the edit button */
         .edit-button {
             background: green;
@@ -43,7 +50,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-right: 10px; /* Add margin between buttons */
         }
 
         /* Style for the back button */
@@ -56,7 +63,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -77,14 +83,15 @@
             <p><strong>Year Intake     :</strong> {{ student.year_intake }}</p>
             <p><strong>Skills Learned  :</strong> {{ student.skills_learned }}</p>
             <p><strong>CGPA            :</strong> {{ student.cgpa }}</p>
-
         </form>
 
-        <form action="{{ url_for('student_app.view_and_edit', student_id=session['student_id']) }}">
-            <button type="submit" class="edit-button">Edit Information</button><br><br>
-        </form>
+        <div class="button-container">
+            <form action="{{ url_for('student_app.view_and_edit', student_id=session['student_id']) }}">
+                <button type="submit" class="edit-button">Edit Information</button>
+            </form>
 
-        <button onclick="history.back()" class="back-button">Back to Menu</button>
+            <button onclick="history.back()" class="back-button">Back to Menu</button>
+        </div>
     </div>
 </body>
 
