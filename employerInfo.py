@@ -284,5 +284,26 @@ def update_job():
         return redirect(url_for('student_app.employer_login_page'))
 
 
+@employer_app.route("/delete-job", methods=['POST'])
+def delete_job():
+    job_id = request.form['job_id']
+    if 'employee_id' in session['employee_id']:
+        cursor = db_conn.cursor()
+        try:
+            query = "DELETE FROM job_post where job_id = %s"
+            cursor.execute(query, (job_id))
+            db_conn.commit()
+
+            return render_template('deleteJobOutput.html', job_id = job_id)
+
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('employer-menu-page'))
+
+
 if __name__ == '__main__':
     employer_app.run(host='0.0.0.0', port=80, debug=True)
