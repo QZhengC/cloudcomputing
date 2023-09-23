@@ -63,6 +63,11 @@ def employerUpdateJobOutput():
 def employer_Menu():
     return render_template('employerMenu.html')
 
+
+@employer_app.route("/employer-delete-job-page", method=['GET'])
+def delete_job_page():
+    return render_template('deleteJob.html')
+
 # SIGN UP AND LOGIN
 
 
@@ -294,7 +299,7 @@ def delete_job():
             cursor.execute(query, (job_id))
             db_conn.commit()
 
-            return render_template('deleteJobOutput.html', job_id = job_id)
+            return render_template('deleteJobOutput.html', job_id=job_id)
 
         except Exception as e:
             db_conn.rollback()
