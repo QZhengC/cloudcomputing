@@ -25,8 +25,8 @@
             <input type="text" id="salary" name="salary" value="{{ job.salary}}" required><br><br>
 
 
-            <form action="{{ url_for('employer.update_job', employer_id=session['employer_id']) }}" autocomplete="on"
-                method="GET">
+            <form action="{{ url_for('employer_app.update_job', employer_id=session['employer_id']) }}"
+                autocomplete="on" method="GET">
                 <button type="submit"
                     style="background: green; height: 45px; width: 200px; color:white; font:oblique;">UPDATE</button><br><br>
             </form>
