@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Jobs</title>
-    <!-- Add your CSS stylesheets here for styling -->
-    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header>
-        <h1>Available Job Posts</h1>
-    </header>
-    <main>
-        <div class="job-list">
-            {% for job in jobs %}
+    <center>
+        <header>
+            <h1>Available Job Posts</h1>
+        </header>
+        <main>
+            <div class="job-list">
+                {% for job in jobs %}
                 <div class="job-card">
                     <h2>{{ job.company_name }}</h2>
                     <p>Postion : {{ job.job_name }}</p>
                     <p>Allowance : ${{ job.job_salary }}</p>
                     <p>Job Description : {{ job.job_description }}</p>
-                    
+
                     <form action="/apply-for-job" method="POST">
                         <input type="hidden" name="student_id" value="{{ session['student_id'] }}">
                         <input type="hidden" name="employer_id" value="{{ job.employer_id }}">
@@ -28,11 +29,12 @@
                         <button type="submit">Apply</button>
                     </form>
                 </div>
-            {% endfor %}
-        </div>
-    </main>
-    <footer>
-        <!-- Add footer content here if needed -->
-    </footer>
+                {% endfor %}
+            </div>
+        </main>
+        <button onclick="history.back()" type="submit"
+            style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">Back to Menu</button>
+    </center>
 </body>
+
 </html>
