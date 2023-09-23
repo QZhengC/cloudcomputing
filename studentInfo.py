@@ -436,9 +436,9 @@ def apply_for_job():
 
         cursor = db_conn.cursor()
         try:
-            # Insert the job application into the 'application' table
+           
             insert_query = """
-                INSERT INTO application (application_id, student_id, employer_id, job_id)
+                INSERT INTO job_applied (application_id, student_id, employer_id, job_id)
                 VALUES (%s, %s, %s, %s)
             """
             cursor.execute(insert_query, (application_id, student_id, employer_id, job_id))
