@@ -243,6 +243,7 @@ def display_choice_of_update():
 @employer_app.route("/update-job", methods=['POST'])
 def update_job():
     if 'employer_id' in session:
+
         cursor = db_conn.cursor()
         employer_id = session['employer_id']
 
@@ -268,7 +269,7 @@ def update_job():
                 employer_id, company_name,
                 updated_info["job_id"], updated_info["job_name"],
                 updated_info["job_description"], updated_info["salary"],
-                updated_info['job_id']
+                updated_info['job_id'],
             ))
             db_conn.commit()
 
