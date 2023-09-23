@@ -491,7 +491,11 @@ def student_view_applied():
         # If the student is not logged in, redirect them to the login page
         return redirect(url_for('student_login_page'))
 
-
+@student_app.route("/logout")
+def logout():
+    # Remove the student_id from the session to log the student out
+    session.pop('student_id', None)
+    return redirect(url_for('student_app.student_login_page'))
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)

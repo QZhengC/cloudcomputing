@@ -36,11 +36,6 @@
     </style>
 </head>
 <body>
-    <!-- Top menu bar with student's name -->
-    <div class="top-menu">
-        <div style="float: left;">Welcome, [Student Name]</div>
-        <div style="float: right;"><a href="#">Logout</a></div>
-    </div>
 
     <!-- Sidebar menu -->
     <div class="sidebar">
@@ -49,6 +44,7 @@
         <a href="{{url_for('student_app.resume_student')}}">Resume</a>
         <a href="{{url_for('student_app.student_view_jobs')}}">Look for Intern</a>
         <a href="{{url_for('student_app.student_view_applied')}}">View Applied Jobs</a>
+        <a href="{{url_for('student_app.logout')}}">Logout</a>
     </div>
 
     <!-- Content area -->
