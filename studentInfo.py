@@ -459,7 +459,7 @@ def student_view_applied():
         try:
             # Query the database to retrieve the jobs the student has applied for
             query = """
-                SELECT ja.application_id, jp.job_name, jp.job_description, jp.salary, jp.company_name
+                SELECT  jp.company_name, jp.job_name, jp.job_description, jp.salary
                 FROM job_applied ja
                 JOIN job_post jp ON ja.job_id = jp.job_id
                 WHERE ja.student_id = %s
