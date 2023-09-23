@@ -240,7 +240,7 @@ def display_choice_of_update():
             cursor: cursor.close()
 
 
-@employer_app.route("update-job", methods=['POST'])
+@employer_app.route("/update-job", methods=['POST'])
 def update_job():
     if 'employer_id' in session:
         updated_info = {
