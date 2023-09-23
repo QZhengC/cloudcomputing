@@ -383,11 +383,10 @@ def student_view_jobs():
             jobs = []
             for row in job_posts:
                 job = {
-                    "job_id": row[0],
-                    "job_name": row[1],
-                    "job_description": row[2],
-                    "salary": row[3],
-                    "employer_id": row[4]
+                    "company_name" : row [1],
+                    "job_name": row[3],
+                    "job_description": row[4],
+                    "job_salary": row[5],
                 }
                 jobs.append(job)
 
