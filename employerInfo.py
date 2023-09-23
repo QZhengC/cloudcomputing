@@ -195,13 +195,6 @@ def view_job_post(employer_id):
                 }
                 jobs.append(job)
 
-            # jobs = {
-            #     "job_id": job_post[2],
-            #     "job_name": job_post[3],
-            #     "job_description": job_post[4],
-            #     "salary": job_post[5]
-            # }
-
             return render_template('viewJobPost.html', jobs=jobs)
 
         except Exception as e:
@@ -212,6 +205,33 @@ def view_job_post(employer_id):
     else:
         # If the employer is not logged in, redirect them to the login page
         return redirect(url_for('employer_login_page'))
+
+
+@employer_app.route("/display-update-job", methods=['POST'])
+def display_choice_of_update():
+    if 'employer_id' in session:
+        cursor = db_conn.cursor()
+        job_id = request.form['job_id']
+        try:
+            query = "SELECT * FROM job_post WHERE job_id = %s"
+            cursor.execute(query, (job_id,))
+            job_data = cursor.fetchone()
+            if not job_data:
+                return render_template('noJobsFound.html')
+
+            job = {
+                "job_id": job_data[2],
+                "job_name": job_data[3],
+                "job_description": job_data[4],
+                "salary": job_data[5]
+            }
+
+            return render_template('displayUpdateDetails.html', job=job)
+
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor: cursor.close()
 
 
 if __name__ == '__main__':

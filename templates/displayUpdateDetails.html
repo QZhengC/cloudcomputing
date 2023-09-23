@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <center>
+        <h1>Update Job</h1>
+    </center>
+    <form action="/display-update-job" method="POST" enctype="multipart/form-data">
+        <center>
+            <label for="job_id">Job ID: </label><br>
+            <input type="number" id="job_id" name="job_id" value="{{ job.job_id }}"><br><br>
+
+            <label for="job_name">Job Name: </label><br>
+            <input type="text" id="job_name" name="job_name" value="{{ job.job_name }}" required><br><br>
+
+            <label for="job_description">Job Description:</label><br>
+            <input type="text" id="job_description" name="job_description" value="{{ job.job_description}}"><br><br>
+
+            <label for="salary">Salary: </label><br>
+            <input type="text" id="salary" name="salary" value="{{ job.salary}}" required><br><br>
+
+
+            <form action="/update-job" autocomplete="on" method="GET">
+                <button type="submit"
+                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
+            </form>
+
+            <form action="/employer-menu-page" autocomplete="on" method="POST">
+                <button type="submit"
+                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
+                    BACK</button><br><br>
+            </form>
+
+        </center>
+    </form>
+</body>
+
+</html>
