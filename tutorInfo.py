@@ -22,7 +22,7 @@ tutor_app = Blueprint('tutor_app', __name__)
 
 @tutor_app.route("/supervisor-menu-page", methods=['GET'])
 def supervisor_menu():
-    return redirect(url_for(tutor_app.view_all_studuents))
+    return redirect(url_for('tutor_app.view_all_students'))
 
 
 @tutor_app.route("/supervisor-login", methods=['POST', 'GET'])
