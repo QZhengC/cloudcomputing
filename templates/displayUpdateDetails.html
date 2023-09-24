@@ -4,43 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <center>
+    <div class="container">
         <h1>Update Job</h1>
-    </center>
-    <form action="/update-job" method="POST" enctype="multipart/form-data">
-        <center>
-            <label for="job_id">Job ID: </label><br>
-            <input type="number" id="job_id" name="job_id" value="{{ job.job_id }}" readonly><br><br>
+        <form action="/update-job" method="POST" enctype="multipart/form-data">
+            <label class="form-label" for="job_id">Job ID:</label><br>
+            <input class="form-input" type="number" id="job_id" name="job_id" value="{{ job.job_id }}" readonly><br><br>
 
-            <label for="job_name">Job Name: </label><br>
-            <input type="text" id="job_name" name="job_name" value="{{ job.job_name }}" required><br><br>
+            <label class="form-label" for="job_name">Job Name:</label><br>
+            <input class="form-input" type="text" id="job_name" name="job_name" value="{{ job.job_name }}"
+                required><br><br>
 
-            <label for="job_description">Job Description:</label><br>
-            <input type="text" id="job_description" name="job_description" value="{{ job.job_description}}"><br><br>
+            <label class="form-label" for="job_description">Job Description:</label><br>
+            <input class="form-input" type="text" id="job_description" name="job_description"
+                value="{{ job.job_description }}"><br><br>
 
-            <label for="salary">Salary: </label><br>
-            <input type="text" id="salary" name="salary" value="{{ job.salary}}" required><br><br>
+            <label class="form-label" for="salary">Salary:</label><br>
+            <input class="form-input" type="text" id="salary" name="salary" value="{{ job.salary }}" required><br><br>
 
+            <button class="form-button" type="submit">UPDATE</button><br><br>
 
-            <form action="{{ url_for('employer_app.update_job', employer_id=session['employer_id']) }}"
-                autocomplete="on" method="GET">
-                <button type="submit"
-                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">UPDATE</button><br><br>
-            </form>
-
-
-            <form action="{{ url_for('employer_app.employer_Menu', employer_id=session['employer_id']) }}"
-                autocomplete="on" method="GET">
-                <button type="submit"
-                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">Go
-                    Back</button><br><br>
-            </form>
-
-        </center>
-    </form>
+            <a href="{{ url_for('employer_app.employer_Menu', employer_id=session['employer_id']) }}"
+                class="form-button">Go Back</a><br><br>
+        </form>
+    </div>
 </body>
 
 </html>
