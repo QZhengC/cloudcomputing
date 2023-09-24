@@ -1,5 +1,6 @@
 from flask import Flask
 from studentInfo import student_app
+from portfolio import portfolio_app
 from adminInfo import admin_app
 from main import main_app
 from employerInfo import employer_app
@@ -15,6 +16,7 @@ Session(app)  # Initialize the Session extension
 
 # Register student and admin blueprints
 app.register_blueprint(main_app)
+app.register_blueprint(portfolio_app)
 app.register_blueprint(student_app)
 app.register_blueprint(admin_app)
 app.register_blueprint(employer_app)
