@@ -72,7 +72,7 @@ def view_all_students():
         if students is None:
             students.append("No rows")
 
-        return render_template("supervisorMenu.html", students=students, studentSupervisor=studentSupervisor)
+        return render_template("supervisorMenu.html", students=students)
     else:
         return redirect(url_for('main_app.backhome'))
 
