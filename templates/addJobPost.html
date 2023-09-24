@@ -4,40 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Add Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            text-align: center;
+            margin: 50px auto;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .form-label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Add this line */
+        }
+
+        .form-button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            font-style: oblique;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: #008000;
+        }
+
+        .go-back-button {
+            background: grey;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-style: oblique;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .go-back-button:hover {
+            background-color: #808080;
+        }
+    </style>
 </head>
 
 <body>
-    <center>
+    <div class="container">
         <h1>Employer Add Job</h1>
-    </center>
-    <form action="/employer-add-job" method="POST" enctype="multipart/form-data">
-        <center>
-            <label for="job_id">Job ID: </label><br>
-            <input type="number" id="job_id" name="job_id" required><br><br>
+        <form action="/employer-add-job" method="POST" enctype="multipart/form-data">
+            <label class="form-label" for="job_id">Job ID:</label>
+            <input class="form-input" type="number" id="job_id" name="job_id" required>
 
-            <label for="job_name">Job Name: </label><br>
-            <input type="text" id="job_name" name="job_name" required><br><br>
+            <label class="form-label" for="job_name">Job Name:</label>
+            <input class="form-input" type="text" id="job_name" name="job_name" required>
 
-            <label for="job_description">Job Description:</label><br>
-            <input type="text" id="job_description" name="job_description"><br><br>
+            <label class="form-label" for="job_description">Job Description:</label>
+            <input class="form-input" type="text" id="job_description" name="job_description">
 
-            <label for="salary">Salary: </label><br>
-            <input type="text" id="salary" name="salary" required><br><br>
+            <label class="form-label" for="salary">Salary:</label>
+            <input class="form-input" type="text" id="salary" name="salary" required>
 
+            <button class="form-button" type="submit">SUBMIT</button>
+        </form>
 
-            <form action="/add-job-post" autocomplete="on" method="GET">
-                <button type="submit"
-                    style="background: green; height: 45px; width: 200px; color:white; font:oblique;">SUBMIT</button><br><br>
-            </form>
-
-            <form action="/employer-menu-page" autocomplete="on" method="GET">
-                <button type="submit"
-                    style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO
-                    BACK</button><br><br>
-            </form>
-
-        </center>
-    </form>
+        <a href="/employer-menu-page" class="go-back-button">GO BACK</a>
+    </div>
 </body>
 
 </html>
