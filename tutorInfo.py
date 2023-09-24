@@ -86,6 +86,9 @@ def view_all_students():
                 "last_name": row[3],
                 "email": row[5]
             }
+        if studentSupervisor is None:
+            studentSupervisor.append(
+                'No Students are currently under your supervision')
 
         return render_template("supervisorMenu.html", students=students, studentSupervisor=studentSupervisor)
     else:
