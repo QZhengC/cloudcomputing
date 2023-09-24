@@ -48,7 +48,7 @@ def supervisor_login():
             cursor.close()
 
     else:
-        return render_template('login.html')
+        return redirect(url_for('main_app.home'))
 
 
 @tutor_app.route("/view-student", methods=['GET'])
