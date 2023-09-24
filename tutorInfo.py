@@ -20,12 +20,12 @@ Session(tutor_session)
 tutor_app = Blueprint('tutor_app', __name__)
 
 
-@tutor_app.route("/tutorLoginPage", methods=['GET'])
-def employer_login_page():
-    return render_template('tutorLogin.html')
+@tutor_app.route("/supervisorLoginPage", methods=['GET'])
+def tutor_Menu():
+    return render_template('tutorMenu.html')
 
 
-@tutor_app.route("/tutorLogin", methods=['POST', 'GET'])
+@tutor_app.route("/supervisor-Login", methods=['POST', 'GET'])
 def tutor_login():
     if request.method == 'POST':
         tutor_id = request.form['tutor_id']
