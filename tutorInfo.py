@@ -114,19 +114,20 @@ def display_student_under_supervisor():
         cursor.execute(select_student_supervisor, (supervisor_id))
         student_under_supervisor = cursor.fetchall()
 
-        studentSupervisor = []
+        supervisedStudent = []
         for row in student_under_supervisor:
-            studentSupervisor = {
+            stud = {
                 "student_id": row[0],
                 "supervisor_id": row[1],
                 "phone_number": row[4],
                 "last_name": row[3],
                 "email": row[5]
             }
-        if studentSupervisor is None:
-            studentSupervisor.append(
+            supervisedStudent.append(stud)
+        if supervisedStudent is None:
+            supervisedStudent.append(
                 'No Students are currently under your supervision')
-        return render_template('displayStudentUnderSupervisor.html', studentSupervisor=studentSupervisor)
+        return render_template('displayStudentUnderSupervisor.html', supervisedStudent=supervisedStudent)
     else:
         return redirect(url_for('main_app.backhome'))
 

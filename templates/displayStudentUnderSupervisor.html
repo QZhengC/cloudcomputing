@@ -20,13 +20,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for studentSupervisor in studentSupervisor %}
+            {% for supervisedStudent in supervisedStudent %}
             <tr>
-                <td>{{ studentSupervisor.student_id }}</td>
-                <td>{{ studentSupervisor.supervisor_id }}</td>
-                <td>{{ studentSupervisor.last_name }}</td>
-                <td>{{ studentSupervisor.phone_number }}</td>
-                <td>{{ studentSupervisor.email }}</td>
+                <td>{{ supervisedStudent.student_id }}</td>
+                <td>{{ supervisedStudent.supervisor_id }}</td>
+                <td>{{ supervisedStudent.last_name }}</td>
+                <td>{{ supervisedStudent.phone_number }}</td>
+                <td>{{ supervisedStudent.email }}</td>
             </tr>
             {% endfor %}
         </tbody>
