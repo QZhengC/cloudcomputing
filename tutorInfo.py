@@ -105,11 +105,12 @@ def add_student_under_supervisor():
             chk_student = "SELECT supervisor_id FROM students WHERE student_id = %s"
             cursor.execute(chk_student, (student_id))
             check = cursor.fetchone()
-            if check is None:
+            if check == None:
                 update_query = "UPDATE students SET supervisor_id = %s WHERE student_id =%s"
                 cursor.execute(update_query, (supervisor_id, student_id))
                 db_conn.commit()
                 return redirect(url_for('tutor_app.supervisor_menu'))
+
             else:
                 return "student already have a supervisor"
         except Exception as e:
