@@ -70,24 +70,25 @@
             <h1>Available Job Posts</h1>
         </header>
         <main>
-            <form action="/apply-for-job" method="POST">
-                <div class="job-list">
-                    {% for job in jobs %}
-                    <div class="job-card">
-                        <h2>{{ job.company_name }}</h2>
-                        <p>Position: {{ job.job_name }}</p>
-                        <p>Allowance: RM {{ job.job_salary }}</p>
-                        <p>Job Description: {{ job.job_description }}</p>
-                    </div>
-                    {% endfor %}
 
+            <div class="job-list">
+                {% for job in jobs %}
+                <div class="job-card">
+                    <h2>{{ job.company_name }}</h2>
+                    <p>Position: {{ job.job_name }}</p>
+                    <p>Allowance: RM {{ job.job_salary }}</p>
+                    <p>Job Description: {{ job.job_description }}</p>
                     <input type="hidden" name="student_id" value="{{ session['student_id'] }}">
                     <input type="hidden" name="employer_id" value="{{ job.employer_id }}">
                     <input type="hidden" name="job_id" value="{{ job.job_id }}">
                     <input type="hidden" name="application_id" value="{{ job.application_id }}">
-                    <button type="submit">Apply</button>
+                    <form action="/apply-for-job" method="POST">
+                        <button type="submit">Apply</button>
+                    </form>
                 </div>
-            </form>
+                {% endfor %}
+            </div>
+            
         </main>
         <br><br>
         <button onclick="history.back()" class="back-button">Back to Menu</button>
