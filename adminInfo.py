@@ -631,3 +631,112 @@ def delete_jobapplied():
         cursor.close()
 
     return render_template('adminJob.html', obj1="deleteSuccess")
+
+@admin_app.route("/admin-add-tutor", methods=['GET','POST'])
+def add_tutor():
+    sup_id = request.form['sup_id']
+    sup_name = request.form['sup_name']
+    sup_password = request.form['sup_password']
+
+
+    cursor = db_conn.cursor()
+
+    try:
+        query = "INSERT INTO supervisor VALUES (%s, %s, %s)"
+        cursor.execute(query, (sup_id, sup_name, sup_password))
+        db_conn.commit()
+
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template('adminTutor.html', obj1="addSuccess")
+
+@admin_app.route("/admin-findu-tutor", methods=['GET','POST'])
+def findu_tutor():
+    sup_id = request.form['sup_id']
+
+    cursor = db_conn.cursor()
+
+    try:
+        query = "SELECT * FROM supervisor WHERE supervisor_id = %s"
+        cursor.execute(query, (sup_id))
+        result = cursor.fetchone()
+
+        if result:
+            return render_template('adminTutor.html', obj1="uFindSuccess", att1=sup_id, att2=result[1], att3=result[2])
+        else:
+            return render_template('adminTutor.html', obj1="findFailed")
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+@admin_app.route("/admin-findd-tutor", methods=['GET','POST'])
+def findd_tutor():
+    sup_id = request.form['sup_id']
+
+    cursor = db_conn.cursor()
+
+    try:
+        query = "SELECT * FROM supervisor WHERE supervisor_id = %s"
+        cursor.execute(query, (sup_id))
+        result = cursor.fetchone()
+
+        if result:
+            return render_template('adminTutor.html', obj1="dFindSuccess", att1=sup_id, att2=result[1], att3=result[2])
+        else:
+            return render_template('adminTutor.html', obj1="findFailed")
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+@admin_app.route("/admin-update-tutor", methods=['POST'])
+def update_tutor():
+    sup_id = request.form['sup_id']
+    sup_name = request.form['sup_name']
+    sup_password = request.form['sup_password']
+
+    cursor = db_conn.cursor()
+
+    try:
+        query = "UPDATE supervisor SET supervisor_name = %s, supervisor_password = %s WHERE supervisor_id = %s"
+        cursor.execute(query, (sup_name, sup_password, sup_id))
+        db_conn.commit()
+
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template('adminTutor.html', obj1="updateSuccess")
+
+@admin_app.route("/admin-delete-tutor", methods=['POST'])
+def delete_tutor():
+    sup_id = request.form['sup_id']
+
+    cursor = db_conn.cursor()
+
+    try:
+        query = "DELETE FROM supervisor WHERE supervisor_id = %s"
+        cursor.execute(query, (sup_id))
+        db_conn.commit()
+
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template('adminTutor.html', obj1="deleteSuccess")

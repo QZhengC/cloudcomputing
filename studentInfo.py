@@ -53,7 +53,7 @@ def signUp():
 
     try:
         # SQL INSERT query
-        insert_query = "INSERT INTO students (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        insert_query = "INSERT INTO students (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_query, (student_id, first_name, last_name, phone_number, email,
                        password, current_address, course_of_study, year_intake, skills_learned, cgpa))
         db_conn.commit()
