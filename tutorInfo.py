@@ -22,7 +22,7 @@ tutor_app = Blueprint('tutor_app', __name__)
 
 @tutor_app.route("/supervisor-menu-page", methods=['GET'])
 def supervisor_menu():
-    return redirect(url_for(tutor_app.view_all_studuents))
+    return redirect(url_for('tutor_app.view_all_students'))
 
 
 @tutor_app.route("/supervisor-login", methods=['POST', 'GET'])
@@ -30,13 +30,13 @@ def supervisor_login():
     if request.method == 'POST':
         supervisor_id = request.form['supervisor_id']
         supervisor_password = request.form['supervisor_password']
+
         cursor = db_conn.cursor()
         try:
             query = "SELECT * FROM supervisor WHERE supervisor_id = %s AND supervisor_password = %s"
             cursor.execute(query, (supervisor_id, supervisor_password))
             tutor = cursor.fetchone()
             if tutor:
-
                 session['supervisor_id'] = supervisor_id
                 return redirect(url_for('tutor_app.supervisor_menu'))
 
@@ -48,18 +48,20 @@ def supervisor_login():
             cursor.close()
 
     else:
-        return render_template('login.html')
+        return redirect(url_for('main_app.home'))
 
 
-@tutor_app.route("/view-student", methods=['GET'])
+@tutor_app.route("/view-all-student", methods=['GET'])
 def view_all_students():
     if 'supervisor_id' in session:
         cursor = db_conn.cursor()
         query = "SELECT * FROM students"
         cursor.execute(query)
         student = cursor.fetchall()
+
         if not student:
             return "No Students Found"
+
         students = []
         for row in student:
             student_dict = {
@@ -72,11 +74,11 @@ def view_all_students():
 
         return render_template("supervisorMenu.html", students=students)
     else:
-        return render_template()
+        return redirect(url_for('main_app.home'))
 
 
-@tutor_app.route("/add-student", methods=['GET'])
-def add_student():
+@tutor_app.route("/add-student-under-supervisor", methods=['GET'])
+def add_student_under_supervisor():
     if 'supervisor_id' in session:
         supervisor_id = session['supervisor_id']
         student_id = request.form['student_id']
