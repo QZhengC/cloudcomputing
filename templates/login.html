@@ -238,17 +238,29 @@
         <h2>Meet Our Team</h2>
         <h4>Portfolios</h4>
         <div class="team-members-container">
-            <a href="{{ url_for('portfolio_app.qz_portfolio') }}" class="team-member" target="_blank">Choong Qian Zheng</a>
-            <a href="{{ url_for('portfolio_app.wx_portfolio') }}" class="team-member" target="_blank">Kung Wei Xin</a>
-            <a href="{{ url_for('portfolio_app.jl_portfolio') }}" class="team-member" target="_blank">Neo Jun Lin</a>
-            <a href="{{ url_for('portfolio_app.wh_portfolio') }}" class="team-member" target="_blank">Fong Wei Hao</a>
-            <a href="{{ url_for('portfolio_app.zh_portfolio') }}" class="team-member" target="_blank">Goh Ze Han</a>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='qz_profile.jpg') }}" alt="Choong Qian Zheng">
+                <a href="{{ url_for('portfolio_app.qz_portfolio') }}" target="_blank">Choong Qian Zheng</a>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='wx_profile.jpg') }}" alt="Kung Wei Xin">
+                <a href="{{ url_for('portfolio_app.wx_portfolio') }}" target="_blank">Kung Wei Xin</a>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='jl_profile.jpg') }}" alt="Neo Jun Lin">
+                <a href="{{ url_for('portfolio_app.jl_portfolio') }}" target="_blank">Neo Jun Lin</a>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='wh_profile.jpg') }}" alt="Fong Wei Hao">
+                <a href="{{ url_for('portfolio_app.wh_portfolio') }}" target="_blank">Fong Wei Hao</a>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='zh_profile.jpg') }}" alt="Goh Ze Han">
+                <a href="{{ url_for('portfolio_app.zh_portfolio') }}" target="_blank">Goh Ze Han</a>
+            </div>
         </div>
     </div>
     
-
-
-
     <script>
         var popOut1 = document.getElementById('adminLogin');
         var popOut2 = document.getElementById('employerLogin');
