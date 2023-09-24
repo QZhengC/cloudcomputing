@@ -34,7 +34,7 @@
     </table>
 
     <form action="/add-student-under-supervisor" method="POST" enctype="multipart/form-data">
-        <label class="form-label" for="student_id">Student ID: </label>
+        <label class="form-label" for="student_id">Add student under your supervision: </label>
         <input class="form-input" type="number" id="student_id" name="student_id" placeholder="STUDENT ID" required>
         <button class="form-button" type="submit">SUBMIT</button>
     </form>
@@ -51,13 +51,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for studentz in studentSupervisor %}
+            {% for studentSupervisor in studentSupervisor %}
             <tr>
-                <td>{{ studentz.student_id }}</td>
-                <td>{{ studentz.supervisor_id }}</td>
-                <td>{{ studentz.last_name }}</td>
-                <td>{{ studentz.phone_number }}</td>
-                <td>{{ studentz.email }}</td>
+                <td>{{ studentSupervisor.student_id }}</td>
+                <td>{{ studentSupervisor.supervisor_id }}</td>
+                <td>{{ studentSupervisor.last_name }}</td>
+                <td>{{ studentSupervisor.phone_number }}</td>
+                <td>{{ studentSupervisor.email }}</td>
             </tr>
             {% endfor %}
         </tbody>
