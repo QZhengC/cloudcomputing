@@ -51,7 +51,7 @@ def supervisor_login():
         return redirect(url_for('main_app.home'))
 
 
-@tutor_app.route("/view-student", methods=['GET'])
+@tutor_app.route("/view-all-student", methods=['GET'])
 def view_all_students():
     if 'supervisor_id' in session:
         cursor = db_conn.cursor()
