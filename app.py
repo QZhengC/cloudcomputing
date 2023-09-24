@@ -2,6 +2,7 @@ from flask import Flask
 from studentInfo import student_app
 from portfolio import portfolio_app
 from adminInfo import admin_app
+from tutorInfo import tutor_app
 from main import main_app
 from employerInfo import employer_app
 from flask_session import Session
@@ -20,6 +21,7 @@ app.register_blueprint(portfolio_app)
 app.register_blueprint(student_app)
 app.register_blueprint(admin_app)
 app.register_blueprint(employer_app)
+app.register_blueprint(tutor_app)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
