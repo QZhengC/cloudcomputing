@@ -71,9 +71,36 @@
                 style="width:20%;">Employer</button></a><br>
         <a><button onclick="document.getElementById('studentLogin').style.display='block'"
                 style="width:20%;">Student</button></a><br>
+        <a><button onclick="document.getElementById('tutorLogin').style.display='block'"
+                style="width:20%;">Student</button></a><br>
     </div>
 
     <div id="adminLogin" class="popOut">
+
+        <form class="popOut-content animate" action="/adminLogin" method="POST">
+            <h1 class="center">Admin Login</h1>
+            <div class="popOut-imgcontainer">
+                <img src="{{url_for('static', filename='adminAvatar.png')}}" width="20%" height="20%" />
+            </div>
+            <div class="popOut-container">
+                <label for="admin_id"><b>Username</b></label><br>
+                <input type="text" placeholder="Username" id="admin_id" name="admin_id" required><br><br>
+
+                <label for="admin_password"><b>Password</b></label><br>
+                <input type="password" placeholder="Password" id="admin_password" name="admin_password" required><br>
+
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </div>
+            <div class="popOut-container"></div>
+            <button type="button" onclick="document.getElementById('adminLogin').style.display='none'"
+                style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
+            <button type="submit"
+                style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
+    </div>
+    </form>
+    </div>
+
+    <div id="tutorLogin" class="popOut">
 
         <form class="popOut-content animate" action="/adminLogin" method="POST">
             <h1 class="center">Admin Login</h1>
@@ -256,24 +283,30 @@
         <h4>Portfolios</h4>
         <div class="team-members-container">
             <div class="team-member">
-                <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Choong Qian Zheng" class="profile-image">
-                <a href="{{ url_for('portfolio_app.qz_portfolio') }}" target="_blank" class="team-member-name">Choong Qian Zheng</a>
+                <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Choong Qian Zheng"
+                    class="profile-image">
+                <a href="{{ url_for('portfolio_app.qz_portfolio') }}" target="_blank" class="team-member-name">Choong
+                    Qian Zheng</a>
             </div>
             <div class="team-member">
                 <img src="{{ url_for('static', filename='wx_profile.png') }}" alt="Kung Wei Xin" class="profile-image">
-                <a href="{{ url_for('portfolio_app.wx_portfolio') }}" target="_blank" class="team-member-name">Kung Wei Xin</a>
+                <a href="{{ url_for('portfolio_app.wx_portfolio') }}" target="_blank" class="team-member-name">Kung Wei
+                    Xin</a>
             </div>
             <div class="team-member">
                 <img src="{{ url_for('static', filename='jl_profile.png') }}" alt="Neo Jun Lin" class="profile-image">
-                <a href="{{ url_for('portfolio_app.jl_portfolio') }}" target="_blank" class="team-member-name">Neo Jun Lin</a>
+                <a href="{{ url_for('portfolio_app.jl_portfolio') }}" target="_blank" class="team-member-name">Neo Jun
+                    Lin</a>
             </div>
             <div class="team-member">
                 <img src="{{ url_for('static', filename='wh_profile.png') }}" alt="Fong Wei Hao" class="profile-image">
-                <a href="{{ url_for('portfolio_app.wh_portfolio') }}" target="_blank" class="team-member-name">Fong Wei Hao</a>
+                <a href="{{ url_for('portfolio_app.wh_portfolio') }}" target="_blank" class="team-member-name">Fong Wei
+                    Hao</a>
             </div>
             <div class="team-member">
                 <img src="{{ url_for('static', filename='zh_profile.png') }}" alt="Goh Ze Han" class="profile-image">
-                <a href="{{ url_for('portfolio_app.zh_portfolio') }}" target="_blank" class="team-member-name">Goh Ze Han</a>
+                <a href="{{ url_for('portfolio_app.zh_portfolio') }}" target="_blank" class="team-member-name">Goh Ze
+                    Han</a>
             </div>
         </div>
     </div>
