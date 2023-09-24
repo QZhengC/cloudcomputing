@@ -46,6 +46,10 @@
             padding-top: 20px;
         }
 
+        .education-section {
+            text-align: center;
+        }
+
         .contact-info {
             text-align: center;
             margin-top: 10px;
@@ -63,6 +67,24 @@
             /* Adjust font size as needed */
             color: #777;
             margin: 0;
+        }
+
+        /* Added CSS for the two-column layout */
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            flex: 1;
+            text-align: left;
+            /* Align text to the left */
+        }
+
+        /* Adjust font size for job titles */
+        .job-title {
+            font-size: 18px;
+            /* You can change the size as needed */
         }
     </style>
 </head>
@@ -95,35 +117,74 @@
         <div class="section">
             <h2>About Me</h2>
             <p>As a data-driven professional with a solid foundation in data analysis and advanced expertise in data
-                science, I bring a unique blend of skills and experience to the table. With two years of dedicated
-                service as a Junior Data Analyst and an additional two years as a Data Scientist, I have honed my
-                abilities in data collection, preprocessing, analysis, and interpretation, while also developing
+                science, I bring a unique blend of skills and experience to thetable. With two years of dedicated
+                service as a <strong>Junior Data Analyst</strong> and an additional two years as a <strong>Data
+                    Scientist</strong>, I have honed my
+                abilities in data collection,preprocessing, analysis, and interpretation, while also developing
                 proficiency in a range of technical tools and techniques.</p>
         </div>
 
         <div class="section">
             <h2>Education</h2>
-            <p>Bachelor of Computer Science (Honours) in Data Science<br>TUNKU ABDUL RAHMAN UNIVERSITY OF MANAGEMENT AND TECHNOLOGY (TARUMT)<br> Graduated: May 2018</p>
+            <p class="education-section">Bachelor of Computer Science (Honours) in Data Science<br><br>TUNKU ABDUL
+                RAHMAN UNIVERSITY OF MANAGEMENT AND TECHNOLOGY (TARUMT)<br><br>Graduated: May 2018</p>
         </div>
 
         <div class="section">
             <h2>Technical & Personal Skills</h2>
-            <p>Python and R for data analysis and modeling.<br> Soft Skills: Teamwork, Communication,
-                Problem-Solving</p>
+            <div class="two-column">
+                <div class="column">
+                    <ul>
+                        <li>Python and R for data analysis and modeling.</li><br>
+                        <li>NLP techniques for text analysis and sentiment analysis.</li><br>
+                        <li>Expertise in tools like Matplotlib, Seaborn, Tableau, or Power BI</li><br>
+                        <li>Developing and implementing machine learning models</li><br>
+                        <li>Knowledge of SQL and NoSQL databases</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li>Effective verbal and written communication</li><br>
+                        <li>Quick learner who readily adapts to new environments, technologies, and roles</li><br>
+                        <li>Exceptional time management skills, consistently meeting deadlines while efficiently
+                            managing multiple tasks.</li><br>
+                        <li>Collaborative team player</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2>Experience</h2>
-            <p>Software Developer Intern<br> XYZ Tech Solutions<br> May 20XX - August 20XX<br> - Worked on
-                developing
-                web applications</p>
+            <h2>Work Experience</h2>
+            <p><strong class="job-title"> Data Analyst</strong><br><br> Avinity Analytics , Petaling Jaya &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; Jul 2018 - Dec
+                2020<br>
+                <br> Perform basic data analysis and statistical tasks, include creating descriptive statistics,
+                generating simple visualizations, and identifying trends or patterns in the data.
+            </p><br>
+
+            <p><strong class="job-title">Data Scientist</strong><br><br> ExxonMobil , Cyberjaya &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;&nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; Jan 2021 - Aug
+                2023<br>
+                <br> Work with computational scientists, data scientists, engineers, software developers, and
+                geoscientists across the globe to develop, deliver and apply computational tools, models, or software to
+                support our business
+            </p>
         </div>
 
         <div class="section">
             <h2>Technical Projects</h2>
-            <p>Project 1: E-commerce Website<br> - Developed a fully functional e-commerce website using
-                Django<br> Project 2: Mobile App Development<br> - Created a mobile app for Android and iOS
-                platforms</p>
+            <p><strong class="job-title">Project 1: Customer Segmentation Analysis</strong><br><br> Conducted customer segmentation analysis using clustering
+                techniques to identify distinct customer groups based on their purchasing behavior.
+                Utilized Python and libraries like Scikit-Learn to perform the analysis.
+                Presented findings to the marketing team, leading to more targeted marketing campaigns and increased
+                customer engagement.<br><br> <strong class="job-title">Project 2: Recommendation Engine Enhancement</strong><br><br> Enhanced an existing
+                recommendation engine for an e-commerce platform by incorporating advanced collaborative filtering
+                techniques.
+                Conducted A/B testing to evaluate the performance improvements.
+                Increased click-through rates by 10%, resulting in higher sales and customer satisfaction.</p>
         </div>
     </div>
 </body>

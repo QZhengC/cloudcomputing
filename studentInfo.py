@@ -37,7 +37,6 @@ def student_signUp_page():
 @student_app.route("/signup", methods=['POST'])
 def signUp():
     student_id = request.form['student_id']
-    supervisor_id = request.form['supervisor_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     phone_number = request.form['phone_number']
@@ -54,8 +53,8 @@ def signUp():
 
     try:
         # SQL INSERT query
-        insert_query = "INSERT INTO students (student_id, supervisor_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, (student_id, supervisor_id, first_name, last_name, phone_number, email,
+        insert_query = "INSERT INTO students (student_id, first_name, last_name, phone_number, email, password, current_address, course_of_study, year_intake, skills_learned, cgpa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (student_id, first_name, last_name, phone_number, email,
                        password, current_address, course_of_study, year_intake, skills_learned, cgpa))
         db_conn.commit()
         stud_name = "" + first_name + " " + last_name
