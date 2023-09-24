@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Error Deteced</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .message {
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .additional-text {
+            font-size: 20px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            background: grey;
+            height: 45px;
+            width: 200px;
+            color: white;
+            font-style: oblique;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message">Error Deteced</div>
+    <div class="additional-text">Encountered Error, click the button below to back to menu</div>
+    <br>
+    <form action="/signup-output" autocomplete="on" method="GET">
+        <button class="back-button">Back to Dashboard</button>
+    </form>
+</body>
+
+</html>
