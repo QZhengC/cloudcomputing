@@ -58,8 +58,10 @@ def view_all_students():
         query = "SELECT * FROM students"
         cursor.execute(query)
         student = cursor.fetchall()
+
         if not student:
             return "No Students Found"
+
         students = []
         for row in student:
             student_dict = {
