@@ -102,17 +102,18 @@ def add_student_under_supervisor():
         student_id = request.form['student_id']
         cursor = db_conn.cursor()
         try:
-            chk_student = "SELECT supervisor_id FROM students WHERE student_id = %s"
-            cursor.execute(chk_student, (student_id))
+            # Check if the 'supervisor_id' in the student record is null
+            chk_student = "SELECT supervisor_id FROM students WHERE student_id = %s AND supervisor_id IS NULL"
+            cursor.execute(chk_student, (student_id,))
             check = cursor.fetchone()
-            if check == None:
-                return "student already have a supervisor"
-
-            else:
-                update_query = "UPDATE students SET supervisor_id = %s WHERE student_id =%s"
+            if check:
+                # Update the 'supervisor_id' only if it is null
+                update_query = "UPDATE students SET supervisor_id = %s WHERE student_id = %s"
                 cursor.execute(update_query, (supervisor_id, student_id))
                 db_conn.commit()
                 return redirect(url_for('tutor_app.supervisor_menu'))
+            else:
+                return "Student already has a supervisor"
         except Exception as e:
             db_conn.rollback()
             return str(e)
