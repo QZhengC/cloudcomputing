@@ -9,7 +9,6 @@
             background-color: #f2f2f2;
             text-align: center;
             padding: 20px;
-            margin: 0;
         }
 
         .portfolio-container {
@@ -19,20 +18,14 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             width: 80%;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center items horizontally */
         }
 
         .profile-picture {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-        }
-
-        .profile-info {
-            text-align: center;
-            margin-top: 20px; /* Add space between picture and info */
+            margin: 20px auto;
+            display: block;
         }
 
         h1 {
@@ -41,39 +34,35 @@
 
         h2 {
             color: #555;
-            margin-top: 10px;
         }
 
         p {
-            text-align: center;
-            margin: 0;
-            color: #777;
+            text-align: left;
         }
 
         .section {
             margin-top: 20px;
             border-top: 1px solid #ccc;
             padding-top: 20px;
-            text-align: left;
-            width: 80%; /* Limit the width of sections */
         }
 
-        /* Added styles for horizontal rule */
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 20px auto;
-            width: 100%; /* Make horizontal rule full width */
+        .contact-info {
+            text-align: center;
+            margin-top: 10px;
         }
 
-        /* Added styles for links */
-        a {
-            color: #0078d4; /* Blue link color */
-            text-decoration: none;
+        .contact-info h2 {
+            font-size: 16px;
+            /* Adjust font size as needed */
+            color: #555;
+            margin-top: 5px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .contact-info p {
+            font-size: 14px;
+            /* Adjust font size as needed */
+            color: #777;
+            margin: 0;
         }
     </style>
 </head>
@@ -81,44 +70,45 @@
 <body>
     <div class="portfolio-container">
         <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Profile Picture" class="profile-picture">
-        <div class="profile-info">
-            <h1>Choong Qian Zheng</h1>
-            <div class="contact-info">
-                <p>New York, NY</p>
-                <p>(123) 456-7890</p>
-                <p>john.doe@example.com</p>
-            </div>
+        <div class="contact-info">
+            <table align="center">
+                <tr>
+                    <td><p>New York, NY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
+                    <td><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (123) 456-7890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
+                    <td><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; john.doe@example.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p></td>
+                </tr>
+            </table>
         </div>
-    </div>
+    
+        <div class="section">
+            <h2>About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ligula eu magna pretium blandit.</p>
+        </div>
 
-    <div class="section">
-        <h2>About Me</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ligula eu magna pretium blandit.</p>
-    </div>
+        <div class="section">
+            <h2>Education</h2>
+            <p>Bachelor of Science in Computer Science<br> University of Example<br> Graduated: May 20XX</p>
+        </div>
 
-    <div class="section">
-        <h2>Education</h2>
-        <p>Bachelor of Science in Computer Science<br> University of Example<br> Graduated: May 20XX</p>
-    </div>
+        <div class="section">
+            <h2>Technical & Personal Skills</h2>
+            <p>Programming Languages: Java, Python, JavaScript<br> Soft Skills: Teamwork, Communication,
+                Problem-Solving</p>
+        </div>
 
-    <div class="section">
-        <h2>Technical & Personal Skills</h2>
-        <p>Programming Languages: Java, Python, JavaScript<br> Soft Skills: Teamwork, Communication,
-            Problem-Solving</p>
-    </div>
+        <div class="section">
+            <h2>Experience</h2>
+            <p>Software Developer Intern<br> XYZ Tech Solutions<br> May 20XX - August 20XX<br> - Worked on
+                developing
+                web applications</p>
+        </div>
 
-    <div class="section">
-        <h2>Experience</h2>
-        <p>Software Developer Intern<br> XYZ Tech Solutions<br> May 20XX - August 20XX<br> - Worked on
-            developing
-            web applications</p>
-    </div>
-
-    <div class="section">
-        <h2>Technical Projects</h2>
-        <p>Project 1: E-commerce Website<br> - Developed a fully functional e-commerce website using
-            Django<br> Project 2: Mobile App Development<br> - Created a mobile app for Android and iOS
-            platforms</p>
+        <div class="section">
+            <h2>Technical Projects</h2>
+            <p>Project 1: E-commerce Website<br> - Developed a fully functional e-commerce website using
+                Django<br> Project 2: Mobile App Development<br> - Created a mobile app for Android and iOS
+                platforms</p>
+        </div>
     </div>
 </body>
 
