@@ -54,30 +54,45 @@ def supervisor_login():
 @tutor_app.route("/view-all-student", methods=['GET'])
 def view_all_students():
     if 'supervisor_id' in session:
+        supervisor_id = session['supervisor_id']
         cursor = db_conn.cursor()
         query = "SELECT * FROM students"
         cursor.execute(query)
         student = cursor.fetchall()
 
-        if not student:
-            return "No Students Found"
-
         students = []
         for row in student:
             student_dict = {
                 "student_id": row[0],
+                "supervisor_id": row[1],
                 "phone_number": row[4],
                 "last_name": row[3],
                 "email": row[5]
             }
             students.append(student_dict)
+        if students is None:
+            students.append("No rows")
 
-        return render_template("supervisorMenu.html", students=students)
+        select_student_supervisor = "SELECT * FROM student WHERE supervisor_id = %s"
+        cursor.execute(select_student_supervisor, (supervisor_id))
+        student_under_supervisor = cursor.fetchall()
+
+        studentSupervisor = []
+        for row in student_under_supervisor:
+            studentSupervisor = {
+                "student_id": row[0],
+                "supervisor_id": row[1],
+                "phone_number": row[4],
+                "last_name": row[3],
+                "email": row[5]
+            }
+
+        return render_template("supervisorMenu.html", students=students, studentSupervisor=studentSupervisor)
     else:
         return redirect(url_for('main_app.home'))
 
 
-@tutor_app.route("/add-student-under-supervisor", methods=['GET'])
+@tutor_app.route("/add-student-under-supervisor", methods=['POST'])
 def add_student_under_supervisor():
     if 'supervisor_id' in session:
         supervisor_id = session['supervisor_id']
@@ -93,7 +108,6 @@ def add_student_under_supervisor():
                 db_conn.commit()
             else:
                 render_template('studentHaveSupervisor.html')
-
         except Exception as e:
             db_conn.rollback()
             return str(e)
