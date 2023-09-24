@@ -390,7 +390,7 @@ def student_view_jobs():
                     "job_salary": row[5],
                 }
                 jobs.append(job)
-
+                
             return render_template('studentViewJob.html', jobs=jobs)
 
         except Exception as e:
