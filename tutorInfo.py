@@ -109,6 +109,7 @@ def add_student_under_supervisor():
                 update_query = "UPDATE students SET supervisor_id = %s WHERE student_id =%s"
                 cursor.execute(update_query, (supervisor_id, student_id))
                 db_conn.commit()
+                return redirect(url_for('tutor_app.supervisor_menu'))
             else:
                 render_template('studentHaveSupervisor.html')
         except Exception as e:
