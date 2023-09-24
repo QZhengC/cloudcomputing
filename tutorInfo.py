@@ -30,13 +30,13 @@ def supervisor_login():
     if request.method == 'POST':
         supervisor_id = request.form['supervisor_id']
         supervisor_password = request.form['supervisor_password']
+
         cursor = db_conn.cursor()
         try:
             query = "SELECT * FROM supervisor WHERE supervisor_id = %s AND supervisor_password = %s"
             cursor.execute(query, (supervisor_id, supervisor_password))
             tutor = cursor.fetchone()
             if tutor:
-
                 session['supervisor_id'] = supervisor_id
                 return redirect(url_for('tutor_app.supervisor_menu'))
 
@@ -72,7 +72,7 @@ def view_all_students():
 
         return render_template("supervisorMenu.html", students=students)
     else:
-        return render_template()
+        return redirect(url_for('main_app.home'))
 
 
 @tutor_app.route("/add-student", methods=['GET'])
