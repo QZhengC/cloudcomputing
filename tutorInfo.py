@@ -111,7 +111,7 @@ def add_student_under_supervisor():
                 db_conn.commit()
                 return redirect(url_for('tutor_app.supervisor_menu'))
             else:
-                render_template('studentHaveSupervisor.html')
+                return render_template('studentHaveSupervisor.html')
         except Exception as e:
             db_conn.rollback()
             return str(e)
