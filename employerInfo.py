@@ -169,6 +169,8 @@ def emloyer_add_job():
             return str(e)
         finally:
             cursor.close()
+    else:
+        return redirect(url_for('main_app.home'))
 
 
 # EDIT JOB -> REDIRECT TO DISPLAY
@@ -286,7 +288,7 @@ def update_job():
         finally:
             cursor.close()
     else:
-        return redirect(url_for('employer_app.employer_login_page'))
+        return redirect(url_for('main_app.home'))
 
 
 @employer_app.route("/delete-job", methods=['POST'])
@@ -307,7 +309,7 @@ def delete_job():
         finally:
             cursor.close()
     else:
-        return redirect(url_for('employer_app.employer_login_page'))
+        return redirect(url_for('main_app.home'))
 
 
 if __name__ == '__main__':
