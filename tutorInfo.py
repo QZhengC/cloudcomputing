@@ -54,7 +54,6 @@ def supervisor_login():
 @tutor_app.route("/view-all-student", methods=['GET'])
 def view_all_students():
     if 'supervisor_id' in session:
-        supervisor_id = session['supervisor_id']
         cursor = db_conn.cursor()
         query = "SELECT * FROM students"
         cursor.execute(query)
@@ -73,26 +72,9 @@ def view_all_students():
         if students is None:
             students.append("No rows")
 
-        select_student_supervisor = "SELECT * FROM students WHERE supervisor_id = %s"
-        cursor.execute(select_student_supervisor, (supervisor_id))
-        student_under_supervisor = cursor.fetchall()
-
-        studentSupervisor = []
-        for row in student_under_supervisor:
-            studentSupervisor = {
-                "student_id": row[0],
-                "supervisor_id": row[1],
-                "phone_number": row[4],
-                "last_name": row[3],
-                "email": row[5]
-            }
-        if studentSupervisor is None:
-            studentSupervisor.append(
-                'No Students are currently under your supervision')
-
         return render_template("supervisorMenu.html", students=students, studentSupervisor=studentSupervisor)
     else:
-        return redirect(url_for('main_app.home'))
+        return redirect(url_for('main_app.backhome'))
 
 
 @tutor_app.route("/add-student-under-supervisor", methods=['POST'])
@@ -121,6 +103,51 @@ def add_student_under_supervisor():
             cursor.close()
     else:
         return redirect(url_for('main_app.home'))
+
+
+@tutor_app.route("/display-student-under-supervisor", methods=['GET'])
+def display_student_under_supervisor():
+    if 'supervisor_id' in session:
+        cursor = db_conn.cursor()
+        supervisor_id = session['supervisor_id']
+        select_student_supervisor = "SELECT * FROM students WHERE supervisor_id = %s"
+        cursor.execute(select_student_supervisor, (supervisor_id))
+        student_under_supervisor = cursor.fetchall()
+
+        studentSupervisor = []
+        for row in student_under_supervisor:
+            studentSupervisor = {
+                "student_id": row[0],
+                "supervisor_id": row[1],
+                "phone_number": row[4],
+                "last_name": row[3],
+                "email": row[5]
+            }
+        if studentSupervisor is None:
+            studentSupervisor.append(
+                'No Students are currently under your supervision')
+        return render_template('deleteStudentUnderSupervisor.html', studentSupervisor=studentSupervisor)
+    else:
+        return redirect(url_for('main_app.backhome'))
+
+
+@tutor_app.route("/delete-student-under-supervisor", methods=['POST'])
+def delete_student_under_supervisor():
+    if 'supervisor_id' in session:
+        student_id = request.form['student_id']
+        supervisor_id = session['supervisor_id']
+        cursor = db_conn.cursor()
+        try:
+            query = "select * from students where supervisor_id = %s AND student_id = %s"
+            cursor.execute(query, (supervisor_id, student_id))
+            db_conn.commit()
+            return redirect(url_for('tutor_app.supervisor_menu'))
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('main_app.backhome'))
 
 
 if __name__ == '__main__':
