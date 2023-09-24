@@ -139,8 +139,8 @@ def delete_student_under_supervisor():
         supervisor_id = session['supervisor_id']
         cursor = db_conn.cursor()
         try:
-            query = "select * from students where supervisor_id = %s AND student_id = %s"
-            cursor.execute(query, (supervisor_id, student_id))
+            delete_query = "UPDATE students SET supervisor_id = NULL WHERE student_id = %s"
+            cursor.execute(delete_query, (student_id))
             db_conn.commit()
             return redirect(url_for('tutor_app.supervisor_menu'))
         except Exception as e:
