@@ -75,32 +75,33 @@
                 style="width:20%;">Tutor</button></a><br>
     </div>
 
-    <div id="adminLogin" class="popOut">
+    <div id="tutorLogin" class="popOut">
 
-        <form class="popOut-content animate" action="/adminLogin" method="POST">
-            <h1 class="center">Admin Login</h1>
+        <form class="popOut-content animate" action="/tutor-login" method="POST">
+            <h1 class="center">Tutor Login</h1>
             <div class="popOut-imgcontainer">
-                <img src="{{url_for('static', filename='adminAvatar.png')}}" width="20%" height="20%" />
+                <img src="{{url_for('static', filename='employerAvatar.png')}}" width="20%" height="20%" />
             </div>
             <div class="popOut-container">
-                <label for="admin_id"><b>Username</b></label><br>
-                <input type="text" placeholder="Username" id="admin_id" name="admin_id" required><br><br>
+                <label for="tutor_id"><b>Tutor ID</b></label><br>
+                <input type="text" placeholder="Tutor ID" id="tutor_id" name="tutor_id" required><br><br>
 
-                <label for="admin_password"><b>Password</b></label><br>
-                <input type="password" placeholder="Password" id="admin_password" name="admin_password" required><br>
+                <label for="tutor_password"><b>Password</b></label><br>
+                <input type="password" placeholder="Password" id="tutor_password" name="tutor_password" required><br>
 
                 <input type="checkbox" checked="checked" name="remember"> Remember me
             </div>
             <div class="popOut-container"></div>
-            <button type="button" onclick="document.getElementById('adminLogin').style.display='none'"
+            <button type="button" onclick="document.getElementById('employerLogin').style.display='none'"
                 style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
             <button type="submit"
                 style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
+
     </div>
     </form>
     </div>
 
-    <div id="tutorLogin" class="popOut">
+    <div id="adminLogin" class="popOut">
 
         <form class="popOut-content animate" action="/adminLogin" method="POST">
             <h1 class="center">Admin Login</h1>
