@@ -120,7 +120,7 @@ def student_login():
 
         else:
             # Authentication failed, you can redirect to an error page or show an error message
-            return render_template('login.html')
+            return render_template('notLoggedIn.html')
 
     except Exception as e:
         # Handle exceptions here, e.g., database connection issues
@@ -147,7 +147,7 @@ def view_and_edit(student_id):
 
             else:
                 # Handle the case where the student is not found
-                return render_template('studentNotFound.html')
+                return render_template('errorNotFound.html')
 
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
@@ -157,7 +157,7 @@ def view_and_edit(student_id):
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 
 @student_app.route("/view/<student_id>", methods=['GET'])
@@ -178,7 +178,7 @@ def view(student_id):
 
             else:
                 # Handle the case where the student is not found
-                return render_template('studentNotFound.html')
+                return render_template('errorNotFound.html')
 
         except Exception as e:
             # Handle exceptions here, e.g., database connection issues
@@ -188,7 +188,7 @@ def view(student_id):
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 from flask import render_template, url_for, redirect
 
@@ -209,7 +209,7 @@ def view_student():
 
             if not student_data:
                 # Handle the case where the student doesn't exist
-                return render_template('student_not_found.html')
+                return render_template('errorNotFound.html')
 
             # Convert the result into a dictionary for easier data access
             student = {
@@ -318,10 +318,10 @@ def update_student():
                 cursor.close()
         else:
             # If the student_id in the session doesn't match the one in the form, handle accordingly
-            return redirect(url_for('student_app.student_login_page'))
+            return render_template('errorNotFound.html')
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_app.student_login_page'))
+        return render_template('notLoggedIn.html')
     
 @student_app.route("/upload-resume", methods=['POST'])
 def upload_resume():
@@ -363,7 +363,7 @@ def upload_resume():
 
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 
 @student_app.route("/student_view_jobs")
@@ -401,8 +401,8 @@ def student_view_jobs():
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
-
+        return render_template('notLoggedIn.html')
+    
 @student_app.route("/apply-for-job", methods=['POST'])
 def apply_for_job():
     if 'student_id' in session:
@@ -449,7 +449,7 @@ def apply_for_job():
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 @student_app.route("/student-view-applied")
 def student_view_applied():
@@ -489,7 +489,7 @@ def student_view_applied():
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 @student_app.route("/logout")
 def logout():
@@ -521,7 +521,7 @@ def cancel_application():
             else:
                 # Application does not exist or does not belong to the student
                 # You can provide a message indicating that the application could not be canceled
-                return "Unable to cancel the application. Please make sure the application exists and belongs to you."
+                return render_template('errorNotFound.html')
 
         except Exception as e:
             db_conn.rollback()
@@ -530,7 +530,7 @@ def cancel_application():
             cursor.close()
     else:
         # If the student is not logged in, redirect them to the login page
-        return redirect(url_for('student_login_page'))
+        return render_template('notLoggedIn.html')
 
 if __name__ == '__main__':
     student_app.run(host='0.0.0.0', port=80, debug=True)
