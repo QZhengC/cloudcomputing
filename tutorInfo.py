@@ -106,8 +106,8 @@ def add_student_under_supervisor():
             cursor.execute(chk_student, (student_id))
             check = cursor.fetchone()
             if check is None:
-                update_query = "UPDATE students SET supervisor_id = %s"
-                cursor.execute(update_query, (supervisor_id))
+                update_query = "UPDATE students SET supervisor_id = %s WHERE student_id =%s"
+                cursor.execute(update_query, (supervisor_id, student_id))
                 db_conn.commit()
             else:
                 render_template('studentHaveSupervisor.html')
