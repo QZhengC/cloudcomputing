@@ -35,39 +35,30 @@
     </div>
 
     <div class="rightBoard">
-        <h1>Employer Tab</h1>
+        <h1>Supervisor Tab</h1>
         <div>
-        <a><button onclick="document.getElementById('adminAdd').style.display='block'" style="width:100%;">Add Employer</button></a><br>
-        <a><button onclick="document.getElementById('adminUpdate').style.display='block'" style="width:100%;">Update Employer</button></a><br>
-        <a><button onclick="document.getElementById('adminDelete').style.display='block'" style="width:100%;">Delete Employer</button></a><br>
+        <a><button onclick="document.getElementById('adminAdd').style.display='block'" style="width:100%;">Add Supervisor</button></a><br>
+        <a><button onclick="document.getElementById('adminUpdate').style.display='block'" style="width:100%;">Update Supervisor</button></a><br>
+        <a><button onclick="document.getElementById('adminDelete').style.display='block'" style="width:100%;">Delete Supervisor</button></a><br>
         </div>
     </div>
 
     <div id="adminAdd" class="popOut">
 
-        <form class="popOut-content animate" action="/admin-add-employer" method="POST">
-            <h1 class="center">Add Employer</h1>
+        <form class="popOut-content animate" action="/admin-add-tutor" method="POST">
+            <h1 class="center">Add Supervisor</h1>
             <div class="popOut-container">
-                <label for="emp_id"><b>Employer ID</b></label><br>
-                <input type="text" placeholder="Employer ID" id="emp_id" name="emp_id" required><br><br>
+                <label for="sup_id"><b>Supervisor ID</b></label><br>
+                <input type="text" placeholder="Supervisor ID" id="sup_id" name="sup_id" required><br><br>
 
-                <label for="emp_name"><b>Company Name</b></label><br>
-                <input type="text" placeholder="Company Name" id="emp_name" name="emp_name" required><br><br>
+                <label for="sup_name"><b>Supervisor Name</b></label><br>
+                <input type="text" placeholder="Supervisor Name" id="sup_name" name="sup_name" required><br><br>
 
-                <label for="emp_num"><b>Company Number</b></label><br>
-                <input type="text" placeholder="Company Number" id="emp_num" name="emp_num" required><br><br>
-
-                <label for="emp_mail"><b>Company Email</b></label><br>
-                <input type="text" placeholder="Company Email" id="emp_mail" name="emp_mail" required><br><br>
-
-                <label for="emp_password"><b>Password</b></label><br>
-                <input type="password" placeholder="Password" id="emp_password" name="emp_password" required><br><br>
-
-                <label for="emp_addr"><b>Address</b></label><br>
-                <input type="text" placeholder="Address" id="emp_addr" name="emp_addr" required><br><br>
+                <label for="sup_password"><b>Password</b></label><br>
+                <input type="password" placeholder="Password" id="sup_password" name="sup_password" required><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Add</button>
@@ -77,14 +68,14 @@
 
     <div id="adminUpdate" class="popOut">
 
-        <form class="popOut-content animate" action="/admin-findu-employer" method="POST">
-            <h1 class="center">Update Employer</h1>
+        <form class="popOut-content animate" action="/admin-findu-tutor" method="POST">
+            <h1 class="center">Update Supervisor</h1>
             <div class="popOut-container">
-                <label for="emp_id"><b>Employer ID</b></label><br>
-                <input type="text" placeholder="Employer ID" id="emp_id" name="emp_id" required><br><br>
+                <label for="sup_id"><b>Supervisor ID</b></label><br>
+                <input type="text" placeholder="Supervisor ID" id="sup_id" name="sup_id" required><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
@@ -94,14 +85,14 @@
 
     <div id="adminDelete" class="popOut">
 
-        <form class="popOut-content animate" action="/admin-findd-employer" method="POST">
-            <h1 class="center">Delete Employer</h1>
+        <form class="popOut-content animate" action="/admin-findd-tutor" method="POST">
+            <h1 class="center">Delete Supervisor</h1>
             <div class="popOut-container">
-                <label for="emp_id"><b>Employer ID</b></label><br>
-                <input type="text" placeholder="Employer ID" id="emp_id" name="emp_id" required><br><br>
+                <label for="sup_id"><b>Supervisor ID</b></label><br>
+                <input type="text" placeholder="Supervisor ID" id="sup_id" name="sup_id" required><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Find</button>
@@ -112,29 +103,20 @@
     {% if obj1 == "uFindSuccess": %}
     <div id="finduSuccess" class="popOut" style="display: unset;">
 
-        <form class="popOut-content animate" action="/admin-update-employer" method="POST">
-            <h1 class="center">Updating Employer {{att1}}</h1>
+        <form class="popOut-content animate" action="/admin-update-tutor" method="POST">
+            <h1 class="center">Updating Supervisor {{att1}}</h1>
             <div class="popOut-container">
-                <label for="emp_id"><b>Employer ID</b></label><br>
-                <input type="text" value="{{att1}}" id="emp_id" name="emp_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <label for="sup_id"><b>Supervisor ID</b></label><br>
+                <input type="text" value="{{att1}}" id="sup_id" name="sup_id" required style="background-color: lightgrey;" readonly><br><br>
 
-                <label for="emp_name"><b>Company Name</b></label><br>
-                <input type="text" value="{{att2}}" id="emp_name" name="emp_name" required><br><br>
-                
-                <label for="emp_num"><b>Company Number</b></label><br>
-                <input type="text" value="{{att3}}" id="emp_num" name="emp_num" required><br><br>
+                <label for="sup_name"><b>Supervisor Name</b></label><br>
+                <input type="text" value="{{att2}}" id="sup_name" name="sup_name" required><br><br>
 
-                <label for="emp_mail"><b>Company Email</b></label><br>
-                <input type="text" value="{{att4}}" id="emp_mail" name="emp_mail" required><br><br>
-
-                <label for="emp_password"><b>Password</b></label><br>
-                <input type="password" value="{{att5}}" id="emp_password" name="emp_password" required><br><br>
-
-                <label for="emp_addr"><b>Address</b></label><br>
-                <input type="text" value="{{att6}}" id="emp_addr" name="emp_addr" required><br><br>
+                <label for="sup_password"><b>Password</b></label><br>
+                <input type="password" value="{{att3}}" id="sup_password" name="sup_password" required><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Update</button>
@@ -146,29 +128,20 @@
     {% if obj1 == "dFindSuccess": %}
     <div id="finddSuccess" class="popOut" style="display: unset;">
 
-        <form class="popOut-content animate" action="/admin-delete-employer" method="POST">
-            <h1 class="center">Deleting Employer {{att1}}</h1>
+        <form class="popOut-content animate" action="/admin-delete-tutor" method="POST">
+            <h1 class="center">Deleting Supervisor {{att1}}</h1>
             <div class="popOut-container">
-                <label for="emp_id"><b>Employer ID</b></label><br>
-                <input type="text" value="{{att1}}" id="emp_id" name="emp_id" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <label for="sup_id"><b>Supervisor ID</b></label><br>
+                <input type="text" value="{{att1}}" id="sup_id" name="sup_id" required style="background-color: lightgrey;" readonly><br><br>
 
-                <label for="emp_name"><b>Company Name</b></label><br>
-                <input type="text" value="{{att2}}" id="emp_name" name="emp_name" readonly="readonly" required style="background-color: lightgrey;"><br><br>
-                
-                <label for="emp_num"><b>Company Number</b></label><br>
-                <input type="text" value="{{att3}}" id="emp_num" name="emp_num" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <label for="sup_name"><b>Supervisor Name</b></label><br>
+                <input type="text" value="{{att2}}" id="sup_name" name="sup_name" required style="background-color: lightgrey;" readonly><br><br>
 
-                <label for="emp_mail"><b>Company Email</b></label><br>
-                <input type="text" value="{{att4}}" id="emp_mail" name="emp_mail" readonly="readonly" required style="background-color: lightgrey;"><br><br>
-
-                <label for="emp_password"><b>Password</b></label><br>
-                <input type="password" value="{{att5}}" id="emp_password" name="emp_password" readonly="readonly" required style="background-color: lightgrey;"><br><br>
-
-                <label for="emp_addr"><b>Address</b></label><br>
-                <input type="text" value="{{att6}}" id="emp_addr" name="emp_addr" readonly="readonly" required style="background-color: lightgrey;"><br><br>
+                <label for="sup_password"><b>Password</b></label><br>
+                <input type="password" value="{{att3}}" id="sup_password" name="sup_password" required style="background-color: lightgrey;" readonly><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Delete</button>
@@ -184,7 +157,7 @@
             <h1 class="center">Added Successfully</h1>
             <div class="popOut-container">
                 <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
             </div>
@@ -199,7 +172,7 @@
             <h1 class="center">Updated Successfully</h1>
             <div class="popOut-container">
                 <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
             </div>
@@ -214,7 +187,7 @@
             <h1 class="center">Deleted Successfully</h1>
             <div class="popOut-container"></div>
                 <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
             </div>
@@ -229,7 +202,7 @@
             <h1 class="center">Record Not Found</h1>
             <div class="popOut-container">
                 <button class="hiddenButton" type="button" style="height: 45px; width: 200px; margin-left: 2%;"></button>
-                <a href="{{ url_for('admin_app.admin_employer') }}">
+                <a href="{{ url_for('admin_app.admin_tutor') }}">
                     <button type="button" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Got it</button>
                 </a>
             </div>

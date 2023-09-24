@@ -19,6 +19,10 @@
                 <button class="leftButton">Employer</button>
             </a>
 
+            <a href="{{ url_for('admin_app.admin_tutor') }}">
+                <button class="leftButton">Tutor</button>
+            </a>
+
             <a href="{{ url_for('admin_app.admin_job') }}">
                 <button class="leftButton">Job</button>
             </a>
@@ -106,7 +110,7 @@
                 <input type="password" value="{{att2}}" id="admin_password" name="admin_password" required><br><br>
             </div>
             <div class="popOut-container">
-                <a href="{{ url_for('admin_app.admin_student') }}">
+                <a href="{{ url_for('admin_app.admin_admin') }}">
                     <button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
                 </a>
                 <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Update</button>
@@ -198,7 +202,7 @@
     {% endif %}
 
     {% if obj1 == "first": %}
-    <div id="findFailed" class="popOut" style="display: unset;">
+    <div id="first" class="popOut" style="display: unset;">
 
         <form class="popOut-content animate">
             <h1 class="center">Welcome {{att1}}</h1>
