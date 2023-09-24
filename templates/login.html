@@ -13,29 +13,37 @@
             border-radius: 10px;
             margin-top: 20px;
         }
-    
+
+        /* Style for the team members container */
+        .team-members-container {
+            text-align: center;
+            /* Center-align the content */
+        }
+
         /* Style for the team members */
         .team-member {
-            text-align: center;
             background-color: #ffffff;
             padding: 10px 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-right: 10px; /* Add spacing between team members */
-            display: inline-block; /* Display team members inline */
+            margin-right: 10px;
+            /* Add spacing between team members */
+            display: inline-block;
+            /* Display team members inline */
         }
-    
+
+
         /* Style for the team members container (table) */
         table {
             border-collapse: collapse;
         }
-    
+
         /* Add some margin to separate the team members from the header */
         h2 {
             margin-bottom: 10px;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -229,17 +237,16 @@
 
     <div class="meet-our-team">
         <h2>Meet Our Team</h2>
-        <table>
-            <tr>
-                <td><div class="team-member">John Doe</div></td>
-                <td><div class="team-member">Jane Smith</div></td>
-                <td><div class="team-member">Bob Johnson</div></td>
-                <td><div class="team-member">Emily Davis</div></td>
-                <td><div class="team-member">Michael Wilson</div></td>
-            </tr>
-        </table>
+        <div class="team-members-container">
+            <div class="team-member">John Doe</div>
+            <div class="team-member">Jane Smith</div>
+            <div class="team-member">Bob Johnson</div>
+            <div class="team-member">Emily Davis</div>
+            <div class="team-member">Michael Wilson</div>
+        </div>
     </div>
-    
+
+
     <script>
         var popOut1 = document.getElementById('adminLogin');
         var popOut2 = document.getElementById('employerLogin');
