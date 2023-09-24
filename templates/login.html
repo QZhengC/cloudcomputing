@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Style for the "Meet Our Team" section */
+        /* Style for the "Meet Our Team" section */
         .meet-our-team {
             text-align: center;
             background-color: #f2f2f2;
@@ -16,31 +17,29 @@
 
         /* Style for the team members container */
         .team-members-container {
-            text-align: center;
-            /* Center-align the content */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Style for the team members */
+        /* Style for the team members (links) */
         .team-member {
             background-color: #ffffff;
             padding: 10px 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-right: 10px;
-            /* Add spacing between team members */
             display: inline-block;
-            /* Display team members inline */
+            text-decoration: none;
+            /* Remove underlines */
+            color: #000;
+            /* Black text color */
         }
 
-
-        /* Style for the team members container (table) */
-        table {
-            border-collapse: collapse;
-        }
-
-        /* Add some margin to separate the team members from the header */
-        h2 {
-            margin-bottom: 10px;
+        /* Style for team member links on hover (optional) */
+        .team-member:hover {
+            background-color: #ccc;
+            /* Change background color on hover */
         }
     </style>
 
@@ -237,6 +236,7 @@
 
     <div class="meet-our-team">
         <h2>Meet Our Team</h2>
+        <h4>Portfolio</h4>
         <div class="team-members-container">
             <a href="john-doe-profile.html" class="team-member">Choong Qian Zheng</a>
             <a href="jane-smith-profile.html" class="team-member">Kung Wei Xin</a>
@@ -245,7 +245,7 @@
             <a href="michael-wilson-profile.html" class="team-member">Goh Ze Han</a>
         </div>
     </div>
-    
+
 
 
     <script>
