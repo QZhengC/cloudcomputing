@@ -9,182 +9,42 @@
 <body>
     <div class="center">
         <h1 class="center">Login</h1>
-            <a><button onclick="document.getElementById('adminLogin').style.display='block'" style="width:20%;">Admin</button></a><br>
-            <a><button onclick="document.getElementById('employerLogin').style.display='block'" style="width:20%;">Employer</button></a><br>
-            <a><button onclick="document.getElementById('studentLogin').style.display='block'" style="width:20%;">Student</button></a><br> 
+        <a><button onclick="document.getElementById('adminLogin').style.display='block'" style="width:20%;">Admin</button></a><br>
+        <a><button onclick="document.getElementById('employerLogin').style.display='block'" style="width:20%;">Employer</button></a><br>
+        <a><button onclick="document.getElementById('studentLogin').style.display='block'" style="width:20%;">Student</button></a><br> 
     </div>
 
+    <!-- Admin Login Pop-up -->
     <div id="adminLogin" class="popOut">
-
-        <form class="popOut-content animate" action="/adminLogin" method="POST">
-            <h1 class="center">Admin Login</h1>
-            <div class="popOut-imgcontainer">
-                <img src="{{url_for('static', filename='adminAvatar.png')}}" width="20%" height="20%"/>
-            </div>
-            <div class="popOut-container">
-                <label for="admin_id"><b>Username</b></label><br>
-                <input type="text" placeholder="Username" id="admin_id" name="admin_id" required><br><br>
-
-                <label for="admin_password"><b>Password</b></label><br>
-                <input type="password" placeholder="Password" id="admin_password" name="admin_password" required><br>
-
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </div>
-            <div class="popOut-container"></div>
-                <button type="button" onclick="document.getElementById('adminLogin').style.display='none'" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
-                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
-            </div>
-        </form>
+        <!-- Your admin login form here -->
     </div>
 
+    <!-- Employer Login Pop-up -->
     <div id="employerLogin" class="popOut">
-
-        <form class="popOut-content animate" action="/employer-login" method="POST">
-            <h1 class="center">Employer Login</h1>
-            <div class="popOut-imgcontainer">
-                <img src="{{url_for('static', filename='employerAvatar.png')}}" width="20%" height="20%"/>
-            </div>
-            <div class="popOut-container">
-                <label for="employer_id"><b>Employer ID</b></label><br>
-                <input type="text" placeholder="Employer ID" id="employer_id" name="employer_id" required><br><br>
-
-                <label for="employer_password"><b>Password</b></label><br>
-                <input type="password" placeholder="Password" id="employer_password" name="employer_password" required><br>
-
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </div>
-            <div class="popOut-container"></div>
-                <button type="button" onclick="document.getElementById('employerLogin').style.display='none'" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
-                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
-                <p class="center">Haven't signed up yet? <a href="{{ url_for('employer_app.employer_sign_up_pop') }}">Click here</a> to sign up.</p>
-            </div>
-        </form>
+        <!-- Your employer login form here -->
     </div>
 
+    <!-- Student Login Pop-up -->
     <div id="studentLogin" class="popOut">
-
-        <form class="popOut-content animate" action="/student-login" method="POST">
-            <h1 class="center">Student Login</h1>
-            <div class="popOut-imgcontainer">
-                <img src="{{url_for('static', filename='studentAvatar.png')}}" width="20%" height="20%"/>
-            </div>
-            <div class="popOut-container">
-                <label for="student_id"><b>Student ID</b></label><br>
-                <input type="text" placeholder="Student ID" id="student_id" name="student_id" required><br><br>
-
-                <label for="password"><b>Password</b></label><br>
-                <input type="password" placeholder="Password" id="password" name="password" required><br>
-
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </div>
-            <div class="popOut-container"></div>
-                <button type="button" onclick="document.getElementById('studentLogin').style.display='none'" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button>
-                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Login</button>
-                <p class="center">Haven't signed up yet? <a href="{{ url_for('student_app.student_sign_up_pop') }}">Click here</a> to sign up.</p>
-            </div>
-        </form>
+        <!-- Your student login form here -->
     </div>
 
-    {% if obj1 == "empSign": %}
-    <div id="employerReg" class="popOut" style="display: block;">
-
-        <form class="popOut-content animate" action="/employer_signup" method="POST" enctype="multipart/form-data">
-            <h1 class="center">Employer Sign Up</h1>
-            <div class="popOut-container">
-                <label for="employer_id">Employer ID:</label><br>
-                <input type="text" id="employer_id" name="employer_id" required><br><br>
-
-                <label for="company_picture">Company Picture:</label><br>
-                <input type="file" id="company_picture" name="company_picture"><br><br>
-
-                <label for="company_name">Company Name:</label><br>
-                <input type="text" id="company_name" name="company_name"><br><br>
-
-                <label for="company_number">Company Number:</label><br>
-                <input type="text" id="company_number" name="company_number" required><br><br>
-
-                <label for="company_email">Company Email:</label><br>
-                <input type="email" id="company_email" name="company_email" required><br><br>
-
-                <label for="employer_password">Employer password:</label><br>
-                <input type="password" id="employer_password" name="employer_password" required><br><br>
-
-                <label for="confirm_employer_password">Confirm Password:</label><br>
-                <input type="password" id="confirm_employer_password" name="confirm_employer_password" required><br><br>
-
-                <label for="employer_address">Employer Address:</label><br>
-                <textarea id="employer_address" name="employer_address" rows="4" cols="50" required></textarea><br><br>
-            </div>
-            <div class="popOut-container"></div>
-                <a href="{{ url_for('main_app.home') }}"><button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button></a>
-                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Register</button>
-            </div>
-        </form>
+    <!-- Meet Our Team Section -->
+    <div class="meet-our-team">
+        <h2>Meet Our Team</h2>
+        <div class="team-members">
+            <div class="team-member">John Doe</div>
+            <div class="team-member">Jane Smith</div>
+            <div class="team-member">Bob Johnson</div>
+            <div class="team-member">Emily Davis</div>
+            <div class="team-member">Michael Wilson</div>
+        </div>
     </div>
-    {% endif %}
-
-    {% if obj1 == "stuSign": %}
-    <div id="studentReg" class="popOut" style="display: block;">
-
-        <form class="popOut-content animate" action="/signup" method="POST" enctype="multipart/form-data">
-            <h1 class="center">Student Sign Up</h1>
-            <div class="popOut-container">
-                <label for="student_id">Student ID:</label><br>
-                <input type="text" id="student_id" name="student_id" required><br><br>
-
-                <label for="supervisor_id">Supervisor ID:</label><br>
-                <input type="text" id="supervisor_id" name="supervisor_id" required><br><br>
-        
-                <label for="profile_picture">Profile Picture:</label><br>
-                <input type="file" id="profile_picture" name="profile_picture"><br><br>
-
-                <label for="first_name">First Name:</label><br>
-                <input type="text" id="first_name" name="first_name" required><br><br>
-        
-                <label for="last_name">Last Name:</label><br>
-                <input type="text" id="last_name" name="last_name" required><br><br>
-
-                <label for="phone_number">Phone Number:</label><br>
-                <input type="text" id="phone_number" name="phone_number" required><br><br>
-        
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
-        
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br><br>
-        
-                <label for="confirm_password">Confirm Password:</label><br>
-                <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-
-                <label for="current_address">Current Address:</label><br>
-                <textarea id="current_address" name="current_address" rows="4" cols="50" required></textarea><br><br>
-                
-                <label for="course_of_study">Course of Study:</label><br>
-                <input type="text" id="course_of_study" name="course_of_study" required><br><br>
-
-                <label for="year_intake">Year Intake:</label><br>
-                <input type="text" id="year_intake" name="year_intake" required><br><br>
-
-                <label for="skills_learned">Skills Learned:</label><br>
-                <textarea id="skills_learned" name="skills_learned" rows="4" cols="50" required></textarea><br><br>
-
-                <label for="cgpa">CGPA:</label><br>
-                <input type="text" id="cgpa" name="cgpa" required><br><br>
-            </div>
-            <div class="popOut-container"></div>
-                <a href="{{ url_for('main_app.home') }}"><button type="button" style="background: red; height: 45px; width: 200px; margin-left: 2%;">Cancel</button></a>
-                <button type="submit" style="background: green; height: 45px; width: 200px; float: right; margin-right: 2%;">Register</button>
-            </div>
-        </form>
-    </div>
-    {% endif %}
 
     <script>
         var popOut1 = document.getElementById('adminLogin');
         var popOut2 = document.getElementById('employerLogin');
         var popOut3 = document.getElementById('studentLogin');
-        var popOut4 = document.getElementById('employerReg');
-        var popOut5 = document.getElementById('studentReg');
 
         window.onclick = function (event) {
             if (event.target == popOut1) {
@@ -195,12 +55,6 @@
             }
             if (event.target == popOut3) {
                 popOut3.style.display = "none";
-            }
-            if (event.target == popOut4) {
-                popOut4.style.display = "none";
-            }
-            if (event.target == popOut5) {
-                popOut5.style.display = "none";
             }
         }
     </script>
