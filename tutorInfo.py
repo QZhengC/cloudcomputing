@@ -75,8 +75,8 @@ def view_all_students():
         return redirect(url_for('main_app.home'))
 
 
-@tutor_app.route("/add-student", methods=['GET'])
-def add_student():
+@tutor_app.route("/add-student-under-supervisor", methods=['GET'])
+def add_student_under_supervisor():
     if 'supervisor_id' in session:
         supervisor_id = session['supervisor_id']
         student_id = request.form['student_id']
