@@ -64,6 +64,16 @@
             color: #777;
             margin: 0;
         }
+
+        /* Added CSS for the two-column layout */
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            flex: 1;
+        }
     </style>
 </head>
 
@@ -108,21 +118,27 @@
 
         <div class="section">
             <h2>Technical & Personal Skills</h2>
-            <ul>
-                <li>Python and R for data analysis and modeling.</li>
-                <li>NLP techniques for text analysis and sentiment analysis.</li>
-                <li>Problem-Solving</li>
-            </ul>
+            <div class="two-column">
+                <div class="column">
+                    <ul>
+                        <li>Python and R for data analysis and modeling.</li>
+                        <li>NLP techniques for text analysis and sentiment analysis.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li>Problem-Solving</li>
+                        <li>Data visualization with tools like Matplotlib and Seaborn.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="section">
             <h2>Experience</h2>
-            <ul>
-                <li>Software Developer Intern</li>
-                <li>XYZ Tech Solutions</li>
-                <li>May 20XX - August 20XX</li>
-                <li>- Worked on developing web applications</li>
-            </ul>
+            <p>Software Developer Intern<br> XYZ Tech Solutions<br> May 20XX - August 20XX<br> - Worked on
+                developing
+                web applications</p>
         </div>
 
         <div class="section">
