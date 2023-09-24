@@ -28,15 +28,15 @@ def tutor_Menu():
 @tutor_app.route("/supervisor-login", methods=['POST', 'GET'])
 def tutor_login():
     if request.method == 'POST':
-        tutor_id = request.form['tutor_id']
-        tutor_password = request.form['tutor_password']
+        supervisor_id = request.form['supervisor_id']
+        supervisor_password = request.form['supervisor_password']
         cursor = db_conn.cursor()
         try:
-            query = "SELECT * FROM tutor WHERE tutor_id = %s AND tutor_password = %s"
-            cursor.execute(query, (tutor_id, tutor_password))
+            query = "SELECT * FROM tutor WHERE supervisor_id = %s AND supervisor_password = %s"
+            cursor.execute(query, (supervisor_id, supervisor_password))
             tutor = cursor.fetchone()
             if tutor:
-                session['tutor_id'] = tutor_id
+                session['supervisor_id'] = supervisor_id
                 return redirect(url_for(tutor_app.tutor_Menu))
             else:
                 return "Login Failed"
