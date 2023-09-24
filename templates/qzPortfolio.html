@@ -69,13 +69,13 @@
 
 <body>
     <div class="portfolio-container">
-        <img class="profile-picture" src="qz_profile.png" alt="Profile Picture">
+        <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Profile Picture" class="profile-picture">
         <div class="contact-info">
             <table align="center">
                 <tr>
-                    <td><p>New York, NY         |</p></td>
-                    <td><p>(123) 456-7890</p></td>
-                    <td><p>john.doe@example.com</p></td>
+                    <td><p>New York, NY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
+                    <td><p>(123) 456-7890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
+                    <td><p>john.doe@example.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p></td>
                 </tr>
             </table>
         </div>
