@@ -73,7 +73,7 @@ def view_all_students():
         if students is None:
             students.append("No rows")
 
-        select_student_supervisor = "SELECT * FROM student WHERE supervisor_id = %s"
+        select_student_supervisor = "SELECT * FROM students WHERE supervisor_id = %s"
         cursor.execute(select_student_supervisor, (supervisor_id))
         student_under_supervisor = cursor.fetchall()
 
