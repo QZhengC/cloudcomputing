@@ -110,7 +110,9 @@
             <label for="cgpa">CGPA:</label>
             <input type="text" id="cgpa" name="cgpa" value="{{ student.cgpa }}" required>
 
-            <button onclick="success()" type="submit" class="save-button">Save Changes</button>
+            <form action="/backToMenu" autocomplete="on" method="POST">
+                <button onclick="success()" type="submit" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">Save Changes</button><br><br>
+            </form>
 
             <button onclick="history.back()" class="back-button">Back to Menu</button>
         </form>
