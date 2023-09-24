@@ -7,16 +7,30 @@
     <title>Update Job</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
             text-align: center;
-            margin-top: 20px;
+            margin: 50px auto;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
         }
 
         .form-label {
             font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
 
         .form-input {
@@ -28,12 +42,37 @@
         }
 
         .form-button {
-            background: green;
-            color: white;
+            background: #4CAF50;
+            color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: #45a049;
+        }
+
+        .go-back-button {
+            display: inline-block;
+            background: #f44336;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .go-back-button:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
@@ -42,24 +81,23 @@
     <div class="container">
         <h1>Update Job</h1>
         <form action="/update-job" method="POST" enctype="multipart/form-data">
-            <label class="form-label" for="job_id">Job ID:</label><br>
-            <input class="form-input" type="number" id="job_id" name="job_id" value="{{ job.job_id }}" readonly><br><br>
+            <label class="form-label" for="job_id">Job ID:</label>
+            <input class="form-input" type="number" id="job_id" name="job_id" value="{{ job.job_id }}" readonly>
 
-            <label class="form-label" for="job_name">Job Name:</label><br>
-            <input class="form-input" type="text" id="job_name" name="job_name" value="{{ job.job_name }}"
-                required><br><br>
+            <label class="form-label" for="job_name">Job Name:</label>
+            <input class="form-input" type="text" id="job_name" name="job_name" value="{{ job.job_name }}" required>
 
-            <label class="form-label" for="job_description">Job Description:</label><br>
+            <label class="form-label" for="job_description">Job Description:</label>
             <input class="form-input" type="text" id="job_description" name="job_description"
-                value="{{ job.job_description }}"><br><br>
+                value="{{ job.job_description }}">
 
-            <label class="form-label" for="salary">Salary:</label><br>
-            <input class="form-input" type="text" id="salary" name="salary" value="{{ job.salary }}" required><br><br>
+            <label class="form-label" for="salary">Salary:</label>
+            <input class="form-input" type="text" id="salary" name="salary" value="{{ job.salary }}" required>
 
-            <button class="form-button" type="submit">UPDATE</button><br><br>
+            <button class="form-button" type="submit">UPDATE</button>
 
             <a href="{{ url_for('employer_app.employer_Menu', employer_id=session['employer_id']) }}"
-                class="form-button">Go Back</a><br><br>
+                class="go-back-button">Go Back</a>
         </form>
     </div>
 </body>
