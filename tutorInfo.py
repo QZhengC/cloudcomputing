@@ -21,23 +21,24 @@ tutor_app = Blueprint('tutor_app', __name__)
 
 
 @tutor_app.route("/supervisorMenuPage", methods=['GET'])
-def tutor_Menu():
-    return render_template('tutorMenu.html')
+def supervisor_Menu():
+    return render_template('supervisorMenu.html')
 
 
 @tutor_app.route("/supervisor-login", methods=['POST', 'GET'])
-def tutor_login():
+def supervisor_login():
     if request.method == 'POST':
         supervisor_id = request.form['supervisor_id']
         supervisor_password = request.form['supervisor_password']
         cursor = db_conn.cursor()
         try:
-            query = "SELECT * FROM tutor WHERE supervisor_id = %s AND supervisor_password = %s"
+            query = "SELECT * FROM supervisor WHERE supervisor_id = %s AND supervisor_password = %s"
             cursor.execute(query, (supervisor_id, supervisor_password))
             tutor = cursor.fetchone()
             if tutor:
                 session['supervisor_id'] = supervisor_id
-                return redirect(url_for(tutor_app.tutor_Menu))
+                return redirect(url_for(tutor_app.supervisor_Menu))
+
             else:
                 return "Login Failed"
         except Exception as e:
