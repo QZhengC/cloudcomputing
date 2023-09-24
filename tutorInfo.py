@@ -126,7 +126,7 @@ def display_student_under_supervisor():
         if studentSupervisor is None:
             studentSupervisor.append(
                 'No Students are currently under your supervision')
-        return render_template('deleteStudentUnderSupervisor.html', studentSupervisor=studentSupervisor)
+        return render_template('displayStudentUnderSupervisor', studentSupervisor=studentSupervisor)
     else:
         return redirect(url_for('main_app.backhome'))
 
