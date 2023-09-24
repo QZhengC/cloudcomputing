@@ -19,18 +19,25 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             width: 80%;
             margin: 0 auto;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically center items */
         }
 
         .profile-picture {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin: 20px auto;
-            display: block;
+        }
+
+        .profile-info {
+            flex-grow: 1; /* Allow this div to grow and fill remaining space */
+            padding-left: 20px;
+            text-align: left;
         }
 
         h1 {
             color: #333;
+            margin-top: 10px;
         }
 
         h2 {
@@ -48,23 +55,6 @@
             margin-top: 20px;
             border-top: 1px solid #ccc;
             padding-top: 20px;
-        }
-
-        .contact-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .contact-info h2 {
-            font-size: 16px;
-            color: #555;
-            margin-top: 5px;
-        }
-
-        .contact-info p {
-            font-size: 14px;
-            color: #777;
-            margin: 0;
         }
 
         /* Added styles for horizontal rule */
@@ -90,17 +80,14 @@
 <body>
     <div class="portfolio-container">
         <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Profile Picture" class="profile-picture">
-        <div class="contact-info">
-            <table align="center">
-                <tr>
-                    <td><p>New York, NY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
-                    <td><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (123) 456-7890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
-                    <td><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; john.doe@example.com</p></td>
-                </tr>
-            </table>
+        <div class="profile-info">
+            <h1>Choong Qian Zheng</h1>
+            <div class="contact-info">
+                <p>New York, NY</p>
+                <p>(123) 456-7890</p>
+                <p>john.doe@example.com</p>
+            </div>
         </div>
-
-        <h1>John Doe</h1>
 
         <div class="section">
             <h2>About Me</h2>
@@ -131,7 +118,6 @@
                 Django<br> Project 2: Mobile App Development<br> - Created a mobile app for Android and iOS
                 platforms</p>
         </div>
-
     </div>
 </body>
 
