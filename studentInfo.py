@@ -378,7 +378,7 @@ def student_view_jobs():
             job_posts = cursor.fetchall()
 
             if not job_posts:
-                return render_template('noJobsFound.html')
+                return render_template('noJobFound.html')
 
             jobs = []
             for row in job_posts:
@@ -468,7 +468,7 @@ def student_view_applied():
             applied_jobs = cursor.fetchall()
 
             if not applied_jobs:
-                return render_template('noAppliedJobs.html')
+                return render_template('errorNotFound.html')
 
             jobs = []
             for row in applied_jobs:
