@@ -70,6 +70,7 @@
             <h1>Available Job Posts</h1>
         </header>
         <main>
+            <form action="/apply-for-job" method="POST">
             <div class="job-list">
                 {% for job in jobs %}
                 <div class="job-card">
@@ -78,7 +79,7 @@
                     <p>Allowance: RM {{ job.job_salary }}</p>
                     <p>Job Description: {{ job.job_description }}</p>
 
-                    <form action="/apply-for-job" method="POST">
+                    
                         <input type="hidden" name="student_id" value="{{ session['student_id'] }}">
                         <input type="hidden" name="employer_id" value="{{ job.employer_id }}">
                         <input type="hidden" name="job_id" value="{{ job.job_id }}">
