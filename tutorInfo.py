@@ -22,7 +22,7 @@ tutor_app = Blueprint('tutor_app', __name__)
 
 @tutor_app.route("/supervisor-menu-page", methods=['GET'])
 def supervisor_menu():
-    return render_template('supervisorMenu.html')
+    return redirect(url_for(tutor_app.view_all_studuents))
 
 
 @tutor_app.route("/supervisor-login", methods=['POST', 'GET'])
@@ -51,6 +51,30 @@ def supervisor_login():
         return render_template('login.html')
 
 
+@tutor_app.route("/view-student", methods=['GET'])
+def view_all_students():
+    if 'supervisor_id' in session:
+        cursor = db_conn.cursor()
+        query = "SELECT * FROM students"
+        cursor.execute(query)
+        student = cursor.fetchall()
+        if not student:
+            return "No Students Found"
+        students = []
+        for row in student:
+            student_dict = {
+                "student_id": row[0],
+                "phone_number": row[4],
+                "last_name": row[3],
+                "email": row[5]
+            }
+            students.append(student_dict)
+
+        return render_template("supervisorMenu.html", students=students)
+    else:
+        return render_template()
+
+
 @tutor_app.route("/add-student", methods=['GET'])
 def add_student():
     if 'supervisor_id' in session:
@@ -58,12 +82,16 @@ def add_student():
         student_id = request.form['student_id']
         cursor = db_conn.cursor()
         try:
-            select_student = "SELECT student_id FROM student WHERE student_id = %s"
-            cursor.execute(select_student, (student_id))
-            student = cursor.fetchone()
-            if student:
-                insert_query = "INSERT INTO supervisor_student (supervisor_id, student_id) VALUES (%s, %s)"
-                cursor.execute(insert_query, (supervisor_id, student))
+            chk_student = "SELECT supervisor_id FROM students WHERE student_id = %s"
+            cursor.execute(chk_student, (student_id))
+            check = cursor.fetchone()
+            if check is None:
+                update_query = "UPDATE students SET supervisor_id = %s"
+                cursor.execute(update_query, (supervisor_id))
+                db_conn.commit()
+            else:
+                render_template('studentHaveSupervisor.html')
+
         except Exception as e:
             db_conn.rollback()
             return str(e)
