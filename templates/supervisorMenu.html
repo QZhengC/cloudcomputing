@@ -17,7 +17,6 @@
                 <th>Student Name</th>
                 <th>Phone number</th>
                 <th>Email</th>
-
             </tr>
         </thead>
         <tbody>
@@ -39,6 +38,7 @@
         <button class="form-button" type="submit">SUBMIT</button>
     </form>
 
+    <h1>Students Under Your Supervision</h1>
     <table>
         <thead>
             <tr>
@@ -47,11 +47,10 @@
                 <th>Student Name</th>
                 <th>Phone number</th>
                 <th>Email</th>
-
             </tr>
         </thead>
         <tbody>
-            {% for studentSupervisor in studentSupervisor %}
+            {% for studentSupervisor in studentsUnderSupervision %}
             <tr>
                 <td>{{ studentSupervisor.student_id }}</td>
                 <td>{{ studentSupervisor.supervisor_id }}</td>
