@@ -51,5 +51,27 @@ def supervisor_login():
         return render_template('login.html')
 
 
+@tutor_app.route("/add-student", methods=['GET'])
+def add_student():
+    if 'supervisor_id' in session:
+        supervisor_id = session['supervisor_id']
+        student_id = request.form['student_id']
+        cursor = db_conn.cursor()
+        try:
+            select_student = "SELECT student_id FROM student WHERE student_id = %s"
+            cursor.execute(select_student, (student_id))
+            student = cursor.fetchone()
+            if student:
+                insert_query = "INSERT INTO supervisor_student (supervisor_id, student_id) VALUES (%s, %s)"
+                cursor.execute(insert_query, (supervisor_id, student))
+        except Exception as e:
+            db_conn.rollback()
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        return redirect(url_for('main_app.home'))
+
+
 if __name__ == '__main__':
     tutor_app.run(host='0.0.0.0', port=80, debug=True)
