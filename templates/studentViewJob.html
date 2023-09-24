@@ -18,14 +18,15 @@
 
         /* Style for the container */
         .job-card {
-            width: 45%;
-            /* Adjust the width to your preference */
+            width: 45%; /* Set the width to 45% for two job cards in a row */
             margin: 10px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: left;
             background-color: #f9f9f9;
+            display: inline-block; /* Display job cards inline */
+            box-sizing: border-box; /* Include padding and border in the width */
         }
 
         /* Style for headings within job cards */
@@ -35,9 +36,7 @@
 
         /* Style for the job list container */
         .job-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            text-align: center; /* Center-align the job cards within the container */
         }
 
         /* Style for the Apply button */
@@ -70,23 +69,23 @@
             <h1>Available Job Posts</h1>
         </header>
         <main>
-            <form action="/apply-for-job" method="POST">
-                <div class="job-list">
-                    {% for job in jobs %}
-                    <div class="job-card">
-                        <h2>{{ job.company_name }}</h2>
-                        <p>Position: {{ job.job_name }}</p>
-                        <p>Allowance: RM {{ job.job_salary }}</p>
-                        <p>Job Description: {{ job.job_description }}</p>
+            <div class="job-list">
+                {% for job in jobs %}
+                <div class="job-card">
+                    <h2>{{ job.company_name }}</h2>
+                    <p>Position: {{ job.job_name }}</p>
+                    <p>Allowance: RM {{ job.job_salary }}</p>
+                    <p>Job Description: {{ job.job_description }}</p>
+                    <form action="/apply-for-job" method="POST">
                         <input type="hidden" name="student_id" value="{{ session['student_id'] }}">
                         <input type="hidden" name="employer_id" value="{{ job.employer_id }}">
                         <input type="hidden" name="job_id" value="{{ job.job_id }}">
                         <input type="hidden" name="application_id" value="{{ job.application_id }}">
                         <button type="submit">Apply</button>
-                    </div>
-                    {% endfor %}
+                    </form>
                 </div>
-            </form>
+                {% endfor %}
+            </div>
         </main>
         <br><br>
         <button onclick="history.back()" class="back-button">Back to Menu</button>
@@ -94,3 +93,4 @@
 </body>
 
 </html>
+
