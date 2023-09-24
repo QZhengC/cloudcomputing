@@ -468,7 +468,7 @@ def student_view_applied():
             applied_jobs = cursor.fetchall()
 
             if not applied_jobs:
-                return render_template('errorNotFound.html')
+                return render_template('noAppliedJob.html')
 
             jobs = []
             for row in applied_jobs:
