@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Neo Jun Lin Portfolio</title>
+    <title>Choong Qian Zheng Portfolio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,6 +46,10 @@
             padding-top: 20px;
         }
 
+        .education-section {
+            text-align: center;
+        }
+
         .contact-info {
             text-align: center;
             margin-top: 10px;
@@ -64,52 +68,131 @@
             color: #777;
             margin: 0;
         }
+
+        /* Added CSS for the two-column layout */
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            flex: 1;
+            text-align: left;
+            /* Align text to the left */
+        }
+
+        /* Adjust font size for job titles */
+        .job-title {
+            font-size: 18px;
+            /* You can change the size as needed */
+        }
+
+        .bullet-point {
+            flex: 1;
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
     <div class="portfolio-container">
-        <img src="{{ url_for('static', filename='jl_profile.png') }}" alt="Profile Picture" class="profile-picture">
-        <h1>Neo Jun Lin</h1>
+        <img src="{{ url_for('static', filename='qz_profile.png') }}" alt="Profile Picture" class="profile-picture">
+        <h1>Choong Qian Zheng</h1>
         <div class="contact-info">
             <table align="center">
                 <tr>
-                    <td><p>New York, NY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
-                    <td><p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (123) 456-7890 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
-                    <td><p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; john.doe@example.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p></td>
-                    <td><p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 13-12-2002 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p></td>
+                    <td>
+                        <p>NO 57, Taman Hijau 2/1 , Lorong Hijau , 48000 , Rawang , Selangor &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp;|</p>
+                    </td>
+                    <td>
+                        <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6011-1162-9196 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+                    </td>
+                    <td>
+                        <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; choongqianz@gmail.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|
+                        </p>
+                    </td>
+                    <td>
+                        <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 13-12-2002 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                    </td>
                 </tr>
             </table>
         </div>
-    
+
         <div class="section">
             <h2>About Me</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ligula eu magna pretium blandit.</p>
+            <p>As a data-driven professional with a solid foundation in data analysis and advanced expertise in data
+                science, I bring a unique blend of skills and experience to the table. With two years of dedicated
+                service as a <strong>Junior Data Analyst</strong> and an additional two years as a <strong>Data
+                    Scientist</strong>, I have honed my
+                abilities in data collection, preprocessing, analysis, and interpretation, while also developing
+                proficiency in a range of technical tools and techniques.</p>
         </div>
 
         <div class="section">
             <h2>Education</h2>
-            <p>Bachelor of Science in Computer Science<br> University of Example<br> Graduated: May 20XX</p>
+            <p class="education-section">Bachelor of Computer Science (Honours) in Data Science<br><br>TUNKU ABDUL
+                RAHMAN UNIVERSITY OF MANAGEMENT AND TECHNOLOGY (TARUMT)<br><br>Graduated: May 2018</p>
         </div>
 
         <div class="section">
             <h2>Technical & Personal Skills</h2>
-            <p>Programming Languages: Java, Python, JavaScript<br> Soft Skills: Teamwork, Communication,
-                Problem-Solving</p>
+            <div class="two-column">
+                <div class="column">
+                    <ul>
+                        <li>Python and R for data analysis and modeling.</li><br>
+                        <li>NLP techniques for text analysis and sentiment analysis.</li><br>
+                        <li>Expertise in tools like Matplotlib, Seaborn, Tableau, or Power BI.</li><br>
+                        <li>Developing and implementing machine learning models.</li><br>
+                        <li>Knowledge of SQL and NoSQL databases.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li>Effective verbal and written communication.</li><br>
+                        <li>Quick learner who readily adapts to new environments, technologies, and roles.</li><br>
+                        <li>Exceptional time management skills, consistently meeting deadlines while efficiently
+                            managing multiple tasks.</li><br>
+                        <li>Collaborative team player.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2>Experience</h2>
-            <p>Software Developer Intern<br> XYZ Tech Solutions<br> May 20XX - August 20XX<br> - Worked on
-                developing
-                web applications</p>
+            <h2>Work Experience</h2>
+            <p><strong class="job-title">Data Analyst</strong></p>
+            <p><strong>Avinity Analyst , Petaling Jaya (Jul 2018 - Dec 2020)</strong></p>
+            <ul class="bullet-point">
+                <li>Performed basic data analysis and statistical tasks, including creating descriptive statistics.</li><br>
+                <li>Generated simple visualizations and identified trends or patterns in the data.</li><br>
+                <li>Employed Python and relevant libraries for data analysis.</li>
+            </ul>
+            <p><strong class="job-title">Data Scientist </strong></p>
+            <p><strong>ExxonMobil , Cyberjaya (Jan 2021 - Aug 2023)</strong></p>
+            <ul class="bullet-point">
+                <li>Collaborated with computational scientists, data scientists, engineers, and other experts.</li><br>
+                <li>Developed, delivered, and applied computational tools, models, or software to support business needs.</li><br>
+                <li>Worked on projects with global reach and impact.</li>
+            </ul>
         </div>
 
         <div class="section">
             <h2>Technical Projects</h2>
-            <p>Project 1: E-commerce Website<br> - Developed a fully functional e-commerce website using
-                Django<br> Project 2: Mobile App Development<br> - Created a mobile app for Android and iOS
-                platforms</p>
+            <p><strong class="job-title">Project 1: Customer Segmentation Analysis</strong></p>
+            <ul class="bullet-point">
+                <li>Conducted customer segmentation analysis using clustering techniques.</li><br>
+                <li>Identified distinct customer groups based on purchasing behavior.</li><br>
+                <li>Utilized Python and libraries like Scikit-Learn for analysis.</li><br>
+                <li>Presented findings to the marketing team for targeted campaigns.</li><br>
+            </ul>
+            <p><strong class="job-title">Project 2: Recommendation Engine Enhancement</strong></p>
+            <ul class="bullet-point">
+                <li>Enhanced an existing recommendation engine for an e-commerce platform.</li><br>
+                <li>Incorporated advanced collaborative filtering techniques.</li><br>
+                <li>Conducted A/B testing to evaluate performance improvements.</li><br>
+                <li>Increased click-through rates and customer satisfaction.</li>
+            </ul>
         </div>
     </div>
 </body>
