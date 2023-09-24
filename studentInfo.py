@@ -390,7 +390,6 @@ def student_view_jobs():
                     "job_salary": row[5],
                 }
                 jobs.append(job)
-                
             return render_template('studentViewJob.html', jobs=jobs)
 
         except Exception as e:
@@ -458,7 +457,7 @@ def student_view_applied():
         try:
             # Query the database to retrieve the jobs the student has applied for
             query = """
-                SELECT  jp.company_name, jp.job_name, jp.job_description, jp.salary
+                SELECT  jp.company_name, jp.job_name, jp.job_description, jp.salary, ja.application_id
                 FROM job_applied ja
                 JOIN job_post jp ON ja.job_id = jp.job_id
                 WHERE ja.student_id = %s
@@ -475,7 +474,8 @@ def student_view_applied():
                     "company_name": row[0],
                     "job_name": row[1],
                     "job_description": row[2],
-                    "salary": row[3]
+                    "salary": row[3],
+                    "application_id" : row[4]
                 }
                 jobs.append(job)
 
