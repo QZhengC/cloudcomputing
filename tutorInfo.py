@@ -20,7 +20,7 @@ Session(tutor_session)
 tutor_app = Blueprint('tutor_app', __name__)
 
 
-@tutor_app.route("/supervisorMenuPage", methods=['GET'])
+@tutor_app.route("/supervisor-menu-page", methods=['GET'])
 def supervisor_menu():
     return render_template('supervisorMenu.html')
 
@@ -36,8 +36,9 @@ def supervisor_login():
             cursor.execute(query, (supervisor_id, supervisor_password))
             tutor = cursor.fetchone()
             if tutor:
+
                 session['supervisor_id'] = supervisor_id
-                return redirect(url_for(tutor_app.supervisor_menu))
+                return redirect(url_for('tutor_app.supervisor_menu'))
 
             else:
                 return "Login Failed"
@@ -45,7 +46,9 @@ def supervisor_login():
             return str(e)
         finally:
             cursor.close()
-    return render_template('login.html')
+
+    else:
+        return render_template('login.html')
 
 
 if __name__ == '__main__':
