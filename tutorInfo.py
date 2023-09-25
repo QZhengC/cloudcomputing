@@ -113,10 +113,10 @@ def display_student_under_supervisor():
 
         select_student_supervisor = "SELECT * FROM students WHERE supervisor_id = %s"
         cursor.execute(select_student_supervisor, (supervisor_id,))
-        student_under_supervisor = cursor.fetchall()
+        dog = cursor.fetchall()
 
         supervisedStudent = []
-        for row in student_under_supervisor:
+        for row in dog:
             stud = {
                 "student_id": row[0],
                 "supervisor_id": row[1],
