@@ -110,8 +110,9 @@ def display_student_under_supervisor():
     if 'supervisor_id' in session:
         cursor = db_conn.cursor()
         supervisor_id = session['supervisor_id']
+
         select_student_supervisor = "SELECT * FROM students WHERE supervisor_id = %s"
-        cursor.execute(select_student_supervisor, (supervisor_id))
+        cursor.execute(select_student_supervisor, (supervisor_id,))
         student_under_supervisor = cursor.fetchall()
 
         supervisedStudent = []
