@@ -195,8 +195,6 @@ def view_job_post(employer_id):
             query = "SELECT * FROM job_post WHERE employer_id = %s"
             cursor.execute(query, (employer_id,))
             job_post = cursor.fetchall()
-            if not job_post:
-                return render_template('noJobsFound.html')
 
             jobs = []
             for row in job_post:
@@ -207,6 +205,8 @@ def view_job_post(employer_id):
                     "salary": row[5]
                 }
                 jobs.append(job)
+            if not jobs:
+                jobs.append("No Rows Found")
 
             return render_template('viewJobPost.html', jobs=jobs)
 
