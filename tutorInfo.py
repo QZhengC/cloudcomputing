@@ -124,6 +124,7 @@ def display_student_under_supervisor():
                 "email": row[5]
             }
             supervisedStudent.append(stud)
+
         if supervisedStudent is None:
             supervisedStudent.append(
                 'No Students are currently under your supervision')
